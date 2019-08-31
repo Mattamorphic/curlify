@@ -1,0 +1,9 @@
+.Value {
+  background-color: #EFFDF9 !important;
+  border-radius: 30px !important;
+  padding-left: 15px !important;
+}
+
+.Value:hover {
+  border: 1px solid #777 !important;
+}

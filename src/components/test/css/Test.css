@@ -1,0 +1,9 @@
+.Test.Disabled {
+  width: 100%;
+  height: 30px;
+  text-align: center;
+  background-color: #FFADAD;
+  font-weight: bold;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

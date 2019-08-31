@@ -1,0 +1,24 @@
+.Notice {
+  height: 20px;
+  width:300px;
+  padding:10px;
+  text-align:center;
+}
+
+.Saved {
+  background-color: #ADFFCD;
+}
+
+.NotSaved {
+  background-color: #FFADAD;
+}
+
+
+.save-notice-enter {
+  opacity: 0.01;
+}
+
+.save-notice-enter.save-notice-enter-active {
+  opacity: 1;
+  transition: opacity .5s ease-in;
+}

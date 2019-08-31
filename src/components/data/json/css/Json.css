@@ -1,0 +1,29 @@
+.Json {
+  background-color: #F0F6FD;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.Json textarea {
+  background-color: #F0F6FD;
+  border: 1px solid #D1D1D1;
+  color: #000;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New';
+  height: 300px;
+  resize: vertical;
+}
+
+.Json textarea:hover {
+  border: 1px solid #777;
+}
+
+.json-is-saved {
+
+}
+
+.json-not-saved {
+
+}

@@ -1,0 +1,8 @@
+.Type {
+  background-color: #F0F6FD !important;
+  padding-left: 10px !important;
+}
+
+.Type:hover {
+  border: 1px solid #777 !important;
+}
