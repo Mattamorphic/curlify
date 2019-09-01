@@ -189,7 +189,6 @@ export default class Curl extends React.Component<CurlProps, CurlState>  {
     // decide which domain and endpoint to use
     const domainAndEndpoint = this.getDomainAndEndpoint(value);
 
-    console.log(config.method, method);
     if (
       method
       && method !== config.method
@@ -199,8 +198,8 @@ export default class Curl extends React.Component<CurlProps, CurlState>  {
       config.method = method;
     }
 
-    // Todo - this needs to actually check the headers
-    if (headers && config.headers.length !== config.headers.length) {
+    // Todo - this needs to actually check the header
+    if (headers && headers.length !== config.headers.length) {
       hasNewConfig = true;
       config.headers = headers;
     }
@@ -227,6 +226,7 @@ export default class Curl extends React.Component<CurlProps, CurlState>  {
         config.endpoint = domainAndEndpoint.endpoint;
       }
     }
+
     return {
       config,
       data,
