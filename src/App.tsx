@@ -70,10 +70,6 @@ export default class App extends React.Component<AppProps, AppState> {
   }
 
   validatePayload = (): ValidatePayloadResult => {
-    console.log(this.state.config, utils.isValidURL(
-      this.state.config.domain,
-      this.state.config.endpoint,
-    ), (this.state.config.domain + '/' + this.state.config.endpoint).match(utils.regEx.url));
     const result = {
       message: [] as string[],
       success: true,
@@ -104,8 +100,7 @@ export default class App extends React.Component<AppProps, AppState> {
           `Invalid GraphQL string, check settings above`,
         );
         result.success = false;
-      }
-    console.log(result);
+    }
     return result;
   }
 

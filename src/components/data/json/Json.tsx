@@ -68,7 +68,6 @@ export default class Json extends React.PureComponent<JsonProps, JsonState> {
    * @param {string} value The possible json string
    */
   updateJson = (value: string) => {
-    console.log(value);
     this.setState({
       draft: value,
       hasDraft: true
@@ -84,7 +83,10 @@ export default class Json extends React.PureComponent<JsonProps, JsonState> {
    */
   pretty = () => {
     try {
-      this.updateJson(JSON.stringify(JSON.parse(this.state.draft), null, 2));
+      this.setState({
+        draft: JSON.stringify(JSON.parse(this.state.draft), null, 2),
+        hasDraft: true,
+      });
     } catch (_) {
       return;
     }
