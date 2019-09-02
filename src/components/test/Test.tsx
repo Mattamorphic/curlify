@@ -88,7 +88,9 @@ class Test extends React.PureComponent<TestProps, TestState> {
           <div className="Test Disabled">
             {
               this.props.validation.message.map(
-                string => <label> {string} </label>,
+                (string, idx) => (
+                  <label key={`validation_${idx}`}> {string} </label>
+                ),
               )
             }
           </div>

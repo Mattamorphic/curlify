@@ -80,9 +80,12 @@ export default class App extends React.Component<AppProps, AppState> {
       );
       result.success = false;
     }
-    // if (!utils.isValidHeaders(this.props.config.headers)) {
-    //
-    // }
+    if (!utils.isValidHeaders(this.state.config.headers)) {
+      result.message.push(
+        `Invalid headers, check settings above`,
+      );
+      result.success = false;
+    }
     if (!utils.isValidURL(
       this.state.config.domain,
       this.state.config.endpoint,

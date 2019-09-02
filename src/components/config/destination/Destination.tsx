@@ -19,7 +19,6 @@ interface DestinationProps {
 const Destination: React.FunctionComponent<DestinationProps> = (props) => {
 
   const onUpdate = (value: string, type: DomainOrEndpoint): void => {
-    ;
     props.onUpdate(
       (type === 'domain') ? value : props.domain,
       (type === 'endpoint') ? value : props.endpoint,
@@ -27,14 +26,19 @@ const Destination: React.FunctionComponent<DestinationProps> = (props) => {
   }
 
   const onUpdateDomain = (domain: string): void => {
+    if (domain.charAt(domain.length-1) === '/') {
+      domain = domain.substr(0, domain.length-1);
+    }
     onUpdate(domain, 'domain');
   }
 
   const onUpdateEndpoint = (endpoint: string): void => {
+    if (endpoint.charAt(0) !== '/') {
+      endpoint = '/' + endpoint;
+    }
     onUpdate(endpoint, 'endpoint');
   }
 
-  ;
   return (
     <div className={props.width + ' Destination'}>
       <div className="row">

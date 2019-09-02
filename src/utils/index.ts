@@ -1,6 +1,8 @@
 import {parse} from 'graphql';
 
-import {HTTPMethods} from '../enums';
+import {HTTPHeaders, HTTPMethods} from '../enums';
+
+import {Header} from '../components/config/headers/Headers';
 
 export const methodHasPayload = (method: HTTPMethods) => (
   ![HTTPMethods.GET, HTTPMethods.HEAD]
@@ -37,9 +39,15 @@ export const isValidURL = (domain: string, endpoint: string): boolean => {
   return (!possUrl || possUrl[0] !== url) ? false : true;
 }
 
-export const isValidHeaders = (_: []): boolean => (
-  true
-)
+export const isValidHeaders = (headers: Header[]): boolean => {
+  const types = Object.values(HTTPHeaders)
+  return headers.reduce(
+    (_: boolean, curr: Header) => {
+      return types.includes(curr.type); // TODO: validate the value
+    },
+    true,
+  );
+}
 
 export const isValidJsonString = (json: string) => {
   try {
