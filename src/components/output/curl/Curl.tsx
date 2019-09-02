@@ -242,8 +242,6 @@ export default class Curl extends React.Component<CurlProps, CurlState>  {
    */
   updateCurl = (value: string): void => {
     const curl = this.serializerCurl(value);
-
-    console.log(curl);
     if (curl.hasNewData || curl.hasNewConfig) {
       this.setState({draft: value, hasDraft: false}, () => {
         curl.hasNewData && this.props.updateData(curl.data);
