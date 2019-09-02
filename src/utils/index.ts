@@ -1,6 +1,8 @@
 import {parse} from 'graphql';
 
-import {HTTPMethods} from '../enums';
+import {HTTPHeaders, HTTPMethods} from '../enums';
+
+import {Header} from '../components/config/headers/Headers';
 
 export const methodHasPayload = (method: HTTPMethods) => (
   ![HTTPMethods.GET, HTTPMethods.HEAD]
@@ -9,7 +11,7 @@ export const methodHasPayload = (method: HTTPMethods) => (
 
 
 export const regEx = {
-  url: /(http(?:s)?(?::\/\/)+[www]{0,1}.?(?:[\w-.])*.[a-zA-Z]{2,3})\/?(\/[^\s\b\n|]*[^.,;:?!@^$ -]{0,})/gim,
+  url: /^((?:http(?:s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+))+([\w\-\._~:\/?#[\]@!\$&'\(\)\*\+,;=.]+)$/gim,
   curlHeader: /(?:-H ")([\w\d]{1,})(?:\s{0,}:\s{0,})(.+?)(?=")/gim,
   curlMethod: /(?:-X\s{0,})(\w{3,6})/gim,
   // Todo: convert to /gms https://github.com/babel/babel/pull/10347
@@ -27,14 +29,25 @@ export const isValidMethod = (string: string): boolean => (
 )
 
 export const isValidURL = (domain: string, endpoint: string): boolean => {
-  const url = domain + '/' + endpoint;
+  const url = domain
+    + ((domain.charAt(domain.length-1) !== '/' && endpoint.charAt(0) !== '/')
+      ? '/'
+      : '')
+    + endpoint;
+
   const possUrl = (url).match(regEx.url);
   return (!possUrl || possUrl[0] !== url) ? false : true;
 }
 
-export const isValidHeaders = (_: []): boolean => (
-  true
-)
+export const isValidHeaders = (headers: Header[]): boolean => {
+  const types = Object.values(HTTPHeaders)
+  return headers.reduce(
+    (_: boolean, curr: Header) => {
+      return types.includes(curr.type); // TODO: validate the value
+    },
+    true,
+  );
+}
 
 export const isValidJsonString = (json: string) => {
   try {
