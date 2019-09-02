@@ -28,7 +28,7 @@ interface TestState {
   isLoading: boolean;
   response: {
     headers?: Headers,
-    json?: {[key: string]: any},
+    data?: string,
   };
 }
 
@@ -61,20 +61,18 @@ class Test extends React.PureComponent<TestProps, TestState> {
     this.setState(
       {isLoading: true},
       async () => {
-      const dest = new URL(this.props.config.domain + this.props.config.endpoint);
+      // Todo: Run our own proxy service instead of using this.
+      const dest = new URL("https://curlify-proxy.herokuapp.com/" + this.props.config.domain + this.props.config.endpoint);
       const response: Response = await fetch(
         dest.href,
         this.getFetchData(),
-      )
-      let json = {};
-      try {
-        json = await response.json();
-      } catch (_) {}
+      );
+      const data = await response.text();
       this.setState({
         isLoading: false,
         response: {
           headers: response.headers as Headers,
-          json: json,
+          data,
         }
       })
       }
@@ -110,8 +108,8 @@ class Test extends React.PureComponent<TestProps, TestState> {
           shouldConfirm={false} // Todo: We need to ensure that everything matches up
           onRequest={this.onTest} />
         {
-          this.state.response.headers && this.state.response.json &&
-          <FetchResponse headers={this.state.response.headers} json={this.state.response.json} />
+          this.state.response.headers && this.state.response.data &&
+          <FetchResponse headers={this.state.response.headers} data={this.state.response.data} />
         }
       </>
     );

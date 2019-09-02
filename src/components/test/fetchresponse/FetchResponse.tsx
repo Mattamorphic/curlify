@@ -11,12 +11,13 @@ import './css/FetchResponse.css';
 
 interface FetchResponseProps {
   headers: Headers,
-  json: {[key: string]: any};
+  data: string;
 }
 
 interface FetchResponseState {
   showHeaders: boolean;
   showData: boolean;
+  showRaw: boolean;
 }
 
 export default class FetchResponse extends React.PureComponent<FetchResponseProps, FetchResponseState> {
@@ -26,6 +27,7 @@ export default class FetchResponse extends React.PureComponent<FetchResponseProp
     this.state ={
       showHeaders: false,
       showData: false,
+      showRaw: false,
     };
   }
 
@@ -86,7 +88,20 @@ export default class FetchResponse extends React.PureComponent<FetchResponseProp
     }))
   }
 
+  toggleRaw = () => {
+    this.setState(prevState => ({
+      showRaw: !prevState.showRaw,
+    }))
+  }
+
   render () {
+    let json = {}
+    try {
+      json = JSON.parse(this.props.data)
+    } catch (_) {
+
+    }
+    console.log(this.props.data);
     return (
       <div className="FetchResponse">
       <Toggler
@@ -116,12 +131,20 @@ export default class FetchResponse extends React.PureComponent<FetchResponseProp
         </table>
       </Toggler>
       <Toggler
+        isToggled={this.state.showRaw}
+        label="Raw"
+        onToggle={this.toggleRaw}>
+          <div className="Data json-key">
+            {this.props.data}
+          </div>
+      </Toggler>
+      <Toggler
         isToggled={this.state.showData}
         label="Data"
         onToggle={this.toggleData}>
           <div className="Data" dangerouslySetInnerHTML={{__html:
             JSON.stringify(
-              this.props.json,
+              json,
               null,
               3
             ).replace(
