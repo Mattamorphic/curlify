@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "90e2a000ce51beb7947c1cb239c70392",
+    "revision": "0092be3e269132343f9bc9d6d6162c77",
     "url": "/curlify/index.html"
   },
   {
-    "revision": "15dab0818d241c685797",
+    "revision": "0c34e1f7b4362fa9a15f",
     "url": "/curlify/static/css/main.920f6212.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/curlify/static/js/2.69c3c128.chunk.js"
   },
   {
-    "revision": "15dab0818d241c685797",
-    "url": "/curlify/static/js/main.40f77914.chunk.js"
+    "revision": "0c34e1f7b4362fa9a15f",
+    "url": "/curlify/static/js/main.83195ccb.chunk.js"
   },
   {
     "revision": "b07c659718a5addbef17",
