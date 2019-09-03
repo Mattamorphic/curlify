@@ -7,6 +7,7 @@ import {InputTypes} from '../../enums';
 // Define Interfaces
 interface InputProps {
   className?: string;
+  isChecked?: boolean
   isDisabled?: boolean;
   label?: string;
   name?: string;
@@ -23,11 +24,12 @@ const Input: React.FunctionComponent<InputProps> = (props) => (
   { props.label && (<label>{props.label}</label>) }
   <input
     type={props.type || InputTypes.TEXT}
+    checked={props.isChecked}
     className={props.className || ''}
     name={props.name || ''}
     id={props.id || ''}
     value={props.value || ''}
-    disabled={props.isDisabled || false}
+    disabled={props.isDisabled}
     onChange={props.onChange}
      />
   </>

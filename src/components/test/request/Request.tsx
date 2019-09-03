@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Proxy, {ProxyData} from './proxy/Proxy';
+
 import './css/Request.css';
 
 import Button from '../../shared/Button';
@@ -9,7 +11,9 @@ import Confirm from '../../shared/Confirm';
 interface RequestProps {
   shouldConfirm: boolean;
   incompleteData?: string;
+  proxy: ProxyData;
   onRequest: () => void;
+  onUpdateProxy: (data: ProxyData) => void;
 }
 
 const Request: React.FunctionComponent<RequestProps> = (props) => {
@@ -20,6 +24,7 @@ const Request: React.FunctionComponent<RequestProps> = (props) => {
   return (
     <div className="row">
       <div className="Request">
+        <Proxy proxy={props.proxy} onUpdateProxy={props.onUpdateProxy} />
         {
           props.shouldConfirm
             ? <Confirm
