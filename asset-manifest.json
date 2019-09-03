@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/curlify/static/css/main.920f6212.chunk.css",
-    "main.js": "/curlify/static/js/main.748b0641.chunk.js",
-    "main.js.map": "/curlify/static/js/main.748b0641.chunk.js.map",
+    "main.css": "/curlify/static/css/main.25bd5b2b.chunk.css",
+    "main.js": "/curlify/static/js/main.788c503f.chunk.js",
+    "main.js.map": "/curlify/static/js/main.788c503f.chunk.js.map",
     "runtime~main.js": "/curlify/static/js/runtime~main.f9da56b4.js",
     "runtime~main.js.map": "/curlify/static/js/runtime~main.f9da56b4.js.map",
-    "static/js/2.69c3c128.chunk.js": "/curlify/static/js/2.69c3c128.chunk.js",
-    "static/js/2.69c3c128.chunk.js.map": "/curlify/static/js/2.69c3c128.chunk.js.map",
+    "static/js/2.80f01f76.chunk.js": "/curlify/static/js/2.80f01f76.chunk.js",
+    "static/js/2.80f01f76.chunk.js.map": "/curlify/static/js/2.80f01f76.chunk.js.map",
     "index.html": "/curlify/index.html",
-    "precache-manifest.fb6ba197e978388e30c36d7c25d938d1.js": "/curlify/precache-manifest.fb6ba197e978388e30c36d7c25d938d1.js",
+    "precache-manifest.a6b426ebe5db0a72c1a7f8803f086731.js": "/curlify/precache-manifest.a6b426ebe5db0a72c1a7f8803f086731.js",
     "service-worker.js": "/curlify/service-worker.js",
-    "static/css/main.920f6212.chunk.css.map": "/curlify/static/css/main.920f6212.chunk.css.map"
+    "static/css/main.25bd5b2b.chunk.css.map": "/curlify/static/css/main.25bd5b2b.chunk.css.map"
   }
 }
