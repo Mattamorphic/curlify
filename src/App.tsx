@@ -3,6 +3,7 @@ import Config, {ConfigData} from './components/config/Config';
 import Data, {DataData} from './components/data/Data';
 import Heading from './components/heading/Heading';
 import Output from './components/output/Output';
+import {ProxyData} from './components/test/request/proxy/Proxy';
 import Test, {ValidatePayloadResult} from './components/test/Test';
 
 import './css/App.css'
@@ -23,6 +24,7 @@ interface AppState {
   config: ConfigData;
   data: DataData;
   output: OutputState;
+  proxy: ProxyData;
   validation: ValidatePayloadResult;
 }
 
@@ -36,10 +38,16 @@ export default class App extends React.Component<AppProps, AppState> {
     }, () => this.setState({validation: this.validatePayload()}));
   }
 
-  onDataChange = (data: DataData) : void => {
+  onDataChange = (data: DataData): void => {
     this.setState({
       data,
     }, () => this.setState({validation: this.validatePayload()}));
+  }
+
+  onUpdateProxy = (proxy: ProxyData): void => {
+    this.setState({
+      proxy,
+    });
   }
 
   constructor(props: AppProps) {
@@ -61,6 +69,10 @@ export default class App extends React.Component<AppProps, AppState> {
       },
       output: {
         type: OutputType.CURL,
+      },
+      proxy: {
+        url: utils.PROXY,
+        isEnabled: true,
       },
       validation: {
         message: [],
@@ -137,8 +149,10 @@ export default class App extends React.Component<AppProps, AppState> {
             validation={this.state.validation}
             config={this.state.config}
             data={this.state.data}
+            proxy={this.state.proxy}
             updateConfig={this.onConfigChange}
-            updateData={this.onDataChange} />
+            updateData={this.onDataChange}
+            updateProxy={this.onUpdateProxy} />
         </div>
       </div>
     );

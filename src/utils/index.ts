@@ -9,6 +9,7 @@ export const methodHasPayload = (method: HTTPMethods) => (
     .includes(method)
 )
 
+export const PROXY = "https://curlify-proxy.herokuapp.com/";
 
 export const regEx = {
   url: /^((?:http(?:s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+))+([\w\-\._~:\/?#[\]@!\$&'\(\)\*\+,;=.]+)$/gim,
@@ -19,7 +20,7 @@ export const regEx = {
   newLine: /[\r|\n]/gm,
   newLineAndTab: /[\n|\r|\t]/gm,
   multipleSpaces: / +/gm,
-}
+};
 
 
 export const isValidMethod = (string: string): boolean => (
