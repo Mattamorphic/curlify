@@ -145,6 +145,7 @@ class Test extends React.PureComponent<TestProps, TestState> {
     return (
       <>
         <Request
+          hasRun={this.state.hasRun}
           proxy={this.props.proxy}
           onUpdateProxy={this.props.updateProxy}
           shouldConfirm={false} // Todo: We need to ensure that everything matches up

@@ -101,7 +101,6 @@ export default class FetchResponse extends React.PureComponent<FetchResponseProp
     } catch (_) {
 
     }
-    console.log(this.props.data);
     return (
       <div className="FetchResponse">
       <Toggler
