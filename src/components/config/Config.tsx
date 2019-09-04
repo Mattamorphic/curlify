@@ -23,23 +23,19 @@ interface ConfigProps {
 
 const Config: React.FunctionComponent<ConfigProps> = (props) => {
   const updateMethod = (value: HTTPMethods) => {
-
     const data = props.data;
     data.method = value;
     props.updateConfig(data);
   }
 
   const updateHeaders = (value: Header | null, index: number): void => {
-
     const data = props.data;
     if (!data.headers[index] && value) {
       data.headers.push(value);
     } else {
       if (!value) {
         delete data.headers[index];
-        ;
         data.headers = data.headers.filter(header => header);
-        ;
       } else {
         data.headers[index] = value;
       }
@@ -48,7 +44,6 @@ const Config: React.FunctionComponent<ConfigProps> = (props) => {
   }
 
   const updateDestination = (domain: string, endpoint: string) => {
-
     const data = props.data;
     data.domain = domain;
     data.endpoint = endpoint;
