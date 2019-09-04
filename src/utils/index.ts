@@ -2,7 +2,10 @@ import {parse} from 'graphql';
 
 import {HTTPHeaders, HTTPMethods} from '../enums';
 
+// import {ConfigData} from '../components/config/Config';
+// import {DataData} from '../components/data/Data';
 import {Header} from '../components/config/headers/Headers';
+import {ProxyData} from '../components/test/request/proxy/Proxy';
 
 export const methodHasPayload = (method: HTTPMethods) => (
   ![HTTPMethods.GET, HTTPMethods.HEAD]
@@ -22,6 +25,27 @@ export const regEx = {
   multipleSpaces: / +/gm,
 };
 
+// export const hasDataChanged = (
+//   prevData: DataData,
+//   newData: DataData
+// ): boolean => {
+//   return false;
+// }
+//
+// export const hasConfigChanged = (
+//   prevData: DataData,
+//   newData: DataData
+// ): boolean => {
+//   return false;
+// }
+
+export const hasProxyChanged = (
+  prevProxy: ProxyData,
+  newProxy: ProxyData
+): boolean => {
+  return prevProxy.isEnabled !== newProxy.isEnabled
+    || prevProxy.url !== newProxy.url;
+}
 
 export const isValidMethod = (string: string): boolean => (
   Object
