@@ -2,3 +2,28 @@
   font-size: 12px;
   word-wrap: break-word !important;
 }
+
+.header-value {
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.header-number {
+
+}
+
+.header-date {
+
+}
+
+.header-url {
+
+}
+
+.header-boolean {
+
+}
+
+.header-string {
+
+}

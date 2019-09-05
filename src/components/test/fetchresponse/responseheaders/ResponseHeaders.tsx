@@ -9,6 +9,7 @@ import Toggler from '../../../shared/Toggler';
 
 import './css/ResponseHeaders.css';
 
+import * as utils from '../../../../utils';
 
 interface ResponseHeadersProps {
   headers: Headers;
@@ -26,6 +27,27 @@ export default class ResponseHeaders extends React.PureComponent<
     this.state = {
       showHeaders: false,
     };
+  }
+
+  parse = (value: string): string | JSX.Element => {
+    
+    if (utils.isStringANumber(value)) {
+      return (<span className='header-value header-number'>{value}</span>);
+    }
+    if (utils.isStringADate(value)) {
+      return (<span className='header-value header-date'>{value}</span>);
+    }
+    if (utils.isStringAURL(value)) {
+      return (
+        <span className='header-value header-url'>
+          <a href={value}>{value}</a>
+        </span>
+      );
+    }
+    if (utils.isStringBooleanOrNull(value)) {
+      return (<span className='header-value header-boolean'>{value}</span>);
+    }
+    return <span className='header-value header-string'>{value}</span>;
   }
 
   toggleHeaders = () => {
@@ -48,7 +70,7 @@ export default class ResponseHeaders extends React.PureComponent<
             Array.from(this.props.headers.keys()).map(
               key => ({
                 Header: key,
-                Value: this.props.headers.get(key) || '',
+                Value: this.parse(this.props.headers.get(key) || ''),
               })
             )
           } />

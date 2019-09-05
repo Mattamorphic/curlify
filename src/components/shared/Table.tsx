@@ -4,8 +4,10 @@
  */
 import React from 'react';
 
+import './css/Table.css';
+
 export interface TableRow {
-  [key: string]: string;
+  [key: string]: string | JSX.Element;
 }
 
 interface TableProps {
@@ -33,13 +35,16 @@ const Table: React.FunctionComponent<TableProps> = (props) => {
       </thead>
       <tbody>
       {
+
         props.data.map(
           (row: TableRow, i: number) => (
             <tr key={`tr_${i}`}>
               {
-                Object.values(row).map(
-                  (value: string, j: number) => (
-                    <td key={`tr_${i}_${j}`}>{value}</td>
+                headers.map(
+                  (header: string, j: number) => (
+                    <td key={`tr_${i}_${j}`} data-label={header}>
+                      {row[header]}
+                    </td>
                   )
                 )
               }
