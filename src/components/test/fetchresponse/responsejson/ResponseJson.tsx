@@ -71,7 +71,11 @@ export default class ResponseJson extends React.PureComponent<
             <span className={valueClass}>
               {
                 type === JsonValueTypes.URL
-                  ? (<a href={part.value.replace(/"/, '')}>{part.value}</a>)
+                  ? (
+                    <a href={part.value.replace(utils.regEx.quotes, '')}>
+                      {part.value}
+                    </a>
+                  )
                   : part.value
               }
             </span>

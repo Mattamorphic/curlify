@@ -25,7 +25,9 @@ export const regEx = {
   newLine: /[\r|\n]/gm,
   newLineAndTab: /[\n|\r|\t]/gm,
   multipleSpaces: / +/gm,
+  quotes:/[\"\']/gim,
   singleEscapedNewLine: /(?<!\\)\\n/gm,
+
 };
 
 // export const hasDataChanged = (
@@ -109,5 +111,5 @@ export const isStringBooleanOrNull = (value: string): boolean => {
 }
 
 export const isStringAURL = (value: string): boolean => {
-  return !!value.match(regEx.url);
+  return !!value.replace(regEx.quotes, '').match(regEx.url);
 }
