@@ -20,6 +20,7 @@ export const regEx = {
   curlMethod: /(?:-X\s{0,})(\w{3,6})/gim,
   // Todo: convert to /gms https://github.com/babel/babel/pull/10347
   curlData: /(?:-d\s{0,}'|")({.*})(?=['|"])/gim,
+  jsonData: /^( *)("[^"]+": )?("[^"].*"|[\w.+-]*)?([{}[\],]*)?$/mg,
   newLine: /[\r|\n]/gm,
   newLineAndTab: /[\n|\r|\t]/gm,
   multipleSpaces: / +/gm,

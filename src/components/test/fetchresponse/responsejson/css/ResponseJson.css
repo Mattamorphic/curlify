@@ -1,0 +1,37 @@
+/* From this palette https://ethanschoonover.com/solarized/ */
+.ResponseJson {
+   background-color: #002B36;
+   font-size: 12px;
+ }
+
+ .ResponseJson > span {
+   word-wrap: break-word;
+ }
+
+.json-key {
+  color: #93A1A1;
+}
+
+.json-value {
+  color: #93A1A1;
+}
+
+.json-number {
+  color: #2AA198;
+}
+
+.json-date {
+  color: #D33682;
+}
+
+.json-boolean {
+  color: #cB4B16;
+}
+
+.json-string {
+  color: #EEE8D5;
+}
+
+.json-url {
+  color: #2AA198;
+}
