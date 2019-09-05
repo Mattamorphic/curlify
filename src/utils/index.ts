@@ -23,6 +23,7 @@ export const regEx = {
   newLine: /[\r|\n]/gm,
   newLineAndTab: /[\n|\r|\t]/gm,
   multipleSpaces: / +/gm,
+  singleEscapedNewLine: /(?<!\\)\\n/gm,
 };
 
 // export const hasDataChanged = (
