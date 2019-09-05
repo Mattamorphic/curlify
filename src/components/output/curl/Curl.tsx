@@ -298,9 +298,6 @@ export default class Curl extends React.Component<CurlProps, CurlState>  {
           <TextArea
             isFullWidth={true}
             onUpdate={this.updateCurl}
-            style={{
-              height: "200px",
-            }}
             value={this.state.draft} />
         </div>
         <div className="row">
