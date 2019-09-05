@@ -30,22 +30,42 @@ interface TestProps {
 
 interface TestState {
   isLoading: boolean;
+  hasRun: boolean;
   response: {
     headers?: Headers,
     data?: string,
   };
-  finalDestination: string;
 }
 
 class Test extends React.PureComponent<TestProps, TestState> {
 
+  baseState: TestState;
+
   constructor(props: TestProps) {
     super(props);
     this.state = {
+      // is the request executing
       isLoading: false,
+      // has there been an execution
+      hasRun: false,
+      // hold the response
       response: {},
-      finalDestination: ''
     };
+    this.baseState = this.state;
+  }
+
+  componentDidUpdate(prevProps: TestProps) {
+    if (utils.hasProxyChanged(prevProps.proxy, this.props.proxy)) {
+      this.setState(this.baseState);
+    }
+  }
+
+
+  getDestination = (): string => {
+    const destination = this.props.config.domain + this.props.config.endpoint;
+    return this.props.proxy.isEnabled
+      ? this.props.proxy.url + destination
+      : destination;
   }
 
   getFetchData = () => {
@@ -64,28 +84,36 @@ class Test extends React.PureComponent<TestProps, TestState> {
   }
 
   onTest = async () => {
-    const finalDestination = ((this.props.proxy.isEnabled) ? this.props.proxy.url : '')
-      + this.props.config.domain
-      + this.props.config.endpoint;
     this.setState(
-      {isLoading: true, finalDestination},
+      {
+        isLoading: true,
+        hasRun: true,
+        response: {}
+      },
       async () => {
       // Todo: Run our own proxy service instead of using this.
-      const dest = new URL(finalDestination);
-      const response: Response = await fetch(
-        dest.href,
-        this.getFetchData(),
-      );
-      const data = await response.text();
-      this.setState({
-        isLoading: false,
-        response: {
-          headers: response.headers as Headers,
-          data,
-        }
-      })
+      const dest = new URL(this.getDestination());
+      let data = null;
+      let response: Response | null = null;
+      try {
+        response = await fetch(
+          dest.href,
+          this.getFetchData(),
+        );
+        data = await response.text();
+        this.setState({
+          isLoading: false,
+          response: {
+            headers: response.headers as Headers,
+            data,
+          }
+        });
+      } catch (_) {
+        this.setState({
+          isLoading: false,
+        });
       }
-    );
+    });
   }
 
   render () {
@@ -111,26 +139,43 @@ class Test extends React.PureComponent<TestProps, TestState> {
         </div>
       );
     }
+
+    const proxyMessage = `${this.props.proxy.isEnabled ? 'through Proxy' : ''} to ${this.getDestination()}`;
+
     return (
       <>
         <Request
+          hasRun={this.state.hasRun}
           proxy={this.props.proxy}
           onUpdateProxy={this.props.updateProxy}
           shouldConfirm={false} // Todo: We need to ensure that everything matches up
           onRequest={this.onTest} />
         {
-          this.state.response.headers && this.state.response.data &&
-          <>
-            <div className="row">
-              <Notice
-                className="twelve columns u-full-width"
-                heading="Request complete"
-                content={`Request sent ${this.props.proxy.isEnabled ? 'through Proxy' : ''} to ${this.state.finalDestination}`} />
-            </div>
-            <div className="row">
-              <FetchResponse headers={this.state.response.headers} data={this.state.response.data} />
-            </div>
-          </>
+          this.state.hasRun && (
+            this.state.response.headers && this.state.response.data
+              ? (
+                <>
+                  <div className="row">
+                    <Notice
+                      className="twelve columns u-full-width"
+                      heading="Request complete"
+                      content={`Request sent ${proxyMessage}`} />
+                  </div>
+                  <div className="row">
+                    <FetchResponse
+                      headers={this.state.response.headers}
+                      data={this.state.response.data} />
+                  </div>
+                </>)
+              : (
+                <div className="row">
+                  <Notice
+                    className="twelve columns u-full-width"
+                    heading="Request Failed"
+                    content={`Request couldn't be sent ${proxyMessage}`} />
+                </div>
+              )
+          )
         }
       </>
     );

@@ -20,6 +20,7 @@ export interface ProxyData {
 }
 
 interface ProxyProps {
+  isExpanded: boolean;
   proxy: ProxyData;
   onUpdateProxy: (data: ProxyData) => void;
 }
@@ -33,7 +34,7 @@ export default class Proxy extends React.PureComponent<ProxyProps, ProxyState> {
   constructor(props: ProxyProps) {
     super(props);
     this.state = {
-      showProxySettings: true,
+      showProxySettings: props.isExpanded,
     };
   }
 

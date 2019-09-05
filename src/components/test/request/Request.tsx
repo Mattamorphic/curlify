@@ -11,6 +11,7 @@ import Confirm from '../../shared/Confirm';
 interface RequestProps {
   shouldConfirm: boolean;
   incompleteData?: string;
+  hasRun: boolean;
   proxy: ProxyData;
   onRequest: () => void;
   onUpdateProxy: (data: ProxyData) => void;
@@ -24,7 +25,10 @@ const Request: React.FunctionComponent<RequestProps> = (props) => {
   return (
     <div className="row">
       <div className="Request">
-        <Proxy proxy={props.proxy} onUpdateProxy={props.onUpdateProxy} />
+        <Proxy
+          isExpanded={!props.hasRun}
+          proxy={props.proxy}
+          onUpdateProxy={props.onUpdateProxy} />
         {
           props.shouldConfirm
             ? <Confirm

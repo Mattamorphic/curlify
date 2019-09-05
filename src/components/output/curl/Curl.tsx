@@ -275,6 +275,7 @@ export default class Curl extends React.Component<CurlProps, CurlState>  {
       case DataType.FORM:
         break;
     }
+
     return "curl -X " + config.method + " \\ \n"
        + (config.headers.map(header => "-H \"" + header.type + ": " + header.value + "\" \\ \n").join(''))
        + ((payload && Object.keys(payload).length > 0 && utils.methodHasPayload(config.method))
@@ -288,7 +289,10 @@ export default class Curl extends React.Component<CurlProps, CurlState>  {
    * @param {string} value
    */
   static parsePayloadString(value: string): string {
-    return value.replace(utils.regEx.newLineAndTab, '').replace(utils.regEx.multipleSpaces, ' ');
+    return value
+      .replace(utils.regEx.newLineAndTab, '')
+      .replace(utils.regEx.multipleSpaces, ' ')
+      .replace(utils.regEx.singleEscapedNewLine, '');
   }
 
   render () {
@@ -298,9 +302,6 @@ export default class Curl extends React.Component<CurlProps, CurlState>  {
           <TextArea
             isFullWidth={true}
             onUpdate={this.updateCurl}
-            style={{
-              height: "200px",
-            }}
             value={this.state.draft} />
         </div>
         <div className="row">

@@ -45,20 +45,20 @@ export default class Json extends React.PureComponent<JsonProps, JsonState> {
    * @return {JsonState}
    */
   static getDerivedStateFromProps(newProps: JsonProps, state: JsonState): JsonState {
-    let draft = '';
+    let draft = state.draft;
     let hasDraft = state.hasDraft;
-    try {
-      // if we can parse the draft it must be valid
-      JSON.parse(state.draft);
-      draft = hasDraft ? state.draft : JSON.stringify(newProps.data);
+    if (!state.hasDraft && JSON.stringify(newProps.data) !== JSON.stringify(JSON.parse(state.draft))) {
+      draft = JSON.stringify(newProps.data, null, 2);
       hasDraft = false;
-    } catch (_) {
-      draft = state.draft;
-      hasDraft = true;
+    } else {
+      try {
+        JSON.parse(draft);
+        hasDraft = false;
+      } catch(_) {}
     }
     return {
-      hasDraft,
       draft,
+      hasDraft,
     };
   }
 

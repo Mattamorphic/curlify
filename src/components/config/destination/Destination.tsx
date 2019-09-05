@@ -25,18 +25,12 @@ const Destination: React.FunctionComponent<DestinationProps> = (props) => {
     );
   }
 
-  const onUpdateDomain = (domain: string): void => {
-    if (domain.charAt(domain.length-1) === '/') {
-      domain = domain.substr(0, domain.length-1);
-    }
-    onUpdate(domain, 'domain');
+  const onUpdateEndpoint = (endpoint: string): void => {
+    onUpdate(endpoint, 'endpoint');
   }
 
-  const onUpdateEndpoint = (endpoint: string): void => {
-    if (endpoint.charAt(0) !== '/') {
-      endpoint = '/' + endpoint;
-    }
-    onUpdate(endpoint, 'endpoint');
+  const onUpdateDomain = (domain: string): void => {
+    onUpdate(domain, 'domain');
   }
 
   return (

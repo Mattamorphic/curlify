@@ -20,7 +20,7 @@ const Saving: React.FunctionComponent<SavingProps> = (props) => {
       <div
         className={
           ((props.isSaved) ? 'Saved' : 'NotSaved')
-          +  " Notice "
+          +  " SavingNotice "
           + (props.className || '')
         }
         key={"notice-" + props.isSaved}>
