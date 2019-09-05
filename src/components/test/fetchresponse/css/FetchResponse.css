@@ -4,11 +4,6 @@
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New';
 }
 
-.FetchResponse .Headers table {
-  font-size: 12px;
-  word-wrap: break-word !important;
-}
-
 
 /* From this palette https://ethanschoonover.com/solarized/ */
 .FetchResponse .Data {

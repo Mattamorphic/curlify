@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 
+import ResponseHeaders from './responseheaders/ResponseHeaders';
+
 import Toggler from '../../shared/Toggler';
 
 import * as utils from '../../../utils';
@@ -103,32 +105,7 @@ export default class FetchResponse extends React.PureComponent<FetchResponseProp
     }
     return (
       <div className="FetchResponse">
-      <Toggler
-        isToggled={this.state.showHeaders}
-        className="Headers"
-        label="Headers"
-        onToggle={this.toggleHeaders}>
-        <table className="u-max-full-width">
-          <thead>
-            <tr>
-              <th> Header </th>
-              <th> Value </th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              Array.from(this.props.headers.keys()).map(
-                (key, index) => (
-                  <tr key={`r_${key}_${index}`}>
-                    <td> {key} </td>
-                    <td> {this.props.headers.get(key)} </td>
-                  </tr>
-                )
-              )
-            }
-          </tbody>
-        </table>
-      </Toggler>
+      <ResponseHeaders headers={this.props.headers} />
       <Toggler
         isToggled={this.state.showRaw}
         label="Raw"
