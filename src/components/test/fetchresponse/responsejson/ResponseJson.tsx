@@ -44,16 +44,16 @@ export default class ResponseJson extends React.PureComponent<
     let valueClass = "json-value";
     let type = JsonValueTypes.STRING;
     if (part.value !== undefined && part.value !== null) {
-      if (!isNaN(parseInt(part.value))) {
+      if (utils.isStringANumber(part.value)) {
         valueClass = "json-number";
         type = JsonValueTypes.NUMBER;
-      } else if (!isNaN(Date.parse(part.value.replace(/[T|Z]/, ' ')))) {
+      } else if (utils.isStringADate(part.value)) {
         valueClass = "json-date";
         type = JsonValueTypes.DATE;
-      } else if (['true', 'false', 'null', 'nil', 'undefined'].includes(part.value.toLowerCase())) {
+      } else if (utils.isStringBooleanOrNull(part.value)) {
         valueClass = "json-boolean";
         type = JsonValueTypes.BOOLEAN;
-      } else if (part.value.match(utils.regEx.url)) {
+      } else if (utils.isStringAURL(part.value)) {
         valueClass = "json-url";
         type = JsonValueTypes.URL;
       } else {
