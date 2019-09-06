@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/curlify/static/css/main.4a3cd034.chunk.css",
+    "main.css": "/curlify/static/css/main.f5ef4ac2.chunk.css",
     "main.js": "/curlify/static/js/main.77f3794d.chunk.js",
     "main.js.map": "/curlify/static/js/main.77f3794d.chunk.js.map",
     "runtime~main.js": "/curlify/static/js/runtime~main.f9da56b4.js",
@@ -8,8 +8,8 @@
     "static/js/2.b33c57e5.chunk.js": "/curlify/static/js/2.b33c57e5.chunk.js",
     "static/js/2.b33c57e5.chunk.js.map": "/curlify/static/js/2.b33c57e5.chunk.js.map",
     "index.html": "/curlify/index.html",
-    "precache-manifest.63e25c3cbefcd8d050fb26c24e9dd9b4.js": "/curlify/precache-manifest.63e25c3cbefcd8d050fb26c24e9dd9b4.js",
+    "precache-manifest.e03817c7214761e564f6e30f24140f97.js": "/curlify/precache-manifest.e03817c7214761e564f6e30f24140f97.js",
     "service-worker.js": "/curlify/service-worker.js",
-    "static/css/main.4a3cd034.chunk.css.map": "/curlify/static/css/main.4a3cd034.chunk.css.map"
+    "static/css/main.f5ef4ac2.chunk.css.map": "/curlify/static/css/main.f5ef4ac2.chunk.css.map"
   }
 }
