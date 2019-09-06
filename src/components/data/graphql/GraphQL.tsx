@@ -1,5 +1,7 @@
 import React from 'react';
 import {parse, print, OperationDefinitionNode} from 'graphql';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagic } from '@fortawesome/free-solid-svg-icons';
 
 import Button from '../../shared/Button';
 import Copy from '../../shared/Copy';
@@ -135,16 +137,16 @@ export default class GraphQL extends React.PureComponent<GraphQLProps, GraphQLSt
           <div className="two columns">
             <Button
               className="u-full-width"
-              label="Pretty"
               onClick={this.pretty}
               isDisabled={!this.state.isSaved}
-              isPrimary={false} />
+              isPrimary={false}>
+              <FontAwesomeIcon icon={faMagic} size="lg" />
+            </Button>
           </div>
           <div className="two columns">
             <Copy
               className="u-pull-right"
-              content={GraphQL.PrettyMe(this.state.draft)}
-              label={`Copy` } />
+              content={GraphQL.PrettyMe(this.state.draft)} />
           </div>
         </div>
         <div className="row">

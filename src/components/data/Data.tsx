@@ -49,6 +49,7 @@ const Data: React.FunctionComponent<DataProps> = (props) => {
 
   return (
     <div className={(props.className || '' ) + ' Data'}>
+      <label> Data </label>
       <div className="row">
         <div className="twelve columns">
         {

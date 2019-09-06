@@ -1,17 +1,16 @@
 import React from 'react';
 import { CSSTransitionGroup } from 'react-transition-group';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSave } from '@fortawesome/free-solid-svg-icons';
 
 import './css/Saving.css';
 
 interface SavingProps {
   className?: string;
-  label?: string;
   isSaved: boolean;
 }
 
 const Saving: React.FunctionComponent<SavingProps> = (props) => {
-  const saved = props.label ? `Saved ${props.label}` : 'Saved';
-  const notSaved = props.label ? `${props.label} Not Saved` : 'Not Saved';
   return (
     <CSSTransitionGroup
       transitionName="save-notice"
@@ -25,7 +24,7 @@ const Saving: React.FunctionComponent<SavingProps> = (props) => {
           + (props.className || '')
         }
         key={"notice-" + props.isSaved}>
-        {props.isSaved ? saved : notSaved}
+        <FontAwesomeIcon icon={faSave} size="lg" />
       </div>
     </CSSTransitionGroup>
   )
