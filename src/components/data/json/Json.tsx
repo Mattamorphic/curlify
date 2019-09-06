@@ -96,15 +96,22 @@ export default class Json extends React.PureComponent<JsonProps, JsonState> {
     return (
       <div className="Json">
         <div className="row">
-          <div className="six columns">
-            <Saving isSaved={!this.state.hasDraft} label="Json" />
+          <div className="four columns">
+            <Saving
+              className="u-full-width"
+              isSaved={!this.state.hasDraft}
+              label="Json" />
           </div>
           <div className="four columns">
-            <Button className="u-pull-right" label="Pretty" onClick={this.pretty} isPrimary={false} />
+            <Button
+              className="u-full-width"
+              label="Pretty"
+              onClick={this.pretty}
+              isPrimary={false} />
           </div>
-          <div className="two columns">
+          <div className="four columns">
             <Copy
-              className="u-pull-right"
+              className="u-full-width"
               content={this.state.draft}
               label={`Copy JSON data` } />
           </div>

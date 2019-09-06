@@ -6,16 +6,20 @@
 }
 
 .Curl textarea{
-  background-color: #F0F6FD;
+  background: url('/images/textarea.png');
+  background-color: #19404A;
+  background-attachment: local;
+  background-repeat: no-repeat;
   border: 1px solid #D1D1D1;
-  color: #000;
-  border-radius: 10px;
-  font-size: 14px;
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New';
+  color: #EEE8D5;
+  font-size: 13px;
+  height: 150px;
+  line-height: 16px;
   max-height: 300px;
-  min-height: 120px;
+  min-height: 100px;
+  padding-left: 35px;
+  padding-top: 10px;
   resize: vertical;
-
 }
 
 .Curl textarea:hover {
