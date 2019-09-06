@@ -1,8 +1,8 @@
 import React from 'react';
 
 interface TextAreaProps {
-  className?: string
-  isFullWidth: boolean
+  className?: string;
+  isFullWidth: boolean;
   onChangeDirect?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   onUpdate?: (value: string) => void;
   style?: {

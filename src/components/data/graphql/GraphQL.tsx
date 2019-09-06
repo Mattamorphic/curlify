@@ -152,6 +152,13 @@ export default class GraphQL extends React.PureComponent<GraphQLProps, GraphQLSt
             isFullWidth={true}
             onChangeDirect={this.updateGraphQL}
             ref="input_gql"
+            style={{
+              background: `url('${process.env.PUBLIC_URL}/images/textarea.png')`,
+              backgroundAttachment: 'local',
+              backgroundRepeat: 'no-repeat',
+              backgroundColor: '#19404A',
+              color: '#EEE8D5',
+            }}
             value={this.state.draft} />
         </div>
       </div>

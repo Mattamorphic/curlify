@@ -302,6 +302,13 @@ export default class Curl extends React.Component<CurlProps, CurlState>  {
           <TextArea
             isFullWidth={true}
             onUpdate={this.updateCurl}
+            style={{
+              background: `url('${process.env.PUBLIC_URL}/images/textarea.png')`,
+              backgroundAttachment: 'local',
+              backgroundRepeat: 'no-repeat',
+              backgroundColor: '#19404A',
+              color: '#EEE8D5',
+            }}
             value={this.state.draft} />
         </div>
         <div className="row">

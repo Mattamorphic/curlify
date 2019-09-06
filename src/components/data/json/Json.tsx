@@ -120,6 +120,13 @@ export default class Json extends React.PureComponent<JsonProps, JsonState> {
           <TextArea
             isFullWidth={true}
             onUpdate={this.updateJson}
+            style={{
+              background: `url('${process.env.PUBLIC_URL}/images/textarea.png')`,
+              backgroundAttachment: 'local',
+              backgroundRepeat: 'no-repeat',
+              backgroundColor: '#19404A',
+              color: '#EEE8D5',
+            }}
             value={this.state.draft} />
         </div>
       </div>

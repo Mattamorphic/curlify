@@ -6,10 +6,7 @@
 }
 
 .GraphQL textarea {
-  background: url('/images/textarea.png');
   background-color: #19404A;
-  background-attachment: local;
-  background-repeat: no-repeat;
   border: 1px solid #D1D1D1;
   color: #EEE8D5;
   font-size: 13px;
