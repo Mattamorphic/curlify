@@ -20,10 +20,14 @@ export const regEx = {
   curlMethod: /(?:-X\s{0,})(\w{3,6})/gim,
   // Todo: convert to /gms https://github.com/babel/babel/pull/10347
   curlData: /(?:-d\s{0,}'|")({.*})(?=['|"])/gim,
+  dateTimeZoneChars: /[T|Z]/gim,
+  jsonData: /^( *)("[^"]+": )?("[^"].*"|[\w.+-]*)?([{}[\],]*)?$/mg,
   newLine: /[\r|\n]/gm,
   newLineAndTab: /[\n|\r|\t]/gm,
   multipleSpaces: / +/gm,
+  quotes:/[\"\']/gim,
   singleEscapedNewLine: /(?<!\\)\\n/gm,
+
 };
 
 // export const hasDataChanged = (
@@ -91,4 +95,21 @@ export const isValidGraphQLString = (gql: string) => {
   } catch (_) {
     return false;
   }
+}
+
+export const isStringANumber = (value: string): boolean => {
+  return !isNaN(parseInt(value));
+}
+
+export const isStringADate = (value: string): boolean => {
+  return !isNaN(Date.parse(value.replace(regEx.dateTimeZoneChars, ' ')));
+}
+
+export const isStringBooleanOrNull = (value: string): boolean => {
+  const permitted = ['true', 'false', 'null', 'nil', 'undefined'];
+  return (permitted.includes(value.toLowerCase()));
+}
+
+export const isStringAURL = (value: string): boolean => {
+  return !!value.replace(regEx.quotes, '').match(regEx.url);
 }
