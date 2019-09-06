@@ -23,6 +23,7 @@ export interface DataData {
 }
 
 interface DataProps {
+  className?: string;
   data: DataData;
   updateData: (data: DataData) => void;
 }
@@ -47,20 +48,7 @@ const Data: React.FunctionComponent<DataProps> = (props) => {
   }
 
   return (
-    <div className="Data">
-      <div className="row">
-        <div className="twelve columns">
-          <label> Data </label>
-        </div>
-      </div>
-      <div className="row">
-        <div className="twelve columns">
-          <Selector
-            className="u-full-width"
-            selected={props.data.type}
-            onUpdate={updateType} />
-        </div>
-      </div>
+    <div className={(props.className || '' ) + ' Data'}>
       <div className="row">
         <div className="twelve columns">
         {
@@ -73,6 +61,14 @@ const Data: React.FunctionComponent<DataProps> = (props) => {
               data={props.data.data.graphQL}
               onUpdateData={updateGraphQLData} />)
         }
+        </div>
+      </div>
+      <div className="row">
+        <div className="twelve columns">
+          <Selector
+            className="u-full-width"
+            selected={props.data.type}
+            onUpdate={updateType} />
         </div>
       </div>
     </div>

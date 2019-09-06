@@ -96,11 +96,10 @@ export default class Json extends React.PureComponent<JsonProps, JsonState> {
     return (
       <div className="Json">
         <div className="row">
-          <div className="four columns">
+          <div className="two columns">
             <Saving
               className="u-full-width"
-              isSaved={!this.state.hasDraft}
-              label="Json" />
+              isSaved={!this.state.hasDraft} />
           </div>
           <div className="four columns">
             <Button
@@ -113,7 +112,7 @@ export default class Json extends React.PureComponent<JsonProps, JsonState> {
             <Copy
               className="u-full-width"
               content={this.state.draft}
-              label={`Copy JSON data` } />
+              label={`Copy` } />
           </div>
         </div>
         <div className="row">

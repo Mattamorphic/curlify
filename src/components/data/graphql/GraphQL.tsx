@@ -123,8 +123,8 @@ export default class GraphQL extends React.PureComponent<GraphQLProps, GraphQLSt
     return (
       <div className="GraphQL">
         <div className="row">
-          <div className="six columns">
-            <Saving isSaved={this.state.isSaved} label="GraphQL" />
+          <div className="two columns">
+            <Saving isSaved={this.state.isSaved} />
           </div>
           <div className="two columns">
             <Type
@@ -144,7 +144,7 @@ export default class GraphQL extends React.PureComponent<GraphQLProps, GraphQLSt
             <Copy
               className="u-pull-right"
               content={GraphQL.PrettyMe(this.state.draft)}
-              label={`Copy GQL data` } />
+              label={`Copy` } />
           </div>
         </div>
         <div className="row">
