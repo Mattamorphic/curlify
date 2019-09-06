@@ -119,7 +119,10 @@ export default class App extends React.Component<AppProps, AppState> {
     return result;
   }
 
+
+
   render () {
+    const showData = utils.methodHasPayload(this.state.config.method);
     return (
       <div className='container App'>
         <div className="row">
@@ -132,17 +135,23 @@ export default class App extends React.Component<AppProps, AppState> {
         </div>
         <div className="row">
           {
-            utils.methodHasPayload(this.state.config.method) &&
-              (<Data data={this.state.data} updateData={this.onDataChange} />)
+            showData && (
+            <div className="six columns">
+              <Data
+                className="u-full-width"
+                data={this.state.data}
+                updateData={this.onDataChange} />
+            </div>)
           }
-        </div>
-        <div className="row">
-          <Output
-            config={this.state.config}
-            data={this.state.data}
-            output={this.state.output.type}
-            updateConfig={this.onConfigChange}
-            updateData={this.onDataChange} />
+          <div className={(showData ? 'six' : 'twelve') + ' columns'}>
+            <Output
+              className="u-full-width"
+              config={this.state.config}
+              data={this.state.data}
+              output={this.state.output.type}
+              updateConfig={this.onConfigChange}
+              updateData={this.onDataChange} />
+          </div>
         </div>
         <div className="row">
           <Test

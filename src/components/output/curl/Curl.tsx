@@ -299,6 +299,22 @@ export default class Curl extends React.Component<CurlProps, CurlState>  {
     return (
       <div className="Curl">
         <div className="row">
+          <div className="two columns">
+            <Saving
+              className="u-full-width"
+              isSaved={!this.state.hasDraft} />
+          </div>
+          <div className="six columns">
+            <div className="u-full-width" />
+          </div>
+          <div className="four columns">
+            <Copy
+              className="u-full-width"
+              content={this.state.draft}
+              label={`Copy` } />
+          </div>
+        </div>
+        <div className="row">
           <TextArea
             isFullWidth={true}
             onUpdate={this.updateCurl}
@@ -310,17 +326,6 @@ export default class Curl extends React.Component<CurlProps, CurlState>  {
               color: '#EEE8D5',
             }}
             value={this.state.draft} />
-        </div>
-        <div className="row">
-          <div className="ten columns">
-            <Saving className="u-pull-left" isSaved={!this.state.hasDraft} label="Curl" />
-          </div>
-          <div className="two columns">
-            <Copy
-              className="u-pull-right"
-              content={this.state.draft}
-              label={`Copy Curl data` } />
-          </div>
         </div>
       </div>
     );
