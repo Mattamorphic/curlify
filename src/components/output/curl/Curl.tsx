@@ -306,7 +306,7 @@ export default class Curl extends React.Component<CurlProps, CurlState>  {
         </div>
         <div className="row">
           <div className="ten columns">
-            <Saving isSaved={!this.state.hasDraft} label="Curl" />
+            <Saving className="u-pull-left" isSaved={!this.state.hasDraft} label="Curl" />
           </div>
           <div className="two columns">
             <Copy
