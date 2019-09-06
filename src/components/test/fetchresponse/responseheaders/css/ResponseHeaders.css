@@ -1,29 +1,45 @@
-.Headers table {
+.ResponseHeadersTable {
+  background-color: #002B36;
   font-size: 12px;
   word-wrap: break-word !important;
 }
 
-.header-value {
+.ResponseHeadersTable > thead > th {
+  color: #EEE8D5;
+}
+
+.ResponseHeadersTable > tbody > td.header-value {
   word-wrap: break-word;
   word-break: break-all;
 }
 
-.header-number {
-
+.ResponseHeadersTable > tbody > tr > td > .header-number {
+  color: #2AA198;
 }
 
-.header-date {
-
+.ResponseHeadersTable > tbody > tr > td > .header-date {
+  color: #D33682;
 }
 
-.header-url {
-
+.ResponseHeadersTable > tbody > tr > td > .header-key {
+  color: #93A1A1;
 }
 
-.header-boolean {
-
+.ResponseHeadersTable > tbody > tr > td > .header-url {
+  color: #2AA198;
 }
 
-.header-string {
+.ResponseHeadersTable > tbody > tr > td > .header-boolean {
+  color: #cB4B16;
+}
 
+
+.ResponseHeadersTable > tbody > tr >  td > .header-string {
+  color: #EEE8D5;
+}
+
+@media screen and (max-width: 600px) {
+  .ResponseHeadersTable > tbody > tr > td[data-label]::before {
+    color: #EEE8D5;
+  }
 }

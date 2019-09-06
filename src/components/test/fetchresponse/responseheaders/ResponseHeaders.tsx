@@ -30,7 +30,7 @@ export default class ResponseHeaders extends React.PureComponent<
   }
 
   parse = (value: string): string | JSX.Element => {
-    
+
     if (utils.isStringANumber(value)) {
       return (<span className='header-value header-number'>{value}</span>);
     }
@@ -65,11 +65,11 @@ export default class ResponseHeaders extends React.PureComponent<
         label="Headers"
         onToggle={this.toggleHeaders}>
         <Table
-          className="u-max-full-width"
+          className="u-max-full-width ResponseHeadersTable"
           data={
             Array.from(this.props.headers.keys()).map(
               key => ({
-                Header: key,
+                Header: this.parse(key),
                 Value: this.parse(this.props.headers.get(key) || ''),
               })
             )

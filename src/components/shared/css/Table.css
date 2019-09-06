@@ -8,25 +8,24 @@ table {
 }
 
 table caption {
-  font-size: 1.5em;
-  margin: .5em 0 .75em;
+  font-size: 10px;
+  margin: 5px 0 10px;
 }
 
 table tr {
-  background-color: #f8f8f8;
   border: 1px solid #ddd;
-  padding: .35em;
+  padding: 10px;
 }
 
 table th,
 table td {
-  padding: .625em;
-  text-align: center;
+  padding-left: 10px !important;
+  text-align: left;
 }
 
 table th {
-  font-size: .85em;
-  letter-spacing: .1em;
+  font-size: 10px;
+  letter-spacing: 2px;
   text-transform: uppercase;
 }
 
@@ -53,13 +52,13 @@ table th {
   table tr {
     border-bottom: 3px solid #ddd;
     display: block;
-    margin-bottom: .625em;
+    margin-bottom: 10px;
   }
 
   table td {
     border-bottom: 1px solid #ddd;
     display: block;
-    font-size: .8em;
+    font-size: 10px;
     text-align: right;
   }
 
