@@ -26,6 +26,7 @@ const Output: React.FunctionComponent<OutputProps> = (props) => {
 
   return (
     <div className={(props.className || '' ) + ' Output'}>
+      <label> Output </label>
       <div className="row">
         <div className="twelve columns">
           {

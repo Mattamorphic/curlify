@@ -2,10 +2,12 @@ import React from 'react';
 
 interface ButtonProps {
   className?: string;
+  id?: string;
   isDisabled?: boolean;
   isPrimary: boolean;
-  label: string;
+  label?: string;
   onClick: () => void;
+  onClickRaw?: (e: React.MouseEvent<HTMLElement>) => void;
 }
 
 const Button: React.FunctionComponent<ButtonProps> = (props) => {
@@ -15,12 +17,13 @@ const Button: React.FunctionComponent<ButtonProps> = (props) => {
   }
 
   return (
-    <input
-      type="button"
+    <button
       className={(props.isPrimary ? 'button-primary ' : ' ') + props.className || ' '}
       disabled={props.isDisabled}
-      onClick={clickHandler}
-      value={props.label} />
+      id={props.id}
+      onClick={props.onClickRaw || clickHandler}>
+      {props.children || props.label || ''}
+      </button>
   );
 }
 

@@ -3,6 +3,8 @@
  * @author Mattamorphic
  */
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagic } from '@fortawesome/free-solid-svg-icons';
 
 // Imported components
 import Button from '../../shared/Button';
@@ -104,15 +106,15 @@ export default class Json extends React.PureComponent<JsonProps, JsonState> {
           <div className="four columns">
             <Button
               className="u-full-width"
-              label="Pretty"
               onClick={this.pretty}
-              isPrimary={false} />
+              isPrimary={false}>
+              <FontAwesomeIcon icon={faMagic} size="lg" />
+            </Button>
           </div>
           <div className="four columns">
             <Copy
               className="u-full-width"
-              content={this.state.draft}
-              label={`Copy` } />
+              content={this.state.draft} />
           </div>
         </div>
         <div className="row">

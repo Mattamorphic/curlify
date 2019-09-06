@@ -310,8 +310,7 @@ export default class Curl extends React.Component<CurlProps, CurlState>  {
           <div className="four columns">
             <Copy
               className="u-full-width"
-              content={this.state.draft}
-              label={`Copy` } />
+              content={this.state.draft} />
           </div>
         </div>
         <div className="row">

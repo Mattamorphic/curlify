@@ -1,4 +1,8 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
+
+import Button from '../../shared/Button';
 
 import Types from './type/Types';
 import Value from './value/Value';
@@ -59,7 +63,7 @@ const Headers: React.FunctionComponent<HeadersProps> = (props) => {
     props.onUpdate(null, parseInt(index));
   }
 
-  // Don't allow duplicate headers. 
+  // Don't allow duplicate headers.
   const selected = props.selected.map(header => header.type);
   const values = Object.values(HTTPHeaders).filter(header => !selected.includes(header));
 
@@ -83,12 +87,14 @@ const Headers: React.FunctionComponent<HeadersProps> = (props) => {
                   // TODO: selected and values aren't behaving below
                 }
                   <div className="two columns">
-                    <button
+                    <Button
+                      id={`remove_${index}`}
+                      isPrimary={false}
                       className='u-full-width'
-                      onClick={removeHeader}
-                      id={`remove_${index}`}>
-                      Remove
-                    </button>
+                      onClick={() => {}}
+                      onClickRaw={removeHeader}>
+                      <FontAwesomeIcon icon={faMinus} size="lg" />
+                    </Button>
                   </div>
                   <div className="four columns">
                     <Types
@@ -106,11 +112,13 @@ const Headers: React.FunctionComponent<HeadersProps> = (props) => {
                       onUpdate={updateValue} />
                   </div>
                   <div className="two columns">
-                    <button
+                    <Button
+                      isPrimary={false}
                       className='u-full-width'
-                      onClick={addHeader}>
-                      Add
-                    </button>
+                      onClick={() => {}}
+                      onClickRaw={addHeader}>
+                      <FontAwesomeIcon icon={faPlus} size="lg" />
+                    </Button>
                   </div>
                 </div>
             )
@@ -119,11 +127,13 @@ const Headers: React.FunctionComponent<HeadersProps> = (props) => {
         {
           props.selected.length === 0 && (
             <div className="row">
-              <button
+              <Button
+                isPrimary={false}
                 className='u-full-width'
-                onClick={addHeader}>
-                Click to add header
-              </button>
+                onClick={() => {}}
+                onClickRaw={addHeader}>
+                <FontAwesomeIcon icon={faPlus} size="lg" />
+              </Button>
             </div>
           )
         }
