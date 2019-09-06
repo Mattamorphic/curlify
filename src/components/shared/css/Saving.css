@@ -1,15 +1,25 @@
 .SavingNotice {
-  height: 20px;
-  width:300px;
-  padding:10px;
+  border: 1px solid #D1D1D1;
+  border-radius: 30px;
+  font-weight: bold;
+  height: 38px;
+  line-height: 38px;
+  margin-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
   text-align:center;
+  vertical-align: middle;
+  word-break: break-all;
+  word-wrap: break-word;
 }
 
 .Saved {
+  color: #79B28F;
   background-color: #ADFFCD;
 }
 
 .NotSaved {
+  color: #B27979;
   background-color: #FFADAD;
 }
 
