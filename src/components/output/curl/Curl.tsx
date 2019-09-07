@@ -35,8 +35,8 @@ interface DomainAndEndpoint {
 interface SerializedCurl {
   config: ConfigData;
   data: DataData;
-  hasNewData: boolean;
   hasNewConfig: boolean;
+  hasNewData: boolean;
 }
 
 interface CurlProps {
@@ -58,18 +58,6 @@ export default class Curl extends React.Component<CurlProps, CurlState>  {
     this.state = {
       draft: Curl.getValue(props.config, props.data),
       hasDraft: false,
-    };
-  }
-
-
-  static getDerivedStateFromProps(newProps: CurlProps, state: CurlState): CurlState {
-    const draft = (state.hasDraft)
-      ? state.draft
-      : Curl.getValue(newProps.config, newProps.data);
-
-    return {
-      hasDraft: state.hasDraft,
-      draft,
     };
   }
 
@@ -175,8 +163,6 @@ export default class Curl extends React.Component<CurlProps, CurlState>  {
     let hasNewConfig = false;
     let hasNewData = false;
 
-    // Only update if we have a match :)
-
      // decide which method to use
     const method = this.getMethod(value);
 
@@ -242,13 +228,15 @@ export default class Curl extends React.Component<CurlProps, CurlState>  {
    */
   updateCurl = (value: string): void => {
     const curl = this.serializerCurl(value);
-
+    console.log(curl);
     if (curl.hasNewData || curl.hasNewConfig) {
-      this.setState({draft: value, hasDraft: false}, () => {
+      // set draft to null, we'll update with the new props
+      this.setState({hasDraft: false}, () => {
         curl.hasNewData && this.props.updateData(curl.data);
         curl.hasNewConfig && this.props.updateConfig(curl.config);
       });
     }
+    // set the draft to true, let's use this
     if (!curl.hasNewData && !curl.hasNewConfig) {
       this.setState({draft: value, hasDraft: true});
     }
@@ -276,11 +264,19 @@ export default class Curl extends React.Component<CurlProps, CurlState>  {
         break;
     }
 
-    return "curl -X " + config.method + " \\ \n"
-       + (config.headers.map(header => "-H \"" + header.type + ": " + header.value + "\" \\ \n").join(''))
-       + ((payload && Object.keys(payload).length > 0 && utils.methodHasPayload(config.method))
-         ? "-d '" + Curl.parsePayloadString(JSON.stringify(payload)) + "' \\ \n" : '')
-       + config.domain + config.endpoint;
+    return (
+      `curl -X ${config.method} \\ \n`
+      + `${config.headers
+        .map(
+          header => `-H "${header.type}": "${header.value }" \\ \n`
+        ).join('')}`
+      + `${(payload
+          && Object.keys(payload).length > 0
+          && utils.methodHasPayload(config.method)
+        )
+         ? `-d '${Curl.parsePayloadString(JSON.stringify(payload))}' \\ \n`
+         : ''}`
+      + `${config.domain + config.endpoint}`);
   }
 
   /**
@@ -296,6 +292,12 @@ export default class Curl extends React.Component<CurlProps, CurlState>  {
   }
 
   render () {
+    const draft = this.state.hasDraft
+      ? this.state.draft
+      : Curl.getValue(
+        this.props.config,
+        this.props.data,
+      );
     return (
       <div className="Curl">
         <div className="row">
@@ -310,7 +312,7 @@ export default class Curl extends React.Component<CurlProps, CurlState>  {
           <div className="four columns">
             <Copy
               className="u-full-width"
-              content={this.state.draft} />
+              content={draft} />
           </div>
         </div>
         <div className="row">
@@ -324,7 +326,7 @@ export default class Curl extends React.Component<CurlProps, CurlState>  {
               backgroundColor: '#19404A',
               color: '#EEE8D5',
             }}
-            value={this.state.draft} />
+            value={draft} />
         </div>
       </div>
     );
