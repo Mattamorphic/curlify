@@ -69,14 +69,15 @@ export default class Proxy extends React.PureComponent<ProxyProps, ProxyState> {
         <div className="row">
           <Notice
             className="twelve columns u-full-width"
-            heading="Proxy Overview"
-            content={"Requests are proxied through a copy of cors-anywhere\n"
-              + `This is hosted on: ${utils.PROXY}${"\n"}`
-              + "You can find the code for this at https://github.com/Mattamorphic/curlify/tree/proxy\n"
-              + "If you'd like to use your own proxy, simply replace the URL\n"
-              + "This should follow cors-anywhere entry design\n"
-              + "This proxy forwards request, gets around the cors issue, and allows us to return headers\n"
-              + "No data is recorded in the proxy\n"} />
+            heading="Proxy Overview">
+            Requests are proxied through a copy of cors-anywhere <br />
+            This is hosted on: <a href={utils.PROXY}>{utils.PROXY}</a> <br />
+            You can find the code for this at <a href="https://github.com/Mattamorphic/curlify/tree/proxy">GitHub</a> <br />
+            If you'd like to use your own proxy, simply replace the URL <br />
+            This should follow cors-anywhere entry design <br />
+            This proxy forwards request, gets around the cors issue, and allows us to return headers <br />
+            No data is recorded in the proxy
+          </Notice>
         </div>
         <div className="row">
           <Input

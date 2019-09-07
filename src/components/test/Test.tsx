@@ -34,6 +34,7 @@ interface TestState {
   response: {
     headers?: Headers,
     data?: string,
+    destination?: URL,
   };
 }
 
@@ -104,6 +105,7 @@ class Test extends React.PureComponent<TestProps, TestState> {
         this.setState({
           isLoading: false,
           response: {
+            destination: dest,
             headers: response.headers as Headers,
             data,
           }
@@ -140,7 +142,11 @@ class Test extends React.PureComponent<TestProps, TestState> {
       );
     }
 
-    const proxyMessage = `${this.props.proxy.isEnabled ? 'through Proxy' : ''} to ${this.getDestination()}`;
+    const proxyMessage = `${
+      this.props.proxy.isEnabled
+        ? 'through Proxy'
+        : ''
+      } to ${this.state.response.destination || this.getDestination()}`;
 
     return (
       <>
@@ -158,8 +164,9 @@ class Test extends React.PureComponent<TestProps, TestState> {
                   <div className="row">
                     <Notice
                       className="twelve columns u-full-width"
-                      heading="Request complete"
-                      content={`Request sent ${proxyMessage}`} />
+                      heading="Request complete">
+                      Request sent {proxyMessage}
+                    </Notice>
                   </div>
                   <div className="row">
                     <FetchResponse
@@ -171,8 +178,9 @@ class Test extends React.PureComponent<TestProps, TestState> {
                 <div className="row">
                   <Notice
                     className="twelve columns u-full-width"
-                    heading="Request Failed"
-                    content={`Request couldn't be sent ${proxyMessage}`} />
+                    heading="Request Failed">
+                    Request couldn't be sent {proxyMessage}
+                  </Notice>
                 </div>
               )
           )

@@ -34,7 +34,12 @@ export default class App extends React.Component<AppProps, AppState> {
 
   onConfigChange = (config: ConfigData): void => {
     this.setState({
-      config,
+      config: {
+        method: config.method,
+        headers: config.headers,
+        domain: config.domain,
+        endpoint: config.endpoint,
+      }
     }, () => this.setState({validation: this.validatePayload()}));
   }
 
@@ -134,15 +139,6 @@ export default class App extends React.Component<AppProps, AppState> {
             updateConfig={this.onConfigChange} />
         </div>
         <div className="row">
-          {
-            showData && (
-            <div className="six columns">
-              <Data
-                className="u-full-width"
-                data={this.state.data}
-                updateData={this.onDataChange} />
-            </div>)
-          }
           <div className={(showData ? 'six' : 'twelve') + ' columns'}>
             <Output
               className="u-full-width"
@@ -152,6 +148,15 @@ export default class App extends React.Component<AppProps, AppState> {
               updateConfig={this.onConfigChange}
               updateData={this.onDataChange} />
           </div>
+            {
+              showData && (
+              <div className="six columns">
+                <Data
+                  className="u-full-width"
+                  data={this.state.data}
+                  updateData={this.onDataChange} />
+              </div>)
+            }
         </div>
         <div className="row">
           <Test
