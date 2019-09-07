@@ -34,6 +34,7 @@ interface TestState {
   response: {
     headers?: Headers,
     data?: string,
+    destination?: URL,
   };
 }
 
@@ -104,6 +105,7 @@ class Test extends React.PureComponent<TestProps, TestState> {
         this.setState({
           isLoading: false,
           response: {
+            destination: dest,
             headers: response.headers as Headers,
             data,
           }
@@ -140,7 +142,11 @@ class Test extends React.PureComponent<TestProps, TestState> {
       );
     }
 
-    const proxyMessage = `${this.props.proxy.isEnabled ? 'through Proxy' : ''} to ${this.getDestination()}`;
+    const proxyMessage = `${
+      this.props.proxy.isEnabled
+        ? 'through Proxy'
+        : ''
+      } to ${this.state.response.destination || this.getDestination()}`;
 
     return (
       <>
