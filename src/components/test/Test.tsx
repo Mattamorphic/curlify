@@ -158,8 +158,9 @@ class Test extends React.PureComponent<TestProps, TestState> {
                   <div className="row">
                     <Notice
                       className="twelve columns u-full-width"
-                      heading="Request complete"
-                      content={`Request sent ${proxyMessage}`} />
+                      heading="Request complete">
+                      Request sent {proxyMessage}
+                    </Notice>
                   </div>
                   <div className="row">
                     <FetchResponse
@@ -171,8 +172,9 @@ class Test extends React.PureComponent<TestProps, TestState> {
                 <div className="row">
                   <Notice
                     className="twelve columns u-full-width"
-                    heading="Request Failed"
-                    content={`Request couldn't be sent ${proxyMessage}`} />
+                    heading="Request Failed">
+                    Request couldn't be sent {proxyMessage}
+                  </Notice>
                 </div>
               )
           )

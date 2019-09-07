@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Toggler from '../shared/Toggler'
+
 import Selector from './selector/Selector';
 
 import {ConfigData} from '../config/Config';
@@ -26,7 +28,7 @@ const Output: React.FunctionComponent<OutputProps> = (props) => {
 
   return (
     <div className={(props.className || '' ) + ' Output'}>
-      <label> Output </label>
+      <label> {props.output} </label>
       <div className="row">
         <div className="twelve columns">
           {
