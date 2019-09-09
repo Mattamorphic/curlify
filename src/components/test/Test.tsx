@@ -22,6 +22,7 @@ interface TestProps {
   config: ConfigData;
   data: DataData;
   proxy: ProxyData;
+  addToHistory: (config: ConfigData, data: DataData) => void;
   updateConfig: (data: ConfigData) => void;
   updateData: (data: DataData) => void;
   updateProxy: (data: ProxyData) => void;
@@ -85,37 +86,44 @@ class Test extends React.PureComponent<TestProps, TestState> {
   }
 
   onTest = async () => {
+    // Update the local state
     this.setState(
       {
         isLoading: true,
         hasRun: true,
-        response: {}
+        response: {},
       },
       async () => {
-      // Todo: Run our own proxy service instead of using this.
-      const dest = new URL(this.getDestination());
-      let data = null;
-      let response: Response | null = null;
-      try {
-        response = await fetch(
-          dest.href,
-          this.getFetchData(),
+        // Store the request in the session history
+        this.props.addToHistory(
+          this.props.config,
+          this.props.data,
         );
-        data = await response.text();
-        this.setState({
-          isLoading: false,
-          response: {
-            destination: dest,
-            headers: response.headers as Headers,
-            data,
-          }
-        });
-      } catch (_) {
-        this.setState({
-          isLoading: false,
-        });
+        // Todo: Run our own proxy service instead of using this.
+        const dest = new URL(this.getDestination());
+        let data = null;
+        let response: Response | null = null;
+        try {
+          response = await fetch(
+            dest.href,
+            this.getFetchData(),
+          );
+          data = await response.text();
+          this.setState({
+            isLoading: false,
+            response: {
+              destination: dest,
+              headers: response.headers as Headers,
+              data,
+            }
+          });
+        } catch (_) {
+          this.setState({
+            isLoading: false,
+          });
+        }
       }
-    });
+    );
   }
 
   render () {

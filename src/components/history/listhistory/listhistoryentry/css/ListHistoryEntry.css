@@ -1,0 +1,66 @@
+.ListHistoryEntry {
+  background-color: #002B36;
+  border: 1px solid #60B8A4;
+  color: #FFF;
+  padding: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.ListHistoryEntry.dark {
+  background-color: #002B36;
+}
+
+.ListHistoryEntry.light {
+  background-color: #004A5D;
+}
+
+.ListHistoryEntryMethod {
+  border: 1px solid #D1D1D1;
+  border-radius: 30px;
+  text-align: center;
+  height: 38px;
+  line-height: 38px;
+  vertical-align: middle;
+}
+
+.ListHistoryEntryMethod.get {
+  background-color: #43D1D9;
+  color: #16696D;
+}
+
+.ListHistoryEntryMethod.post {
+  background-color: #DCCE88;
+  color: #9C8B2E;
+}
+
+.ListHistoryEntryID {
+  color: #EEE8D5;
+  text-align: center;
+  height: 38px;
+  line-height: 38px;
+  vertical-align: middle;
+}
+
+
+.ListHistoryEntryDest {
+  color: #EEE8D5;
+  text-align: center;
+  height: 38px;
+  line-height: 38px;
+  vertical-align: middle;
+}
+
+.ListHistoryEntryDest > a {
+  color: #EEE8D5;
+}
+
+.ListHistoryEntryAction > button {
+  background-color: #EEE8D5;
+}
+
+.ListHistoryEntryAction > button:hover {
+  background-color: #F9F7F1;
+}
