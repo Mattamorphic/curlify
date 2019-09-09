@@ -2,9 +2,10 @@ import {parse} from 'graphql';
 
 import {HTTPHeaders, HTTPMethods} from '../enums';
 
-// import {ConfigData} from '../components/config/Config';
-// import {DataData} from '../components/data/Data';
+import {ConfigData} from '../components/config/Config';
+import {DataData} from '../components/data/Data';
 import {Header} from '../components/config/headers/Headers';
+import {HistoryEntry} from '../components/history/History';
 import {ProxyData} from '../components/test/request/proxy/Proxy';
 
 export const methodHasPayload = (method: HTTPMethods) => (
@@ -112,4 +113,72 @@ export const isStringBooleanOrNull = (value: string): boolean => {
 
 export const isStringAURL = (value: string): boolean => {
   return !!value.replace(regEx.quotes, '').match(regEx.url);
+}
+
+export const isStorageAvailable = (): boolean => {
+  let storage;
+  try {
+      storage = window['localStorage'];
+      var x = '__storage_test__';
+      storage.setItem(x, x);
+      storage.removeItem(x);
+      return true;
+  }
+  catch(e) {
+      return false;
+  }
+}
+
+export const addToHistory = (
+  config: ConfigData,
+  data: DataData
+): string => {
+  const storage = window.localStorage;
+
+  if (storage.length + 1 === 20) {
+    let keys = [];
+    for (let i = 0; i < storage.length; i++) {
+      const key = storage.key(i);
+      if (key) {
+        keys.push(key);
+      }
+    }
+    const removeKey = keys.sort().shift();
+    if (removeKey) {
+      storage.removeItem(removeKey);
+    }
+  }
+  const id = new Date().getTime().toString();
+  const item = JSON.stringify({
+    id,
+    config,
+    data,
+  });
+  console.log("adding, ", id, item);
+  storage.setItem(id, item);
+  return id;
+}
+
+export const getHistory = () => {
+  if (!isStorageAvailable()) {
+    return [];
+  }
+  const requestHistory = [] as HistoryEntry[];
+  const storage = window.localStorage;
+  for (let i = 0; i < storage.length; i++) {
+    const key = storage.key(i);
+    if (!key) {
+      break;
+    }
+    const data = storage.getItem(key);
+    if (!data) {
+      break;
+    }
+    requestHistory.push(JSON.parse(data));
+  }
+  return requestHistory.sort((a, b) => {
+    const a_id = parseInt(a.id);
+    const b_id = parseInt(b.id);
+    return a_id > b_id ? -1 : a_id < b_id ? 1 : 0;
+  });
 }

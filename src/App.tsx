@@ -2,6 +2,7 @@ import React from 'react';
 import Config, {ConfigData} from './components/config/Config';
 import Data, {DataData} from './components/data/Data';
 import Heading from './components/heading/Heading';
+import History, {HistoryEntry} from './components/history/History';
 import Output from './components/output/Output';
 import {ProxyData} from './components/test/request/proxy/Proxy';
 import Test, {ValidatePayloadResult} from './components/test/Test';
@@ -23,6 +24,7 @@ interface OutputState {
 interface AppState {
   config: ConfigData;
   data: DataData;
+  history: HistoryEntry[];
   output: OutputState;
   proxy: ProxyData;
   validation: ValidatePayloadResult;
@@ -31,29 +33,7 @@ interface AppState {
 interface AppProps {}
 
 export default class App extends React.Component<AppProps, AppState> {
-
-  onConfigChange = (config: ConfigData): void => {
-    this.setState({
-      config: {
-        method: config.method,
-        headers: config.headers,
-        domain: config.domain,
-        endpoint: config.endpoint,
-      }
-    }, () => this.setState({validation: this.validatePayload()}));
-  }
-
-  onDataChange = (data: DataData): void => {
-    this.setState({
-      data,
-    }, () => this.setState({validation: this.validatePayload()}));
-  }
-
-  onUpdateProxy = (proxy: ProxyData): void => {
-    this.setState({
-      proxy,
-    });
-  }
+  isStorageAvailable = false;
 
   constructor(props: AppProps) {
     super(props);
@@ -72,6 +52,7 @@ export default class App extends React.Component<AppProps, AppState> {
           form: null,
         },
       },
+      history: utils.getHistory(),
       output: {
         type: OutputType.CURL,
       },
@@ -84,6 +65,53 @@ export default class App extends React.Component<AppProps, AppState> {
         success: true,
       }
     }
+    // Only called once, no need to add to state
+    this.isStorageAvailable = utils.isStorageAvailable();
+  }
+
+  addToHistory = (
+    config: ConfigData,
+    data: DataData
+  ): void => {
+    this.setState(_ => {
+      utils.addToHistory(
+        config,
+        data,
+      )
+      return {
+        history: utils.getHistory(),
+      };
+    });
+  }
+
+  clearHistory = (): void => {
+    window.localStorage.clear();
+    this.setState({
+      history: [],
+    });
+  }
+
+  onConfigChange = (config: ConfigData): void => {
+    this.setState({
+      config: {
+        method: config.method,
+        headers: config.headers,
+        domain: config.domain,
+        endpoint: config.endpoint,
+      }
+    }, () => this.setState({validation: this.validatePayload()}));
+  }
+
+  onDataChange = (data: DataData): void => {
+    this.setState({
+      data,
+    }, () => this.setState({validation: this.validatePayload()}));
+  }
+
+  onProxyChange = (proxy: ProxyData): void => {
+    this.setState({
+      proxy,
+    });
   }
 
   validatePayload = (): ValidatePayloadResult => {
@@ -158,15 +186,27 @@ export default class App extends React.Component<AppProps, AppState> {
               </div>)
             }
         </div>
+        {
+          this.isStorageAvailable && (
+            <div className="row">
+              <History
+                clearHistory={this.clearHistory}
+                history={this.state.history}
+                updateConfig={this.onConfigChange}
+                updateData={this.onDataChange} />
+            </div>
+          )
+        }
         <div className="row">
           <Test
             validation={this.state.validation}
             config={this.state.config}
             data={this.state.data}
             proxy={this.state.proxy}
+            addToHistory={this.addToHistory}
             updateConfig={this.onConfigChange}
             updateData={this.onDataChange}
-            updateProxy={this.onUpdateProxy} />
+            updateProxy={this.onProxyChange} />
         </div>
       </div>
     );
