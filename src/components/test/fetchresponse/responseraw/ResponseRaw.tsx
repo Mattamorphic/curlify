@@ -18,32 +18,30 @@ interface ResponseRawState {
 
 export default class ResponseRaw extends React.PureComponent<
   ResponseRawProps,
-  ResponseRawState> {
-
+  ResponseRawState
+> {
   constructor(props: ResponseRawProps) {
     super(props);
     this.state = {
-      showRaw: false,
+      showRaw: false
     };
   }
 
   toggleRaw = () => {
     this.setState(prevState => ({
-      showRaw: !prevState.showRaw,
+      showRaw: !prevState.showRaw
     }));
-  }
+  };
 
   render() {
     return (
       <Toggler
         isToggled={this.state.showRaw}
         label="Raw"
-        onToggle={this.toggleRaw}>
-          <div className="ResponseRaw">
-            {this.props.data}
-          </div>
+        onToggle={this.toggleRaw}
+      >
+        <div className="ResponseRaw">{this.props.data}</div>
       </Toggler>
     );
   }
-
 }

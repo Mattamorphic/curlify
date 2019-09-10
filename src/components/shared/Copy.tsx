@@ -10,20 +10,16 @@ interface CopyProps {
   content: string;
 }
 
-const Copy: React.FunctionComponent<CopyProps> = (props) => {
-
+const Copy: React.FunctionComponent<CopyProps> = props => {
   const copy = async () => {
     await navigator.clipboard.writeText(props.content);
-  }
+  };
 
   return (
-    <Button
-      className={props.className || ''}
-      isPrimary={false}
-      onClick={copy}>
+    <Button className={props.className || ''} isPrimary={false} onClick={copy}>
       <FontAwesomeIcon icon={faCopy} size="lg" />
-      </Button>
-  )
-}
+    </Button>
+  );
+};
 
 export default Copy;

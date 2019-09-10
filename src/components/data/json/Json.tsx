@@ -16,7 +16,7 @@ import TextArea from '../../shared/TextArea';
 import './css/Json.css';
 
 // Type imports
-import {payloadType} from '../Data';
+import { payloadType } from '../Data';
 
 interface JsonProps {
   data: payloadType;
@@ -29,12 +29,11 @@ interface JsonState {
 }
 
 export default class Json extends React.PureComponent<JsonProps, JsonState> {
-
   constructor(props: JsonProps) {
     super(props);
     this.state = {
       draft: JSON.stringify(props.data, null, 2),
-      hasDraft: false,
+      hasDraft: false
     };
   }
 
@@ -46,21 +45,27 @@ export default class Json extends React.PureComponent<JsonProps, JsonState> {
    *
    * @return {JsonState}
    */
-  static getDerivedStateFromProps(newProps: JsonProps, state: JsonState): JsonState {
+  static getDerivedStateFromProps(
+    newProps: JsonProps,
+    state: JsonState
+  ): JsonState {
     let draft = state.draft;
     let hasDraft = state.hasDraft;
-    if (!state.hasDraft && JSON.stringify(newProps.data) !== JSON.stringify(JSON.parse(state.draft))) {
+    if (
+      !state.hasDraft &&
+      JSON.stringify(newProps.data) !== JSON.stringify(JSON.parse(state.draft))
+    ) {
       draft = JSON.stringify(newProps.data, null, 2);
       hasDraft = false;
     } else {
       try {
         JSON.parse(draft);
         hasDraft = false;
-      } catch(_) {}
+      } catch (_) {}
     }
     return {
       draft,
-      hasDraft,
+      hasDraft
     };
   }
 
@@ -78,7 +83,7 @@ export default class Json extends React.PureComponent<JsonProps, JsonState> {
       const object = JSON.parse(value);
       this.props.onUpdateData(object);
     } catch (_) {}
-  }
+  };
 
   /**
    * @function Pretty print the json in the state
@@ -87,34 +92,31 @@ export default class Json extends React.PureComponent<JsonProps, JsonState> {
     try {
       this.setState({
         draft: JSON.stringify(JSON.parse(this.state.draft), null, 2),
-        hasDraft: true,
+        hasDraft: true
       });
     } catch (_) {
       return;
     }
-  }
+  };
 
   render() {
     return (
       <div className="Json">
         <div className="row">
           <div className="two columns">
-            <Saving
-              className="u-full-width"
-              isSaved={!this.state.hasDraft} />
+            <Saving className="u-full-width" isSaved={!this.state.hasDraft} />
           </div>
           <div className="four columns">
             <Button
               className="u-full-width"
               onClick={this.pretty}
-              isPrimary={false}>
+              isPrimary={false}
+            >
               <FontAwesomeIcon icon={faMagic} size="lg" />
             </Button>
           </div>
           <div className="four columns">
-            <Copy
-              className="u-full-width"
-              content={this.state.draft} />
+            <Copy className="u-full-width" content={this.state.draft} />
           </div>
         </div>
         <div className="row">
@@ -126,11 +128,12 @@ export default class Json extends React.PureComponent<JsonProps, JsonState> {
               backgroundAttachment: 'local',
               backgroundRepeat: 'no-repeat',
               backgroundColor: '#19404A',
-              color: '#EEE8D5',
+              color: '#EEE8D5'
             }}
-            value={this.state.draft} />
+            value={this.state.draft}
+          />
         </div>
       </div>
-    )
+    );
   }
 }

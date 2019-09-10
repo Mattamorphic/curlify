@@ -7,14 +7,14 @@ import ResponseRaw from './responseraw/ResponseRaw';
 import './css/FetchResponse.css';
 
 interface FetchResponseProps {
-  headers: Headers,
+  headers: Headers;
   data: string;
 }
 
-const FetchResponse: React.FunctionComponent<FetchResponseProps> = (props) => {
-  let json = {}
+const FetchResponse: React.FunctionComponent<FetchResponseProps> = props => {
+  let json = {};
   try {
-    json = JSON.parse(props.data)
+    json = JSON.parse(props.data);
   } catch (_) {}
 
   return (
@@ -24,6 +24,6 @@ const FetchResponse: React.FunctionComponent<FetchResponseProps> = (props) => {
       <ResponseJson data={json} />
     </div>
   );
-}
+};
 
 export default FetchResponse;

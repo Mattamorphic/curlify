@@ -11,8 +11,8 @@ import './css/LoadHistoryEntry.css';
 
 import Button from '../../../../shared/Button';
 
-import {ConfigData} from '../../../../config/Config';
-import {DataData} from '../../../../data/Data';
+import { ConfigData } from '../../../../config/Config';
+import { DataData } from '../../../../data/Data';
 
 interface LoadHistoryEntryProps {
   className?: string;
@@ -22,20 +22,19 @@ interface LoadHistoryEntryProps {
   updateData: (data: DataData) => void;
 }
 
-const LoadHistoryEntry: React.FunctionComponent<LoadHistoryEntryProps> = (props) => {
+const LoadHistoryEntry: React.FunctionComponent<
+  LoadHistoryEntryProps
+> = props => {
   const load = () => {
     props.updateConfig(props.config);
     props.updateData(props.data);
-  }
+  };
 
   return (
-    <Button
-      className={props.className}
-      isPrimary={false}
-      onClick={load}>
+    <Button className={props.className} isPrimary={false} onClick={load}>
       <FontAwesomeIcon icon={faUpload} size="lg" />
     </Button>
-  )
+  );
 };
 
 export default LoadHistoryEntry;

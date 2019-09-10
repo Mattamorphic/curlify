@@ -9,32 +9,27 @@ interface TogglerProps {
   isToggled: boolean;
 }
 
-const Toggler: React.FunctionComponent<TogglerProps> = (props) => {
-
+const Toggler: React.FunctionComponent<TogglerProps> = props => {
   return (
     <div>
       <div className="row">
-      <Button
-        className="u-full-width"
-        isPrimary={false}
-        onClick={props.onToggle}>
-        {
-          typeof props.label === 'string'
-            ? ((!props.isToggled ? 'Show ' : 'Hide ') + props.label)
-            : props.label
-        }
-
-      </Button>
+        <Button
+          className="u-full-width"
+          isPrimary={false}
+          onClick={props.onToggle}
+        >
+          {typeof props.label === 'string'
+            ? (!props.isToggled ? 'Show ' : 'Hide ') + props.label
+            : props.label}
+        </Button>
       </div>
-      {
-        props.isToggled && (
-          <div className={props.className || ''}>
+      {props.isToggled && (
+        <div className={props.className || ''}>
           <div className="row">{props.children}</div>
-          </div>
-        )
-      }
+        </div>
+      )}
     </div>
-  )
-}
+  );
+};
 
 export default Toggler;

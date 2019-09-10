@@ -10,24 +10,26 @@ interface SavingProps {
   isSaved: boolean;
 }
 
-const Saving: React.FunctionComponent<SavingProps> = (props) => {
+const Saving: React.FunctionComponent<SavingProps> = props => {
   return (
     <CSSTransitionGroup
       transitionName="save-notice"
       transitionLeave={false}
       transitionEnter={true}
-      transitionEnterTimeout={500}>
+      transitionEnterTimeout={500}
+    >
       <div
         className={
-          ((props.isSaved) ? 'Saved' : 'NotSaved')
-          +  " SavingNotice "
-          + (props.className || '')
+          (props.isSaved ? 'Saved' : 'NotSaved') +
+          ' SavingNotice ' +
+          (props.className || '')
         }
-        key={"notice-" + props.isSaved}>
+        key={'notice-' + props.isSaved}
+      >
         <FontAwesomeIcon icon={faSave} size="lg" />
       </div>
     </CSSTransitionGroup>
-  )
-}
+  );
+};
 
 export default Saving;

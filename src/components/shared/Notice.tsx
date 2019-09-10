@@ -11,16 +11,13 @@ interface NoticeProps {
   heading: string;
 }
 
-const Notice: React.FunctionComponent<NoticeProps> = (props) => {
-
+const Notice: React.FunctionComponent<NoticeProps> = props => {
   return (
     <div className={(props.className || '') + ' Notice'}>
       <h4> {props.heading} </h4>
-      <>
-        {props.children}
-      </>
+      <>{props.children}</>
     </div>
-  )
+  );
 };
 
 export default Notice;

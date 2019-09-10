@@ -1,11 +1,11 @@
 .Curl {
-  background-color: #F0F6FD;
+  background-color: #f0f6fd;
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
-.Curl textarea{
-  border: 1px solid #D1D1D1;
+.Curl textarea {
+  border: 1px solid #d1d1d1;
   font-size: 13px;
   height: 300px;
   line-height: 16px;

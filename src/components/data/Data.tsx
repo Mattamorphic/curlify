@@ -6,12 +6,10 @@ import Selector from './selector/Selector';
 
 import './css/Data.css';
 
-import {
-  DataType,
-} from '../../enums';
+import { DataType } from '../../enums';
 
-export type payloadType = {[key: string]: any}
-export type gqlPayloadType = {query: string}
+export type payloadType = { [key: string]: any };
+export type gqlPayloadType = { query: string };
 
 export interface DataData {
   type: DataType;
@@ -19,7 +17,7 @@ export interface DataData {
     [DataType.JSON]: payloadType;
     [DataType.GQL]: gqlPayloadType;
     [DataType.FORM]: null;
-  }
+  };
 }
 
 interface DataProps {
@@ -28,40 +26,39 @@ interface DataProps {
   updateData: (data: DataData) => void;
 }
 
-const Data: React.FunctionComponent<DataProps> = (props) => {
+const Data: React.FunctionComponent<DataProps> = props => {
   const updateType = (value: DataType) => {
     const data = props.data;
     data.type = value;
     props.updateData(data);
-  }
+  };
 
   const updateJsonData = (value: payloadType) => {
     const data = props.data;
     data.data.json = value;
     props.updateData(data);
-  }
+  };
 
   const updateGraphQLData = (value: gqlPayloadType) => {
     const data = props.data;
-    data.data.graphQL = value
+    data.data.graphQL = value;
     props.updateData(data);
-  }
+  };
 
   return (
-    <div className={(props.className || '' ) + ' Data'}>
+    <div className={(props.className || '') + ' Data'}>
       <label> Data </label>
       <div className="row">
         <div className="twelve columns">
-        {
-          props.data.type === DataType.JSON
-            && (<Json data={props.data.data.json} onUpdateData={updateJsonData} />)
-        }
-        {
-          props.data.type === DataType.GQL
-            && (<GraphQL
+          {props.data.type === DataType.JSON && (
+            <Json data={props.data.data.json} onUpdateData={updateJsonData} />
+          )}
+          {props.data.type === DataType.GQL && (
+            <GraphQL
               data={props.data.data.graphQL}
-              onUpdateData={updateGraphQLData} />)
-        }
+              onUpdateData={updateGraphQLData}
+            />
+          )}
         </div>
       </div>
       <div className="row">
@@ -69,10 +66,11 @@ const Data: React.FunctionComponent<DataProps> = (props) => {
           <Selector
             className="u-full-width"
             selected={props.data.type}
-            onUpdate={updateType} />
+            onUpdate={updateType}
+          />
         </div>
       </div>
     </div>
   );
-}
+};
 export default Data;

@@ -1,13 +1,13 @@
 .GraphQL {
-  background-color: #F0F6FD;
+  background-color: #f0f6fd;
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
 .GraphQL textarea {
-  background-color: #19404A;
-  border: 1px solid #D1D1D1;
-  color: #EEE8D5;
+  background-color: #19404a;
+  border: 1px solid #d1d1d1;
+  color: #eee8d5;
   font-size: 13px;
   height: 300px;
   line-height: 16px;

@@ -17,20 +17,20 @@ interface ConfirmProps {
   isPrimary?: boolean;
 }
 
-const Confirm: React.FunctionComponent<ConfirmProps> = (props) => {
-
+const Confirm: React.FunctionComponent<ConfirmProps> = props => {
   const onConfirm = () => {
     const result = window.confirm(props.message);
     result ? props.onConfirm() : props.onCancel();
-  }
+  };
 
   return (
     <Button
       className={props.className || ''}
       isPrimary={props.isPrimary || false}
       label={props.label}
-      onClick={onConfirm} />
-  )
+      onClick={onConfirm}
+    />
+  );
 };
 
 export default Confirm;

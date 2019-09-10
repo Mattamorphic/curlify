@@ -1,11 +1,11 @@
 .ResponseHeadersTable {
-  background-color: #002B36;
+  background-color: #002b36;
   font-size: 12px;
   word-wrap: break-word !important;
 }
 
 .ResponseHeadersTable > thead > th {
-  color: #EEE8D5;
+  color: #eee8d5;
 }
 
 .ResponseHeadersTable > tbody > td.header-value {
@@ -14,32 +14,31 @@
 }
 
 .ResponseHeadersTable > tbody > tr > td > .header-number {
-  color: #2AA198;
+  color: #2aa198;
 }
 
 .ResponseHeadersTable > tbody > tr > td > .header-date {
-  color: #D33682;
+  color: #d33682;
 }
 
 .ResponseHeadersTable > tbody > tr > td > .header-key {
-  color: #93A1A1;
+  color: #93a1a1;
 }
 
 .ResponseHeadersTable > tbody > tr > td > .header-url {
-  color: #2AA198;
+  color: #2aa198;
 }
 
 .ResponseHeadersTable > tbody > tr > td > .header-boolean {
-  color: #cB4B16;
+  color: #cb4b16;
 }
 
-
-.ResponseHeadersTable > tbody > tr >  td > .header-string {
-  color: #EEE8D5;
+.ResponseHeadersTable > tbody > tr > td > .header-string {
+  color: #eee8d5;
 }
 
 @media screen and (max-width: 600px) {
   .ResponseHeadersTable > tbody > tr > td[data-label]::before {
-    color: #EEE8D5;
+    color: #eee8d5;
   }
 }

@@ -1,11 +1,11 @@
 .Notice {
   background-color: #555;
-  color: #FFF;
+  color: #fff;
   margin-top: 10px;
   margin-bottom: 10px;
   padding: 10px;
   text-align: center;
-  height:auto;
+  height: auto;
   word-wrap: break-word;
   word-break: break-all;
 }

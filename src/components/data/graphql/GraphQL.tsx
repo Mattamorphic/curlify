@@ -1,5 +1,5 @@
 import React from 'react';
-import {parse, print, OperationDefinitionNode} from 'graphql';
+import { parse, print, OperationDefinitionNode } from 'graphql';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagic } from '@fortawesome/free-solid-svg-icons';
 
@@ -11,11 +11,11 @@ import Type from './type/Type';
 
 import './css/GraphQL.css';
 
-import {gqlPayloadType} from '../Data';
+import { gqlPayloadType } from '../Data';
 
 export enum GraphQLType {
   QUERY = 'query',
-  MUTATION = 'mutation',
+  MUTATION = 'mutation'
 }
 
 interface ParsedGQL {
@@ -34,23 +34,24 @@ interface GraphQLState {
   type: GraphQLType;
 }
 
-export default class GraphQL extends React.PureComponent<GraphQLProps, GraphQLState> {
-
+export default class GraphQL extends React.PureComponent<
+  GraphQLProps,
+  GraphQLState
+> {
   constructor(props: GraphQLProps) {
     super(props);
     const gql = GraphQL.getDocAndTypeFromGQLString(props.data.query);
     this.state = {
       draft: gql.gql,
       isSaved: true,
-      type: gql.type,
-    }
+      type: gql.type
+    };
   }
 
-  static getDocAndTypeFromGQLString(
-    gql: string
-  ): ParsedGQL {
+  static getDocAndTypeFromGQLString(gql: string): ParsedGQL {
     const doc = parse(gql);
-    const def: OperationDefinitionNode = doc.definitions[0] as OperationDefinitionNode;
+    const def: OperationDefinitionNode = doc
+      .definitions[0] as OperationDefinitionNode;
     const type = def.operation as GraphQLType;
     return {
       gql: print(doc),
@@ -58,7 +59,10 @@ export default class GraphQL extends React.PureComponent<GraphQLProps, GraphQLSt
     };
   }
 
-  static getDerivedStateFromProps(newProps: GraphQLProps, state: GraphQLState): GraphQLState {
+  static getDerivedStateFromProps(
+    newProps: GraphQLProps,
+    state: GraphQLState
+  ): GraphQLState {
     if (newProps.data.query !== state.draft && !state.isSaved) {
       return state;
     }
@@ -67,9 +71,8 @@ export default class GraphQL extends React.PureComponent<GraphQLProps, GraphQLSt
       return {
         draft: newProps.data.query,
         isSaved: true,
-        type: gql.type,
+        type: gql.type
       };
-
     } catch (e) {
       return state;
     }
@@ -82,36 +85,37 @@ export default class GraphQL extends React.PureComponent<GraphQLProps, GraphQLSt
       if (gql.gql !== this.state.draft) {
         this.props.onUpdateData(
           // replace any existing operation with an empty string
-          {query: draft}
+          { query: draft }
         );
-        this.setState({isSaved: true});
+        this.setState({ isSaved: true });
       } else {
         this.setState({
           draft,
-          isSaved:false,
+          isSaved: false
         });
       }
     } catch (_) {
       this.setState({
         draft,
-        isSaved: false,
+        isSaved: false
       });
     }
-
-
-  }
+  };
 
   updateType = (type: GraphQLType): void => {
-    this.props.onUpdateData(
-      {query: type +  ' ' + this.state.draft.replace(this.state.type, '')},
-    );
-  }
+    this.props.onUpdateData({
+      query: type + ' ' + this.state.draft.replace(this.state.type, '')
+    });
+  };
 
   pretty = () => {
-    this.props.onUpdateData(
-      {query: this.state.type + ' ' + GraphQL.PrettyMe(this.state.draft).replace(this.state.type, '')},
-    );
-  }
+    this.props.onUpdateData({
+      query:
+        this.state.type +
+        ' ' +
+        GraphQL.PrettyMe(this.state.draft).replace(this.state.type, '')
+    });
+  };
 
   static PrettyMe(gql: string): string {
     try {
@@ -132,21 +136,24 @@ export default class GraphQL extends React.PureComponent<GraphQLProps, GraphQLSt
             <Type
               className="u-full-width"
               selected={this.state.type}
-              onUpdate={this.updateType} />
+              onUpdate={this.updateType}
+            />
           </div>
           <div className="two columns">
             <Button
               className="u-full-width"
               onClick={this.pretty}
               isDisabled={!this.state.isSaved}
-              isPrimary={false}>
+              isPrimary={false}
+            >
               <FontAwesomeIcon icon={faMagic} size="lg" />
             </Button>
           </div>
           <div className="two columns">
             <Copy
               className="u-pull-right"
-              content={GraphQL.PrettyMe(this.state.draft)} />
+              content={GraphQL.PrettyMe(this.state.draft)}
+            />
           </div>
         </div>
         <div className="row">
@@ -159,9 +166,10 @@ export default class GraphQL extends React.PureComponent<GraphQLProps, GraphQLSt
               backgroundAttachment: 'local',
               backgroundRepeat: 'no-repeat',
               backgroundColor: '#19404A',
-              color: '#EEE8D5',
+              color: '#EEE8D5'
             }}
-            value={this.state.draft} />
+            value={this.state.draft}
+          />
         </div>
       </div>
     );

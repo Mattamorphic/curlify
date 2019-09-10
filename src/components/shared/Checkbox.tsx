@@ -5,7 +5,7 @@
 import React from 'react';
 
 import Input from './Input';
-import {InputTypes} from '../../enums';
+import { InputTypes } from '../../enums';
 
 interface CheckboxProps {
   className?: string;
@@ -20,15 +20,14 @@ interface CheckboxProps {
   value?: string;
 }
 
-const Checkbox: React.FunctionComponent<CheckboxProps> = (props) => {
-
+const Checkbox: React.FunctionComponent<CheckboxProps> = props => {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    props.onChange(e.target.checked)
-  }
+    props.onChange(e.target.checked);
+  };
 
   const label = props.isChecked
     ? props.isCheckedLabel || props.label
-    : props.isNotCheckedLabel || props.label
+    : props.isNotCheckedLabel || props.label;
 
   return (
     <div className={props.className || ''}>
@@ -39,10 +38,11 @@ const Checkbox: React.FunctionComponent<CheckboxProps> = (props) => {
         name={props.name || ''}
         id={props.id || ''}
         onChange={onChange}
-        value={props.value || ''} />
+        value={props.value || ''}
+      />
       <span> {label} </span>
     </div>
-  )
+  );
 };
 
 export default Checkbox;

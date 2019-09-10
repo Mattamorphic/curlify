@@ -11,21 +11,24 @@ interface ButtonProps {
   clickValue?: any;
 }
 
-const Button: React.FunctionComponent<ButtonProps> = (props) => {
+const Button: React.FunctionComponent<ButtonProps> = props => {
   const clickHandler = (e: React.MouseEvent) => {
     e.preventDefault();
     props.onClick(props.clickValue);
-  }
+  };
 
   return (
     <button
-      className={(props.isPrimary ? 'button-primary ' : ' ') + props.className || ' '}
+      className={
+        (props.isPrimary ? 'button-primary ' : ' ') + props.className || ' '
+      }
       disabled={props.isDisabled}
       id={props.id}
-      onClick={props.onClickRaw || clickHandler}>
+      onClick={props.onClickRaw || clickHandler}
+    >
       {props.children || props.label || ''}
-      </button>
+    </button>
   );
-}
+};
 
 export default Button;

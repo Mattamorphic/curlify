@@ -12,14 +12,12 @@ interface ClearHistoryProps {
   clear: () => void;
 }
 
-const ClearHistory: React.FunctionComponent<ClearHistoryProps> = (props) => {
+const ClearHistory: React.FunctionComponent<ClearHistoryProps> = props => {
   return (
-    <Button
-      isPrimary={false}
-      onClick={props.clear}>
+    <Button isPrimary={false} onClick={props.clear}>
       <FontAwesomeIcon icon={faTrash} size="lg" />
     </Button>
-  )
+  );
 };
 
 export default ClearHistory;
