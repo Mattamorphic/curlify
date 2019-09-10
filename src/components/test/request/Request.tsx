@@ -24,16 +24,16 @@ const Request: React.FunctionComponent<RequestProps> = props => {
       <div className="Request">
         <Proxy
           isExpanded={!props.hasRun}
-          proxy={props.proxy}
           onUpdateProxy={props.onUpdateProxy}
+          proxy={props.proxy}
         />
         {props.shouldConfirm ? (
           <Confirm
             className="u-full-width"
             label="Test"
-            onConfirm={onConfirm}
-            onCancel={onCancel}
             message="Are you sure?"
+            onCancel={onCancel}
+            onConfirm={onConfirm}
           />
         ) : (
           <Button

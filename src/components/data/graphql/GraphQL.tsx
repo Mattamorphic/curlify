@@ -120,7 +120,7 @@ export default class GraphQL extends React.PureComponent<
     try {
       return print(parse(gql));
     } catch (_) {
-      console.log(_);
+      // Todo: print errors
       return gql;
     }
   }
@@ -135,16 +135,16 @@ export default class GraphQL extends React.PureComponent<
           <div className="two columns">
             <Type
               className="u-full-width"
-              selected={this.state.type}
               onUpdate={this.updateType}
+              selected={this.state.type}
             />
           </div>
           <div className="two columns">
             <Button
               className="u-full-width"
-              onClick={this.pretty}
               isDisabled={!this.state.isSaved}
               isPrimary={false}
+              onClick={this.pretty}
             >
               <FontAwesomeIcon icon={faMagic} size="lg" />
             </Button>
@@ -160,12 +160,11 @@ export default class GraphQL extends React.PureComponent<
           <TextArea
             isFullWidth={true}
             onChangeDirect={this.updateGraphQL}
-            ref="input_gql"
             style={{
               background: `url('${process.env.PUBLIC_URL}/images/textarea.png')`,
               backgroundAttachment: 'local',
-              backgroundRepeat: 'no-repeat',
               backgroundColor: '#19404A',
+              backgroundRepeat: 'no-repeat',
               color: '#EEE8D5'
             }}
             value={this.state.draft}

@@ -13,18 +13,18 @@ export const methodHasPayload = (method: HTTPMethods) =>
 export const PROXY = 'https://curlify-proxy.herokuapp.com/';
 
 export const regEx = {
-  url: /^((?:http(?:s)?:\/\/)?[\w.-]+(?:.[\w.-]+))+([\w-._~:/?#[\]@!$&'()*+,;=.]+)$/gim,
-  curlHeader: /(?:-H ")([\w\d]{1,})(?:\s{0,}:\s{0,})(.+?)(?=")/gim,
-  curlMethod: /(?:-X\s{0,})(\w{3,6})/gim,
   // Todo: convert to /gms https://github.com/babel/babel/pull/10347
   curlData: /(?:-d\s{0,}'|")({.*})(?=['|"])/gim,
+  curlHeader: /(?:-H ")([\w\d]{1,})(?:\s{0,}:\s{0,})(.+?)(?=")/gim,
+  curlMethod: /(?:-X\s{0,})(\w{3,6})/gim,
   dateTimeZoneChars: /[T|Z]/gim,
   jsonData: /^( *)("[^"]+": )?("[^"].*"|[\w.+-]*)?([{}[\],]*)?$/gm,
+  multipleSpaces: / +/gm,
   newLine: /[\r|\n]/gm,
   newLineAndTab: /[\n|\r|\t]/gm,
-  multipleSpaces: / +/gm,
   quotes: /["']/gim,
-  singleEscapedNewLine: /(?<!\\)\\n/gm
+  singleEscapedNewLine: /(?<!\\)\\n/gm,
+  url: /^((?:http(?:s)?:\/\/)?[\w.-]+(?:.[\w.-]+))+([\w-._~:/?#[\]@!$&'()*+,;=.]+)$/gim
 };
 
 // export const hasDataChanged = (
@@ -138,9 +138,9 @@ export const addToHistory = (config: ConfigData, data: DataData): string => {
   }
   const id = new Date().getTime().toString();
   const item = JSON.stringify({
-    id,
     config,
-    data
+    data,
+    id
   });
   storage.setItem(id, item);
   return id;

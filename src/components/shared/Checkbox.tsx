@@ -31,12 +31,12 @@ const Checkbox: React.FunctionComponent<CheckboxProps> = props => {
   return (
     <div className={props.className || ''}>
       <Input
-        type={InputTypes.CHECKBOX}
+        id={props.id || ''}
         isChecked={props.isChecked}
         isDisabled={props.isDisabled || false}
         name={props.name || ''}
-        id={props.id || ''}
         onChange={onChange}
+        type={InputTypes.CHECKBOX}
         value={props.value || ''}
       />
       <span> {label} </span>

@@ -43,10 +43,10 @@ class Test extends React.PureComponent<TestProps, TestState> {
   constructor(props: TestProps) {
     super(props);
     this.state = {
-      // is the request executing
-      isLoading: false,
       // has there been an execution
       hasRun: false,
+      // is the request executing
+      isLoading: false,
       // hold the response
       response: {}
     };
@@ -68,11 +68,11 @@ class Test extends React.PureComponent<TestProps, TestState> {
 
   getFetchData = () => {
     const fetchData: RequestInit = {
-      method: this.props.config.method,
       body: null,
       headers: new Headers(
         this.props.config.headers.map(header => [header.type, header.value])
-      )
+      ),
+      method: this.props.config.method
     };
 
     if (utils.methodHasPayload(this.props.config.method)) {
@@ -87,8 +87,8 @@ class Test extends React.PureComponent<TestProps, TestState> {
     // Update the local state
     this.setState(
       {
-        isLoading: true,
         hasRun: true,
+        isLoading: true,
         response: {}
       },
       async () => {
@@ -104,9 +104,9 @@ class Test extends React.PureComponent<TestProps, TestState> {
           this.setState({
             isLoading: false,
             response: {
+              data,
               destination: dest,
-              headers: response.headers as Headers,
-              data
+              headers: response.headers as Headers
             }
           });
         } catch (_) {
@@ -146,10 +146,10 @@ class Test extends React.PureComponent<TestProps, TestState> {
       <>
         <Request
           hasRun={this.state.hasRun}
-          proxy={this.props.proxy}
-          onUpdateProxy={this.props.updateProxy}
-          shouldConfirm={false} // Todo: We need to ensure that everything matches up
           onRequest={this.onTest}
+          onUpdateProxy={this.props.updateProxy}
+          proxy={this.props.proxy} // Todo: We need to ensure that everything matches up
+          shouldConfirm={false}
         />
         {this.state.hasRun &&
           (this.state.response.headers && this.state.response.data ? (
@@ -164,8 +164,8 @@ class Test extends React.PureComponent<TestProps, TestState> {
               </div>
               <div className="row">
                 <FetchResponse
-                  headers={this.state.response.headers}
                   data={this.state.response.data}
+                  headers={this.state.response.headers}
                 />
               </div>
             </>
@@ -175,7 +175,7 @@ class Test extends React.PureComponent<TestProps, TestState> {
                 className="twelve columns u-full-width"
                 heading="Request Failed"
               >
-                Request couldn't be sent {proxyMessage}
+                Request couldn&apos;t be sent {proxyMessage}
               </Notice>
             </div>
           ))}

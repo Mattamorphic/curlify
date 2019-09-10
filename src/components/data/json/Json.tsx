@@ -77,7 +77,9 @@ export default class Json extends React.PureComponent<JsonProps, JsonState> {
     try {
       const object = JSON.parse(value);
       this.props.onUpdateData(object);
-    } catch (_) {}
+    } catch (_) {
+      // Todo: print the error
+    }
   };
 
   /**
@@ -90,6 +92,7 @@ export default class Json extends React.PureComponent<JsonProps, JsonState> {
         hasDraft: true
       });
     } catch (_) {
+      // Todo: Print the error;
       return;
     }
   };
@@ -104,8 +107,8 @@ export default class Json extends React.PureComponent<JsonProps, JsonState> {
           <div className="four columns">
             <Button
               className="u-full-width"
-              onClick={this.pretty}
               isPrimary={false}
+              onClick={this.pretty}
             >
               <FontAwesomeIcon icon={faMagic} size="lg" />
             </Button>
@@ -121,8 +124,8 @@ export default class Json extends React.PureComponent<JsonProps, JsonState> {
             style={{
               background: `url('${process.env.PUBLIC_URL}/images/textarea.png')`,
               backgroundAttachment: 'local',
-              backgroundRepeat: 'no-repeat',
               backgroundColor: '#19404A',
+              backgroundRepeat: 'no-repeat',
               color: '#EEE8D5'
             }}
             value={this.state.draft}

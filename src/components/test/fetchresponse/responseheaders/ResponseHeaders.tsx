@@ -59,8 +59,8 @@ export default class ResponseHeaders extends React.PureComponent<
   render() {
     return (
       <Toggler
-        isToggled={this.state.showHeaders}
         className="ResponseHeaders"
+        isToggled={this.state.showHeaders}
         label="Headers"
         onToggle={this.toggleHeaders}
       >

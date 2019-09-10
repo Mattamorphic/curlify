@@ -71,15 +71,15 @@ const Headers: React.FunctionComponent<HeadersProps> = props => {
       </div>
 
       {props.selected.map((header: Header, index: number) => (
-        <div className="row" key={`${header.type}_${index}`}>
+        <div key={`${header.type}_${index}`} className="row">
           {
             // TODO: selected and values aren't behaving below
           }
           <div className="two columns">
             <Button
+              className="u-full-width"
               id={`remove_${index}`}
               isPrimary={false}
-              className="u-full-width"
               onClick={() => {}}
               onClickRaw={removeHeader}
             >
@@ -90,23 +90,23 @@ const Headers: React.FunctionComponent<HeadersProps> = props => {
             <Types
               index={index}
               isFullWidth={true}
-              values={[...values, header.type]}
-              selected={header.type}
               onUpdate={updateType}
+              selected={header.type}
+              values={[...values, header.type]}
             />
           </div>
           <div className="four columns">
             <Value
               index={index}
               isFullWidth={true}
-              value={header.value || ''}
               onUpdate={updateValue}
+              value={header.value || ''}
             />
           </div>
           <div className="two columns">
             <Button
-              isPrimary={false}
               className="u-full-width"
+              isPrimary={false}
               onClick={() => {}}
               onClickRaw={addHeader}
             >
@@ -118,8 +118,8 @@ const Headers: React.FunctionComponent<HeadersProps> = props => {
       {props.selected.length === 0 && (
         <div className="row">
           <Button
-            isPrimary={false}
             className="u-full-width"
+            isPrimary={false}
             onClick={() => {}}
             onClickRaw={addHeader}
           >

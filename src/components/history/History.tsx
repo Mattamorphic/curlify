@@ -61,8 +61,8 @@ export default class History extends React.PureComponent<
   render() {
     return (
       <Toggler
-        isToggled={this.state.showHistory}
         className="History"
+        isToggled={this.state.showHistory}
         label={<FontAwesomeIcon icon={faHistory} size="lg" />}
         onToggle={this.toggleHistory}
       >

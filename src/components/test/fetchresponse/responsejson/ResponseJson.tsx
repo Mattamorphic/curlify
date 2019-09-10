@@ -38,7 +38,7 @@ export default class ResponseJson extends React.PureComponent<
   };
 
   replacer = (_: string, p1: string, p2: string, p3: string, p4: string) => {
-    const part = { indent: p1, key: p2, value: p3, end: p4 };
+    const part = { end: p4, indent: p1, key: p2, value: p3 };
 
     let valueClass = 'json-value';
     let type = JsonValueTypes.STRING;

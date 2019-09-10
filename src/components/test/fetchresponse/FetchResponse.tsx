@@ -14,7 +14,9 @@ const FetchResponse: React.FunctionComponent<FetchResponseProps> = props => {
   let json = {};
   try {
     json = JSON.parse(props.data);
-  } catch (_) {}
+  } catch (_) {
+    json = {};
+  }
 
   return (
     <div className="FetchResponse">

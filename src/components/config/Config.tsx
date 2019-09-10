@@ -74,8 +74,8 @@ export default class Config extends React.PureComponent<
       <>
         <div className="row">
           <Toggler
-            isToggled={this.state.showConfigSettings}
             className="Config"
+            isToggled={this.state.showConfigSettings}
             label="Config Settings"
             onToggle={this.toggleConfigSettings}
           >
@@ -88,14 +88,14 @@ export default class Config extends React.PureComponent<
             </div>
             <div className="row">
               <Method
+                onUpdate={this.updateMethod}
                 selected={this.props.data.method}
                 width={ColumnCount.TWO}
-                onUpdate={this.updateMethod}
               />
               <Destination
-                onUpdate={this.updateDestination}
                 domain={this.props.data.domain}
                 endpoint={this.props.data.endpoint}
+                onUpdate={this.updateDestination}
                 width={ColumnCount.TEN}
               />
             </div>

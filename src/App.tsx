@@ -39,26 +39,26 @@ export default class App extends React.Component<AppProps, AppState> {
     super(props);
     this.state = {
       config: {
-        method: HTTPMethods.GET,
-        headers: [],
         domain: 'https://api.github.com',
-        endpoint: '/users/octocat'
+        endpoint: '/users/octocat',
+        headers: [],
+        method: HTTPMethods.GET
       },
       data: {
-        type: DataType.JSON,
         data: {
-          json: { test: 'value' },
+          form: null,
           graphQL: { query: 'query {viewer {username}}' },
-          form: null
-        }
+          json: { test: 'value' }
+        },
+        type: DataType.JSON
       },
       history: utils.getHistory(),
       output: {
         type: OutputType.CURL
       },
       proxy: {
-        url: utils.PROXY,
-        isEnabled: true
+        isEnabled: true,
+        url: utils.PROXY
       },
       validation: {
         message: [],
@@ -89,10 +89,10 @@ export default class App extends React.Component<AppProps, AppState> {
     this.setState(
       {
         config: {
-          method: config.method,
-          headers: config.headers,
           domain: config.domain,
-          endpoint: config.endpoint
+          endpoint: config.endpoint,
+          headers: config.headers,
+          method: config.method
         }
       },
       () => this.setState({ validation: this.validatePayload() })
@@ -191,14 +191,14 @@ export default class App extends React.Component<AppProps, AppState> {
         )}
         <div className="row">
           <Test
-            validation={this.state.validation}
+            addToHistory={this.addToHistory}
             config={this.state.config}
             data={this.state.data}
             proxy={this.state.proxy}
-            addToHistory={this.addToHistory}
             updateConfig={this.onConfigChange}
             updateData={this.onDataChange}
             updateProxy={this.onProxyChange}
+            validation={this.state.validation}
           />
         </div>
       </div>

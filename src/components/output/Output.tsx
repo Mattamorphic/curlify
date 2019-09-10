@@ -40,8 +40,8 @@ const Output: React.FunctionComponent<OutputProps> = props => {
         <div className="twelve columns">
           <Selector
             className="u-full-width"
-            selected={props.output}
             onUpdate={updateType}
+            selected={props.output}
           />
         </div>
       </div>

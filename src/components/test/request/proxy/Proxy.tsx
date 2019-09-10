@@ -45,23 +45,23 @@ export default class Proxy extends React.PureComponent<ProxyProps, ProxyState> {
 
   onUpdateProxyUrl = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.props.onUpdateProxy({
-      url: e.target.value,
-      isEnabled: this.props.proxy.isEnabled
+      isEnabled: this.props.proxy.isEnabled,
+      url: e.target.value
     });
   };
 
   onUpdateProxyEnabled = (isEnabled: boolean) => {
     this.props.onUpdateProxy({
-      url: this.props.proxy.url,
-      isEnabled
+      isEnabled,
+      url: this.props.proxy.url
     });
   };
 
   render() {
     return (
       <Toggler
-        isToggled={this.state.showProxySettings}
         className="Proxy"
+        isToggled={this.state.showProxySettings}
         label="Proxy Settings"
         onToggle={this.toggleProxySettings}
       >
@@ -77,7 +77,8 @@ export default class Proxy extends React.PureComponent<ProxyProps, ProxyState> {
               GitHub
             </a>{' '}
             <br />
-            If you'd like to use your own proxy, simply replace the URL <br />
+            If you&apos;d like to use your own proxy, simply replace the URL{' '}
+            <br />
             This should follow cors-anywhere entry design <br />
             This proxy forwards request, gets around the cors issue, and allows
             us to return headers <br />
@@ -88,9 +89,9 @@ export default class Proxy extends React.PureComponent<ProxyProps, ProxyState> {
           <Input
             className="six columns u-full-width"
             isDisabled={!this.props.proxy.isEnabled}
-            type={InputTypes.URL}
             onChange={this.onUpdateProxyUrl}
             placeholder="Proxy Url"
+            type={InputTypes.URL}
             value={this.props.proxy.url}
           />
           <Checkbox

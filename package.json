@@ -30,6 +30,7 @@
     ]
   },
   "scripts": {
+    "lint": "eslint './src/**/*.{tsx,ts,js}' --fix",
     "predeploy": "yarn run build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
@@ -56,5 +57,8 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "devDependencies": {
+    "eslint-plugin-react": "^7.14.3"
   }
 }

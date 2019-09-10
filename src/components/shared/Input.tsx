@@ -20,14 +20,14 @@ const Input: React.FunctionComponent<InputProps> = props => (
   <>
     {props.label && <label>{props.label}</label>}
     <input
-      type={props.type || InputTypes.TEXT}
       checked={props.isChecked}
       className={props.className || ''}
-      name={props.name || ''}
-      id={props.id || ''}
-      value={props.value || ''}
       disabled={props.isDisabled}
+      id={props.id || ''}
+      name={props.name || ''}
       onChange={props.onChange}
+      type={props.type || InputTypes.TEXT}
+      value={props.value || ''}
     />
   </>
 );

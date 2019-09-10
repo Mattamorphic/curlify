@@ -309,8 +309,8 @@ export default class Curl extends React.Component<CurlProps, CurlState> {
             style={{
               background: `url('${process.env.PUBLIC_URL}/images/textarea.png')`,
               backgroundAttachment: 'local',
-              backgroundRepeat: 'no-repeat',
               backgroundColor: '#19404A',
+              backgroundRepeat: 'no-repeat',
               color: '#EEE8D5'
             }}
             value={draft}

@@ -20,19 +20,19 @@ const Select: React.FunctionComponent<selectProps> = props => {
       {props.label && <label>{props.label}</label>}
       <select
         className={props.className || ''}
-        name={props.name || ''}
-        size={props.size || 0}
-        style={props.style || {}}
         disabled={props.isDisabled || false}
         multiple={props.isMultiple || false}
+        name={props.name || ''}
         onChange={props.onChange || null}
+        size={props.size || 0}
+        style={props.style || {}}
         value={selected}
       >
         <option value="" disabled>
           Please Select
         </option>
         {props.values.map((value: string, i: number) => (
-          <option value={value} key={`${value}_${i}`}>
+          <option key={`${value}_${i}`} value={value}>
             {value}
           </option>
         ))}

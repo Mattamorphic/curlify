@@ -63,8 +63,8 @@ const Data: React.FunctionComponent<DataProps> = props => {
         <div className="twelve columns">
           <Selector
             className="u-full-width"
-            selected={props.data.type}
             onUpdate={updateType}
+            selected={props.data.type}
           />
         </div>
       </div>

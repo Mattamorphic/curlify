@@ -9,7 +9,7 @@ interface HeadingProps {
 const Heading: React.FunctionComponent<HeadingProps> = props => {
   return (
     <div className="Heading">
-      <img src={props.imageSrc} alt="curlify logo" />
+      <img alt="curlify logo" src={props.imageSrc} />
     </div>
   );
 };

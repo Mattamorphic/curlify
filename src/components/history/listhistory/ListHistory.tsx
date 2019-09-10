@@ -25,6 +25,7 @@ const ListHistory: React.FunctionComponent<ListHistoryProps> = props => {
           config={historyEntry.config}
           data={historyEntry.data}
           id={historyEntry.id}
+          key={historyEntry.id}
           updateConfig={props.updateConfig}
           updateData={props.updateData}
         />
