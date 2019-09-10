@@ -1,11 +1,9 @@
-import React from 'react';
-
-import Domain from './domain/Domain';
-import Endpoint from './endpoint/Endpoint';
-
 import './css/Destination.css';
 
 import { ColumnCount } from '../../../enums';
+import Domain from './domain/Domain';
+import Endpoint from './endpoint/Endpoint';
+import React from 'react';
 
 type DomainOrEndpoint = 'domain' | 'endpoint';
 

@@ -1,8 +1,5 @@
-// Import React
-import React from 'react';
-
-// Import Enums
 import { InputTypes } from '../../enums';
+import React from 'react';
 
 // Define Interfaces
 interface InputProps {

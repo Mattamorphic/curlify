@@ -1,12 +1,11 @@
-import { parse } from 'graphql';
-
-import { HTTPHeaders, HTTPMethods } from '../enums';
-
 import { ConfigData } from '../components/config/Config';
 import { DataData } from '../components/data/Data';
 import { Header } from '../components/config/headers/Headers';
 import { HistoryEntry } from '../components/history/History';
+import { parse } from 'graphql';
 import { ProxyData } from '../components/test/request/proxy/Proxy';
+
+import { HTTPHeaders, HTTPMethods } from '../enums';
 
 export const methodHasPayload = (method: HTTPMethods) =>
   ![HTTPMethods.GET, HTTPMethods.HEAD].includes(method);
@@ -14,7 +13,7 @@ export const methodHasPayload = (method: HTTPMethods) =>
 export const PROXY = 'https://curlify-proxy.herokuapp.com/';
 
 export const regEx = {
-  url: /^((?:http(?:s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+))+([\w\-\._~:\/?#[\]@!\$&'\(\)\*\+,;=.]+)$/gim,
+  url: /^((?:http(?:s)?:\/\/)?[\w.-]+(?:.[\w.-]+))+([\w-._~:/?#[\]@!$&'()*+,;=.]+)$/gim,
   curlHeader: /(?:-H ")([\w\d]{1,})(?:\s{0,}:\s{0,})(.+?)(?=")/gim,
   curlMethod: /(?:-X\s{0,})(\w{3,6})/gim,
   // Todo: convert to /gms https://github.com/babel/babel/pull/10347
@@ -24,7 +23,7 @@ export const regEx = {
   newLine: /[\r|\n]/gm,
   newLineAndTab: /[\n|\r|\t]/gm,
   multipleSpaces: / +/gm,
-  quotes: /[\"\']/gim,
+  quotes: /["']/gim,
   singleEscapedNewLine: /(?<!\\)\\n/gm
 };
 
@@ -143,7 +142,6 @@ export const addToHistory = (config: ConfigData, data: DataData): string => {
     config,
     data
   });
-  console.log('adding, ', id, item);
   storage.setItem(id, item);
   return id;
 };
@@ -163,7 +161,11 @@ export const getHistory = () => {
     if (!data) {
       break;
     }
-    requestHistory.push(JSON.parse(data));
+    try {
+      requestHistory.push(JSON.parse(data));
+    } catch (_) {
+      storage.removeItem(key);
+    }
   }
   return requestHistory.sort((a, b) => {
     const a_id = parseInt(a.id);

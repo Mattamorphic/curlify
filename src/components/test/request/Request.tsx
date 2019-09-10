@@ -1,11 +1,10 @@
-import React from 'react';
-
-import Proxy, { ProxyData } from './proxy/Proxy';
-
 import './css/Request.css';
 
 import Button from '../../shared/Button';
 import Confirm from '../../shared/Confirm';
+import React from 'react';
+
+import Proxy, { ProxyData } from './proxy/Proxy';
 
 interface RequestProps {
   shouldConfirm: boolean;

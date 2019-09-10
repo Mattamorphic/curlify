@@ -2,16 +2,15 @@
  * @file ResponseJson component
  * @author Mattamorphic
  */
-import React from 'react';
-import ReactDOMServer from 'react-dom/server';
-
-import Toggler from '../../../shared/Toggler';
-
 import './css/ResponseJson.css';
 
 import * as utils from '../../../../utils';
 
 import { JsonValueTypes } from '../../../../enums';
+
+import React from 'react';
+import ReactDOMServer from 'react-dom/server';
+import Toggler from '../../../shared/Toggler';
 
 interface ResponseJsonProps {
   data: { [key: string]: any };

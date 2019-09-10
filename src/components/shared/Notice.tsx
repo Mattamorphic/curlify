@@ -2,9 +2,9 @@
  * @file Notice component
  * @author Mattamorphic
  */
-import React from 'react';
-
 import './css/Notice.css';
+
+import React from 'react';
 
 interface NoticeProps {
   className?: string;

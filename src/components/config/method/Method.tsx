@@ -1,8 +1,7 @@
-import React from 'react';
-
-import Select from '../../shared/Select';
-
 import './css/Method.css';
+
+import React from 'react';
+import Select from '../../shared/Select';
 
 import { ColumnCount, HTTPMethods } from '../../../enums/';
 

@@ -2,11 +2,10 @@
  * @file ResponseRaw component
  * @author Mattamorphic
  */
-import React from 'react';
-
-import Toggler from '../../../shared/Toggler';
-
 import './css/ResponseRaw.css';
+
+import React from 'react';
+import Toggler from '../../../shared/Toggler';
 
 interface ResponseRawProps {
   data: string;

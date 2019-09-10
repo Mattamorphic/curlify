@@ -2,13 +2,13 @@
  * @file ListHistory component
  * @author Mattamorphic
  */
-import React from 'react';
-import ListHistoryEntry from './listhistoryentry/ListHistoryEntry';
 import './css/ListHistory.css';
 
 import { ConfigData } from '../../config/Config';
 import { DataData } from '../../data/Data';
 import { HistoryEntry } from '../History';
+import ListHistoryEntry from './listhistoryentry/ListHistoryEntry';
+import React from 'react';
 
 interface ListHistoryProps {
   history: HistoryEntry[];

@@ -1,9 +1,9 @@
-import React from 'react';
-import { CSSTransitionGroup } from 'react-transition-group';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSave } from '@fortawesome/free-solid-svg-icons';
-
 import './css/Saving.css';
+
+import { CSSTransitionGroup } from 'react-transition-group';
+import { faSave } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
 
 interface SavingProps {
   className?: string;

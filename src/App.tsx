@@ -1,17 +1,21 @@
-import React from 'react';
-import Config, { ConfigData } from './components/config/Config';
-import Data, { DataData } from './components/data/Data';
-import Heading from './components/heading/Heading';
-import History, { HistoryEntry } from './components/history/History';
-import Output from './components/output/Output';
-import { ProxyData } from './components/test/request/proxy/Proxy';
-import Test, { ValidatePayloadResult } from './components/test/Test';
-
+// 'None' imports
 import './css/App.css';
 
+// 'All' imports
 import * as utils from './utils';
 
+// 'Single' Imports
+import Heading from './components/heading/Heading';
+import Output from './components/output/Output';
+import { ProxyData } from './components/test/request/proxy/Proxy';
+import React from 'react';
+
+// 'Multiple' imports
+import Config, { ConfigData } from './components/config/Config';
+import Data, { DataData } from './components/data/Data';
 import { DataType, HTTPMethods, OutputType } from './enums';
+import History, { HistoryEntry } from './components/history/History';
+import Test, { ValidatePayloadResult } from './components/test/Test';
 
 interface OutputState {
   type: OutputType;

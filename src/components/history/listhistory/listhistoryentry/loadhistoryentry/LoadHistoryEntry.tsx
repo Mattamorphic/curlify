@@ -2,17 +2,14 @@
  * @file LoadHistoryEntry component
  * @author Mattamorphic
  */
-import React from 'react';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUpload } from '@fortawesome/free-solid-svg-icons';
-
 import './css/LoadHistoryEntry.css';
 
 import Button from '../../../../shared/Button';
-
 import { ConfigData } from '../../../../config/Config';
 import { DataData } from '../../../../data/Data';
+import { faUpload } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
 
 interface LoadHistoryEntryProps {
   className?: string;

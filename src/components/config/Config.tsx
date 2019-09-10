@@ -1,13 +1,11 @@
-import React from 'react';
-
-import Method from './method/Method';
-import Headers, { Header } from './headers/Headers';
 import Destination from './destination/Destination';
-
+import Method from './method/Method';
 import Notice from '../shared/Notice';
+import React from 'react';
 import Toggler from '../shared/Toggler';
 
 import { ColumnCount, HTTPMethods } from '../../enums';
+import Headers, { Header } from './headers/Headers';
 
 export interface ConfigData {
   method: HTTPMethods;

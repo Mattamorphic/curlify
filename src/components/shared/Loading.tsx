@@ -1,6 +1,6 @@
-import React from 'react';
-
 import './css/Loading.css';
+
+import React from 'react';
 
 interface LoadingProps {
   className?: string;

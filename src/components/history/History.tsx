@@ -2,20 +2,16 @@
  * @file History component
  * @author Mattamorphic
  */
-import React from 'react';
-
 import './css/History.css';
 
+import ClearHistory from './clearhistory/ClearHistory';
 import { ConfigData } from '../config/Config';
 import { DataData } from '../data/Data';
-
-import ClearHistory from './clearhistory/ClearHistory';
-import ListHistory from './listhistory/ListHistory';
-
-import Toggler from '../shared/Toggler';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHistory } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import ListHistory from './listhistory/ListHistory';
+import React from 'react';
+import Toggler from '../shared/Toggler';
 
 export interface HistoryEntry {
   id: string;

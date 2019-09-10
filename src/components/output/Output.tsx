@@ -1,16 +1,11 @@
-import React from 'react';
-
-import Toggler from '../shared/Toggler';
-
-import Selector from './selector/Selector';
+import './css/Output.css';
 
 import { ConfigData } from '../config/Config';
 import Curl from './curl/Curl';
 import { DataData } from '../data/Data';
-
-import './css/Output.css';
-
 import { OutputType } from '../../enums';
+import React from 'react';
+import Selector from './selector/Selector';
 
 interface OutputProps {
   className?: string;

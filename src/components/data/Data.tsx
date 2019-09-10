@@ -1,12 +1,10 @@
-import React from 'react';
-
-import GraphQL from './graphql/GraphQL';
-import Json from './json/Json';
-import Selector from './selector/Selector';
-
 import './css/Data.css';
 
 import { DataType } from '../../enums';
+import GraphQL from './graphql/GraphQL';
+import Json from './json/Json';
+import React from 'react';
+import Selector from './selector/Selector';
 
 export type payloadType = { [key: string]: any };
 export type gqlPayloadType = { query: string };

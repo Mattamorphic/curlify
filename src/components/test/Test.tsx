@@ -1,17 +1,15 @@
-import React from 'react';
-
-import Request from './request/Request';
-import FetchResponse from './fetchresponse/FetchResponse';
-import Loading from '../shared/Loading';
-import Notice from '../shared/Notice';
-
 import './css/Test.css';
+
+import * as utils from '../../utils';
 
 import { ConfigData } from '../config/Config';
 import { DataData } from '../data/Data';
+import FetchResponse from './fetchresponse/FetchResponse';
+import Loading from '../shared/Loading';
+import Notice from '../shared/Notice';
 import { ProxyData } from './request/proxy/Proxy';
-
-import * as utils from '../../utils';
+import React from 'react';
+import Request from './request/Request';
 
 export interface ValidatePayloadResult {
   message: string[];

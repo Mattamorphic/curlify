@@ -2,17 +2,17 @@
  * @file Proxy component
  * @author Mattamorphic
  */
-import React from 'react';
-
-import Checkbox from '../../../shared/Checkbox';
-import Toggler from '../../../shared/Toggler';
-import Input from '../../../shared/Input';
-import Notice from '../../../shared/Notice';
-import { InputTypes } from '../../../../enums';
 
 import './css/Proxy.css';
 
 import * as utils from '../../../../utils';
+
+import Checkbox from '../../../shared/Checkbox';
+import Input from '../../../shared/Input';
+import { InputTypes } from '../../../../enums';
+import Notice from '../../../shared/Notice';
+import React from 'react';
+import Toggler from '../../../shared/Toggler';
 
 export interface ProxyData {
   url: string;

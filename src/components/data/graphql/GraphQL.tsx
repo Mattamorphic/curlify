@@ -1,17 +1,16 @@
-import React from 'react';
-import { parse, print, OperationDefinitionNode } from 'graphql';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagic } from '@fortawesome/free-solid-svg-icons';
+import './css/GraphQL.css';
 
 import Button from '../../shared/Button';
 import Copy from '../../shared/Copy';
+import { faMagic } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { gqlPayloadType } from '../Data';
+import React from 'react';
 import Saving from '../../shared/Saving';
 import TextArea from '../../shared/TextArea';
 import Type from './type/Type';
 
-import './css/GraphQL.css';
-
-import { gqlPayloadType } from '../Data';
+import { OperationDefinitionNode, parse, print } from 'graphql';
 
 export enum GraphQLType {
   QUERY = 'query',
@@ -121,6 +120,7 @@ export default class GraphQL extends React.PureComponent<
     try {
       return print(parse(gql));
     } catch (_) {
+      console.log(_);
       return gql;
     }
   }

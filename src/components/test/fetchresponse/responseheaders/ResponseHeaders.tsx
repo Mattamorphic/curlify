@@ -2,14 +2,14 @@
  * @file ResponseHeaders component
  * @author Mattamorphic
  */
-import React from 'react';
-
-import Table from '../../../shared/Table';
-import Toggler from '../../../shared/Toggler';
 
 import './css/ResponseHeaders.css';
 
 import * as utils from '../../../../utils';
+
+import React from 'react';
+import Table from '../../../shared/Table';
+import Toggler from '../../../shared/Toggler';
 
 interface ResponseHeadersProps {
   headers: Headers;

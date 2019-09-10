@@ -2,11 +2,10 @@
  * @file $COMPONENT component
  * @author Mattamorphic
  */
-import React from 'react';
+import './css/Confirm.css';
 
 import Button from './Button';
-
-import './css/Confirm.css';
+import React from 'react';
 
 interface ConfirmProps {
   className?: string;

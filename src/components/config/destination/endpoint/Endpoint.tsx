@@ -1,8 +1,7 @@
-import React from 'react';
+import './css/Endpoint.css';
 
 import Input from '../../../shared/Input';
-
-import './css/Endpoint.css';
+import React from 'react';
 
 interface EndpointProps {
   isFullWidth: boolean;

@@ -1,10 +1,8 @@
-import React from 'react';
-
-import Select from '../../../shared/Select';
-
 import './css/Type.css';
 
 import { GraphQLType } from '../GraphQL';
+import React from 'react';
+import Select from '../../../shared/Select';
 
 interface TypeProps {
   className?: string;

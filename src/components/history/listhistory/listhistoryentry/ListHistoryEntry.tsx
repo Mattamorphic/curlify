@@ -2,14 +2,12 @@
  * @file ListHistoryEntry component
  * @author Mattamorphic
  */
-import React from 'react';
-
-import LoadHistoryEntry from './loadhistoryentry/LoadHistoryEntry';
-
 import './css/ListHistoryEntry.css';
 
 import { ConfigData } from '../../../config/Config';
 import { DataData } from '../../../data/Data';
+import LoadHistoryEntry from './loadhistoryentry/LoadHistoryEntry';
+import React from 'react';
 
 interface ListHistoryEntryProps {
   className?: string;

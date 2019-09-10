@@ -2,9 +2,9 @@
  * @file Table component
  * @author Mattamorphic
  */
-import React from 'react';
-
 import './css/Table.css';
+
+import React from 'react';
 
 export interface TableRow {
   [key: string]: string | JSX.Element;

@@ -2,21 +2,16 @@
  * @file Curl component
  * @author Mattamorphic
  */
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagic } from '@fortawesome/free-solid-svg-icons';
-
-// Imported components
-import Button from '../../shared/Button';
-import Copy from '../../shared/Copy';
-import Saving from '../../shared/Saving';
-import TextArea from '../../shared/TextArea';
-
-// CSS imports
 import './css/Json.css';
 
-// Type imports
+import Button from '../../shared/Button';
+import Copy from '../../shared/Copy';
+import { faMagic } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { payloadType } from '../Data';
+import React from 'react';
+import Saving from '../../shared/Saving';
+import TextArea from '../../shared/TextArea';
 
 interface JsonProps {
   data: payloadType;

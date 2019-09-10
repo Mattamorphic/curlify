@@ -2,10 +2,9 @@
  * @file Checkbox component
  * @author Mattamorphic
  */
-import React from 'react';
-
 import Input from './Input';
 import { InputTypes } from '../../enums';
+import React from 'react';
 
 interface CheckboxProps {
   className?: string;

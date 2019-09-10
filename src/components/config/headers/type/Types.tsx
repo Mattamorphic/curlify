@@ -1,10 +1,8 @@
-import React from 'react';
-
-import Select from '../../../shared/Select';
-
 import './css/Types.css';
 
 import { HTTPHeaders } from '../../../../enums';
+import React from 'react';
+import Select from '../../../shared/Select';
 
 interface TypeProps {
   index: number;

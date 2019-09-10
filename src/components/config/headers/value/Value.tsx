@@ -1,8 +1,7 @@
-import React from 'react';
+import './css/Value.css';
 
 import Input from '../../../shared/Input';
-
-import './css/Value.css';
+import React from 'react';
 
 interface ValueProps {
   index: number;

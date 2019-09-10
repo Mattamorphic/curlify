@@ -1,10 +1,8 @@
-import React from 'react';
-
-import Select from '../../shared/Select';
-
 import './css/Selector.css';
 
 import { OutputType } from '../../../enums';
+import React from 'react';
+import Select from '../../shared/Select';
 
 interface SelectorProps {
   className?: string;

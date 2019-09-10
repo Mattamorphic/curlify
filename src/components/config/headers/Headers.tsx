@@ -1,15 +1,13 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
+import './css/Headers.css';
 
 import Button from '../../shared/Button';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
 import Types from './type/Types';
 import Value from './value/Value';
 
-import './css/Headers.css';
-
 import { ColumnCount, HTTPHeaders } from '../../../enums';
+import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 export interface Header {
   type: HTTPHeaders | string;

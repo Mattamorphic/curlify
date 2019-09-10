@@ -1,6 +1,6 @@
-import React from 'react';
-
 import './css/Heading.css';
+
+import React from 'react';
 
 interface HeadingProps {
   imageSrc: string;

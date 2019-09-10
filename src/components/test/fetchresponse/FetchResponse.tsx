@@ -1,10 +1,9 @@
-import React from 'react';
+import './css/FetchResponse.css';
 
+import React from 'react';
 import ResponseHeaders from './responseheaders/ResponseHeaders';
 import ResponseJson from './responsejson/ResponseJson';
 import ResponseRaw from './responseraw/ResponseRaw';
-
-import './css/FetchResponse.css';
 
 interface FetchResponseProps {
   headers: Headers;

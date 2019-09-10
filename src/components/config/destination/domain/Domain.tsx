@@ -1,10 +1,8 @@
-import React from 'react';
-
-import Input from '../../../shared/Input';
-
 import './css/Domain.css';
 
+import Input from '../../../shared/Input';
 import { InputTypes } from '../../../../enums';
+import React from 'react';
 
 interface DomainProps {
   isFullWidth: boolean;

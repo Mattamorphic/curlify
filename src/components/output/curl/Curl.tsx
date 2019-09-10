@@ -2,25 +2,18 @@
  * @file Curl component
  * @author Mattamorphic
  */
-import React from 'react';
+import './css/Curl.css';
 
-// Imported components
+import * as utils from '../../../utils';
+
+import { ConfigData } from '../../config/Config';
 import Copy from '../../shared/Copy';
+import { Header } from '../../config/headers/Headers';
+import React from 'react';
 import Saving from '../../shared/Saving';
 import TextArea from '../../shared/TextArea';
 
-// Resuable helper functions / objects
-import * as utils from '../../../utils';
-
-// Imported types / interfaces
-import { ConfigData } from '../../config/Config';
 import { DataData, payloadType } from '../../data/Data';
-import { Header } from '../../config/headers/Headers';
-
-// CSS imports
-import './css/Curl.css';
-
-// Enum imports
 import { DataType, HTTPHeaders, HTTPMethods } from '../../../enums';
 
 interface DomainAndEndpoint {
@@ -232,7 +225,6 @@ export default class Curl extends React.Component<CurlProps, CurlState> {
    */
   updateCurl = (value: string): void => {
     const curl = this.serializerCurl(value);
-    console.log(curl);
     if (curl.hasNewData || curl.hasNewConfig) {
       // set draft to null, we'll update with the new props
       this.setState({ hasDraft: false }, () => {
@@ -266,15 +258,15 @@ export default class Curl extends React.Component<CurlProps, CurlState> {
     }
 
     return (
-      `curl -X ${config.method} \\ \n` +
+      `curl -X ${config.method} \\${'\n'}` +
       `${config.headers
-        .map(header => `-H "${header.type}": "${header.value}" \\ \n`)
+        .map(header => `-H "${header.type}: ${header.value}" \\${'\n'}`)
         .join('')}` +
       `${
         payload &&
         Object.keys(payload).length > 0 &&
         utils.methodHasPayload(config.method)
-          ? `-d '${Curl.parsePayloadString(JSON.stringify(payload))}' \\ \n`
+          ? `-d '${Curl.parsePayloadString(JSON.stringify(payload))}' \\${'\n'}`
           : ''
       }` +
       `${config.domain + config.endpoint}`
