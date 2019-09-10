@@ -10,19 +10,13 @@ interface DomainProps {
   onUpdate: (value: string) => void;
 }
 
-const Domain: React.FunctionComponent<DomainProps> = props => {
-  const updateValue = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    props.onUpdate(e.target.value);
-  };
-
-  return (
-    <Input
-      className={(props.isFullWidth ? 'u-full-width' : '') + ' Domain'}
-      onChange={updateValue}
-      type={InputTypes.URL}
-      value={props.value}
-    />
-  );
-};
+const Domain: React.FunctionComponent<DomainProps> = props => (
+  <Input
+    className={(props.isFullWidth ? 'u-full-width' : '') + ' Domain'}
+    onChange={props.onUpdate}
+    type={InputTypes.URL}
+    value={props.value}
+  />
+);
 
 export default Domain;

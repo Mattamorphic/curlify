@@ -14,6 +14,7 @@ interface ListHistoryEntryProps {
   config: ConfigData;
   data: DataData;
   id: string;
+  status: number;
   updateConfig: (config: ConfigData) => void;
   updateData: (data: DataData) => void;
 }
@@ -22,10 +23,25 @@ const ListHistoryEntry: React.FunctionComponent<
   ListHistoryEntryProps
 > = props => {
   const url = props.config.domain + props.config.endpoint;
+  let statusClass = 'success';
+  if (props.status > 200) {
+    if (props.status < 400) {
+      statusClass = 'redirect';
+    } else if (props.status < 500) {
+      statusClass = 'client';
+    } else {
+      statusClass = 'server';
+    }
+  }
 
   return (
     <div className={(props.className || '') + ' ListHistoryEntry'}>
       <div className="row">
+        <div className="two columns">
+          <div className={statusClass + ' u-full-width ListHistoryEntryStatus'}>
+            {props.status}
+          </div>
+        </div>
         <div className="two columns">
           <div
             className={
@@ -46,7 +62,7 @@ const ListHistoryEntry: React.FunctionComponent<
             {props.id}
           </div>
         </div>
-        <div className="six columns">
+        <div className="four columns">
           <div className="u-full-width ListHistoryEntryDest">
             <a href={url}>{url}</a>
           </div>

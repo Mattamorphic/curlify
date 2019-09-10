@@ -9,17 +9,12 @@ interface EndpointProps {
   onUpdate: (value: string) => void;
 }
 
-const Endpoint: React.FunctionComponent<EndpointProps> = props => {
-  const updateValue = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    props.onUpdate(e.target.value);
-  };
-  return (
-    <Input
-      className={(props.isFullWidth ? 'u-full-width' : '') + ' Endpoint'}
-      onChange={updateValue}
-      value={props.value}
-    />
-  );
-};
+const Endpoint: React.FunctionComponent<EndpointProps> = props => (
+  <Input
+    className={(props.isFullWidth ? 'u-full-width' : '') + ' Endpoint'}
+    onChange={props.onUpdate}
+    value={props.value}
+  />
+);
 
 export default Endpoint;

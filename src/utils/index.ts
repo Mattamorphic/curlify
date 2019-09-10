@@ -120,7 +120,11 @@ export const isStorageAvailable = (): boolean => {
   }
 };
 
-export const addToHistory = (config: ConfigData, data: DataData): string => {
+export const addToHistory = (
+  config: ConfigData,
+  data: DataData,
+  status: number
+): string => {
   const storage = window.localStorage;
 
   if (storage.length + 1 === 20) {
@@ -140,7 +144,8 @@ export const addToHistory = (config: ConfigData, data: DataData): string => {
   const item = JSON.stringify({
     config,
     data,
-    id
+    id,
+    status
   });
   storage.setItem(id, item);
   return id;

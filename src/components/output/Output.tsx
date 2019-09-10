@@ -23,7 +23,9 @@ const Output: React.FunctionComponent<OutputProps> = props => {
 
   return (
     <div className={(props.className || '') + ' Output'}>
-      <label> {props.output} </label>
+      <div className="row OutputHeading">
+        <h4> Request Config: {props.output.toUpperCase()} </h4>
+      </div>
       <div className="row">
         <div className="twelve columns">
           {props.output === OutputType.CURL && (

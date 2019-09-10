@@ -21,7 +21,6 @@ const Method: React.FunctionComponent<methodProps> = props => {
     <div className={props.width}>
       <Select
         className="u-full-width Method"
-        label="HTTP Method"
         onChange={updateSelected}
         selected={props.selected}
         values={Object.values(HTTPMethods)}

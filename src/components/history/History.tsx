@@ -7,8 +7,6 @@ import './css/History.css';
 import ClearHistory from './clearhistory/ClearHistory';
 import { ConfigData } from '../config/Config';
 import { DataData } from '../data/Data';
-import { faHistory } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ListHistory from './listhistory/ListHistory';
 import React from 'react';
 import Toggler from '../shared/Toggler';
@@ -17,6 +15,7 @@ export interface HistoryEntry {
   id: string;
   config: ConfigData;
   data: DataData;
+  status: number;
 }
 
 interface HistoryProps {
@@ -63,7 +62,7 @@ export default class History extends React.PureComponent<
       <Toggler
         className="History"
         isToggled={this.state.showHistory}
-        label={<FontAwesomeIcon icon={faHistory} size="lg" />}
+        label="History"
         onToggle={this.toggleHistory}
       >
         <h4> History</h4>

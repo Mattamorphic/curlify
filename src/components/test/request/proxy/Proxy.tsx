@@ -43,10 +43,10 @@ export default class Proxy extends React.PureComponent<ProxyProps, ProxyState> {
     }));
   };
 
-  onUpdateProxyUrl = (e: React.ChangeEvent<HTMLInputElement>) => {
+  onUpdateProxyUrl = (url: string) => {
     this.props.onUpdateProxy({
       isEnabled: this.props.proxy.isEnabled,
-      url: e.target.value
+      url
     });
   };
 

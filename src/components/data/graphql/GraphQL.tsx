@@ -129,6 +129,20 @@ export default class GraphQL extends React.PureComponent<
     return (
       <div className="GraphQL">
         <div className="row">
+          <TextArea
+            isFullWidth={true}
+            onChangeDirect={this.updateGraphQL}
+            style={{
+              background: `url('${process.env.PUBLIC_URL}/images/textarea.png')`,
+              backgroundAttachment: 'local',
+              backgroundColor: '#19404A',
+              backgroundRepeat: 'no-repeat',
+              color: '#EEE8D5'
+            }}
+            value={this.state.draft}
+          />
+        </div>
+        <div className="row">
           <div className="two columns">
             <Saving isSaved={this.state.isSaved} />
           </div>
@@ -155,20 +169,6 @@ export default class GraphQL extends React.PureComponent<
               content={GraphQL.PrettyMe(this.state.draft)}
             />
           </div>
-        </div>
-        <div className="row">
-          <TextArea
-            isFullWidth={true}
-            onChangeDirect={this.updateGraphQL}
-            style={{
-              background: `url('${process.env.PUBLIC_URL}/images/textarea.png')`,
-              backgroundAttachment: 'local',
-              backgroundColor: '#19404A',
-              backgroundRepeat: 'no-repeat',
-              color: '#EEE8D5'
-            }}
-            value={this.state.draft}
-          />
         </div>
       </div>
     );

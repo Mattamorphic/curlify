@@ -20,7 +20,7 @@ interface TestProps {
   config: ConfigData;
   data: DataData;
   proxy: ProxyData;
-  addToHistory: (config: ConfigData, data: DataData) => void;
+  addToHistory: (config: ConfigData, data: DataData, status: number) => void;
   updateConfig: (data: ConfigData) => void;
   updateData: (data: DataData) => void;
   updateProxy: (data: ProxyData) => void;
@@ -34,6 +34,7 @@ interface TestState {
     headers?: Headers;
     data?: string;
     destination?: URL;
+    status?: number;
   };
 }
 
@@ -92,8 +93,6 @@ class Test extends React.PureComponent<TestProps, TestState> {
         response: {}
       },
       async () => {
-        // Store the request in the session history
-        this.props.addToHistory(this.props.config, this.props.data);
         // Todo: Run our own proxy service instead of using this.
         const dest = new URL(this.getDestination());
         let data = null;
@@ -106,13 +105,21 @@ class Test extends React.PureComponent<TestProps, TestState> {
             response: {
               data,
               destination: dest,
-              headers: response.headers as Headers
+              headers: response.headers as Headers,
+              status: response.status
             }
           });
         } catch (_) {
           this.setState({
             isLoading: false
           });
+        } finally {
+          // Store the request in the session history
+          this.props.addToHistory(
+            this.props.config,
+            this.props.data,
+            response ? response.status : 0
+          );
         }
       }
     );

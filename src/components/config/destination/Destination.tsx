@@ -33,11 +33,6 @@ const Destination: React.FunctionComponent<DestinationProps> = props => {
   return (
     <div className={props.width + ' Destination'}>
       <div className="row">
-        <div className="twelve columns">
-          <label> Destination </label>
-        </div>
-      </div>
-      <div className="row">
         <div className="six columns">
           <Domain
             isFullWidth={true}
