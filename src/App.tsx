@@ -69,9 +69,9 @@ export default class App extends React.Component<AppProps, AppState> {
     this.isStorageAvailable = utils.isStorageAvailable();
   }
 
-  addToHistory = (config: ConfigData, data: DataData): void => {
+  addToHistory = (config: ConfigData, data: DataData, status: number): void => {
     this.setState(_ => {
-      utils.addToHistory(config, data);
+      utils.addToHistory(config, data, status);
       return {
         history: utils.getHistory()
       };

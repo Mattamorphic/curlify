@@ -17,12 +17,11 @@
   background-color: #004a5d;
 }
 
-.ListHistoryEntryMethod {
+.ListHistoryEntryMethod,
+.ListHistoryEntryStatus {
   border: 1px solid #d1d1d1;
   border-radius: 30px;
   text-align: center;
-  height: 38px;
-  line-height: 38px;
   vertical-align: middle;
 }
 
@@ -39,17 +38,15 @@
 .ListHistoryEntryID {
   color: #eee8d5;
   text-align: center;
-  height: 38px;
-  line-height: 38px;
   vertical-align: middle;
 }
 
 .ListHistoryEntryDest {
   color: #eee8d5;
   text-align: center;
-  height: 38px;
-  line-height: 38px;
   vertical-align: middle;
+  word-break: break-all;
+  word-wrap: break-word;
 }
 
 .ListHistoryEntryDest > a {
@@ -62,4 +59,24 @@
 
 .ListHistoryEntryAction > button:hover {
   background-color: #f9f7f1;
+}
+
+.ListHistoryEntryStatus.success {
+  background-color: #43d1d9;
+  color: #16696d;
+}
+
+.ListHistoryEntryStatus.redirect {
+  background-color: #dcce88;
+  color: #9c8b2e;
+}
+
+.ListHistoryEntryStatus.client {
+  background-color: #dc8888;
+  color: #754949;
+}
+
+.ListHistoryEntryStatus.server {
+  background-color: #dc889e;
+  color: #754955;
 }

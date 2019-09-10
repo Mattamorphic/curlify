@@ -2,6 +2,7 @@ import './css/Method.css';
 
 import React from 'react';
 import Select from '../../shared/Select';
+import Tooltip from '../../shared/Tooltip';
 
 import { ColumnCount, HTTPMethods } from '../../../enums/';
 
@@ -19,13 +20,14 @@ const Method: React.FunctionComponent<methodProps> = props => {
 
   return (
     <div className={props.width}>
-      <Select
-        className="u-full-width Method"
-        label="HTTP Method"
-        onChange={updateSelected}
-        selected={props.selected}
-        values={Object.values(HTTPMethods)}
-      />
+      <Tooltip text="Method">
+        <Select
+          className="u-full-width Method"
+          onChange={updateSelected}
+          selected={props.selected}
+          values={Object.values(HTTPMethods)}
+        />
+      </Tooltip>
     </div>
   );
 };

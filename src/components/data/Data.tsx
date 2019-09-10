@@ -45,7 +45,9 @@ const Data: React.FunctionComponent<DataProps> = props => {
 
   return (
     <div className={(props.className || '') + ' Data'}>
-      <label> Data </label>
+      <div className="row DataHeading">
+        <h4> Request Data: {props.data.type.toUpperCase()} </h4>
+      </div>
       <div className="row">
         <div className="twelve columns">
           {props.data.type === DataType.JSON && (

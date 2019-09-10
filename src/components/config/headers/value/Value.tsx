@@ -11,8 +11,8 @@ interface ValueProps {
 }
 
 const Value: React.FunctionComponent<ValueProps> = props => {
-  const updateValue = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    props.onUpdate(e.target.value, props.index);
+  const updateValue = (value: string): void => {
+    props.onUpdate(value, props.index);
   };
 
   return (

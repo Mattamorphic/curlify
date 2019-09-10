@@ -64,12 +64,6 @@ const Headers: React.FunctionComponent<HeadersProps> = props => {
 
   return (
     <div className={props.width + ' Headers'}>
-      <div className="row">
-        <div className="twelve rows">
-          <label> HTTP Headers </label>
-        </div>
-      </div>
-
       {props.selected.map((header: Header, index: number) => (
         <div key={`${header.type}_${index}`} className="row">
           {
@@ -123,7 +117,7 @@ const Headers: React.FunctionComponent<HeadersProps> = props => {
             onClick={() => {}}
             onClickRaw={addHeader}
           >
-            <FontAwesomeIcon icon={faPlus} size="lg" />
+            Configure Headers
           </Button>
         </div>
       )}

@@ -3,6 +3,7 @@ import './css/Domain.css';
 import Input from '../../../shared/Input';
 import { InputTypes } from '../../../../enums';
 import React from 'react';
+import Tooltip from '../../../shared/Tooltip';
 
 interface DomainProps {
   isFullWidth: boolean;
@@ -10,19 +11,15 @@ interface DomainProps {
   onUpdate: (value: string) => void;
 }
 
-const Domain: React.FunctionComponent<DomainProps> = props => {
-  const updateValue = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    props.onUpdate(e.target.value);
-  };
-
-  return (
+const Domain: React.FunctionComponent<DomainProps> = props => (
+  <Tooltip text="Domain">
     <Input
       className={(props.isFullWidth ? 'u-full-width' : '') + ' Domain'}
-      onChange={updateValue}
+      onChange={props.onUpdate}
       type={InputTypes.URL}
       value={props.value}
     />
-  );
-};
+  </Tooltip>
+);
 
 export default Domain;

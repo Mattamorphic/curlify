@@ -35,7 +35,7 @@ const Checkbox: React.FunctionComponent<CheckboxProps> = props => {
         isChecked={props.isChecked}
         isDisabled={props.isDisabled || false}
         name={props.name || ''}
-        onChange={onChange}
+        onChangeRaw={onChange}
         type={InputTypes.CHECKBOX}
         value={props.value || ''}
       />

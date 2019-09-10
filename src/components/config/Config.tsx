@@ -80,6 +80,9 @@ export default class Config extends React.PureComponent<
             onToggle={this.toggleConfigSettings}
           >
             <div className="row">
+              <h4>Request Config Settings</h4>
+            </div>
+            <div className="row">
               <Headers
                 onUpdate={this.updateHeaders}
                 selected={this.props.data.headers}

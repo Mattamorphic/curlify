@@ -8,6 +8,7 @@ import { gqlPayloadType } from '../Data';
 import React from 'react';
 import Saving from '../../shared/Saving';
 import TextArea from '../../shared/TextArea';
+import Tooltip from '../../shared/Tooltip';
 import Type from './type/Type';
 
 import { OperationDefinitionNode, parse, print } from 'graphql';
@@ -129,34 +130,6 @@ export default class GraphQL extends React.PureComponent<
     return (
       <div className="GraphQL">
         <div className="row">
-          <div className="two columns">
-            <Saving isSaved={this.state.isSaved} />
-          </div>
-          <div className="two columns">
-            <Type
-              className="u-full-width"
-              onUpdate={this.updateType}
-              selected={this.state.type}
-            />
-          </div>
-          <div className="two columns">
-            <Button
-              className="u-full-width"
-              isDisabled={!this.state.isSaved}
-              isPrimary={false}
-              onClick={this.pretty}
-            >
-              <FontAwesomeIcon icon={faMagic} size="lg" />
-            </Button>
-          </div>
-          <div className="two columns">
-            <Copy
-              className="u-pull-right"
-              content={GraphQL.PrettyMe(this.state.draft)}
-            />
-          </div>
-        </div>
-        <div className="row">
           <TextArea
             isFullWidth={true}
             onChangeDirect={this.updateGraphQL}
@@ -169,6 +142,36 @@ export default class GraphQL extends React.PureComponent<
             }}
             value={this.state.draft}
           />
+        </div>
+        <div className="row">
+          <div className="two columns">
+            <Saving isSaved={this.state.isSaved} />
+          </div>
+          <div className="two columns">
+            <Type
+              className="u-full-width"
+              onUpdate={this.updateType}
+              selected={this.state.type}
+            />
+          </div>
+          <div className="two columns">
+            <Tooltip text="Pretty payload">
+              <Button
+                className="u-full-width"
+                isDisabled={!this.state.isSaved}
+                isPrimary={false}
+                onClick={this.pretty}
+              >
+                <FontAwesomeIcon icon={faMagic} size="lg" />
+              </Button>
+            </Tooltip>
+          </div>
+          <div className="two columns">
+            <Copy
+              className="u-pull-right"
+              content={GraphQL.PrettyMe(this.state.draft)}
+            />
+          </div>
         </div>
       </div>
     );

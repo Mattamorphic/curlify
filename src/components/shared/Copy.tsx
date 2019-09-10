@@ -2,6 +2,7 @@ import Button from './Button';
 import { faCopy } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import Tooltip from './Tooltip';
 
 interface CopyProps {
   className?: string;
@@ -15,9 +16,15 @@ const Copy: React.FunctionComponent<CopyProps> = props => {
   };
 
   return (
-    <Button className={props.className || ''} isPrimary={false} onClick={copy}>
-      <FontAwesomeIcon icon={faCopy} size="lg" />
-    </Button>
+    <Tooltip text="Copy">
+      <Button
+        className={props.className || ''}
+        isPrimary={false}
+        onClick={copy}
+      >
+        <FontAwesomeIcon icon={faCopy} size="lg" />
+      </Button>
+    </Tooltip>
   );
 };
 

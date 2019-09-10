@@ -4,3 +4,17 @@
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+.ListHistoryFilter {
+  background-color: #effdf9 !important;
+  border-radius: 30px !important;
+  padding-left: 15px !important;
+}
+
+.ListHistoryFilter:hover {
+  border: 1px solid #777 !important;
+}
+
+.ListHistoryFilter:disabled {
+  background-color: #ddd !important;
+}
