@@ -8,6 +8,7 @@ import { gqlPayloadType } from '../Data';
 import React from 'react';
 import Saving from '../../shared/Saving';
 import TextArea from '../../shared/TextArea';
+import Tooltip from '../../shared/Tooltip';
 import Type from './type/Type';
 
 import { OperationDefinitionNode, parse, print } from 'graphql';
@@ -154,14 +155,16 @@ export default class GraphQL extends React.PureComponent<
             />
           </div>
           <div className="two columns">
-            <Button
-              className="u-full-width"
-              isDisabled={!this.state.isSaved}
-              isPrimary={false}
-              onClick={this.pretty}
-            >
-              <FontAwesomeIcon icon={faMagic} size="lg" />
-            </Button>
+            <Tooltip text="Pretty payload">
+              <Button
+                className="u-full-width"
+                isDisabled={!this.state.isSaved}
+                isPrimary={false}
+                onClick={this.pretty}
+              >
+                <FontAwesomeIcon icon={faMagic} size="lg" />
+              </Button>
+            </Tooltip>
           </div>
           <div className="two columns">
             <Copy

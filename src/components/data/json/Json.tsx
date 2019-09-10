@@ -12,6 +12,7 @@ import { payloadType } from '../Data';
 import React from 'react';
 import Saving from '../../shared/Saving';
 import TextArea from '../../shared/TextArea';
+import Tooltip from '../../shared/Tooltip';
 
 interface JsonProps {
   data: payloadType;
@@ -119,13 +120,16 @@ export default class Json extends React.PureComponent<JsonProps, JsonState> {
             <Saving className="u-full-width" isSaved={!this.state.hasDraft} />
           </div>
           <div className="four columns">
-            <Button
-              className="u-full-width"
-              isPrimary={false}
-              onClick={this.pretty}
-            >
-              <FontAwesomeIcon icon={faMagic} size="lg" />
-            </Button>
+            <Tooltip text="Pretty payload">
+              <Button
+                className="u-full-width"
+                isDisabled={!this.state.hasDraft}
+                isPrimary={false}
+                onClick={this.pretty}
+              >
+                <FontAwesomeIcon icon={faMagic} size="lg" />
+              </Button>
+            </Tooltip>
           </div>
           <div className="four columns">
             <Copy className="u-full-width" content={this.state.draft} />
