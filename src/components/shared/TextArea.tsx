@@ -6,15 +6,17 @@ interface TextAreaProps {
   onChangeDirect?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   onUpdate?: (value: string) => void;
   style?: {
-    [key: string]: string,
+    [key: string]: string;
   };
   value: string;
 }
 
 interface TextAreaState {}
 
-export default class TextArea extends React.Component<TextAreaProps, TextAreaState> {
-
+export default class TextArea extends React.Component<
+  TextAreaProps,
+  TextAreaState
+> {
   constructor(props: TextAreaProps) {
     super(props);
     this.state = {};
@@ -26,16 +28,19 @@ export default class TextArea extends React.Component<TextAreaProps, TextAreaSta
     } else if (this.props.onUpdate) {
       this.props.onUpdate(e.target.value);
     }
-  }
+  };
 
-  render () {
+  render() {
     return (
       <textarea
-        className={((this.props.isFullWidth) ? 'u-full-width ' : ' ') + this.props.className || '' }
+        className={
+          (this.props.isFullWidth ? 'u-full-width ' : ' ') +
+            this.props.className || ''
+        }
         onChange={this.onUpdate}
         style={this.props.style || {}}
-        value={this.props.value}>
-      </textarea>
+        value={this.props.value}
+      ></textarea>
     );
   }
 }

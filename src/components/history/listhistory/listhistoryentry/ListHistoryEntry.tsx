@@ -2,14 +2,12 @@
  * @file ListHistoryEntry component
  * @author Mattamorphic
  */
-import React from 'react';
-
-import LoadHistoryEntry from './loadhistoryentry/LoadHistoryEntry';
-
 import './css/ListHistoryEntry.css';
 
-import {ConfigData} from '../../../config/Config';
-import {DataData} from '../../../data/Data';
+import { ConfigData } from '../../../config/Config';
+import { DataData } from '../../../data/Data';
+import LoadHistoryEntry from './loadhistoryentry/LoadHistoryEntry';
+import React from 'react';
 
 interface ListHistoryEntryProps {
   className?: string;
@@ -20,19 +18,31 @@ interface ListHistoryEntryProps {
   updateData: (data: DataData) => void;
 }
 
-const ListHistoryEntry: React.FunctionComponent<ListHistoryEntryProps> = (props) => {
+const ListHistoryEntry: React.FunctionComponent<
+  ListHistoryEntryProps
+> = props => {
   const url = props.config.domain + props.config.endpoint;
 
   return (
     <div className={(props.className || '') + ' ListHistoryEntry'}>
       <div className="row">
         <div className="two columns">
-          <div className={props.config.method.toLowerCase() + " u-full-width ListHistoryEntryMethod"}>
+          <div
+            className={
+              props.config.method.toLowerCase() +
+              ' u-full-width ListHistoryEntryMethod'
+            }
+          >
             {props.config.method}
           </div>
         </div>
         <div className="two columns">
-          <div className={props.config.method.toLowerCase() + " u-full-width ListHistoryEntryID"}>
+          <div
+            className={
+              props.config.method.toLowerCase() +
+              ' u-full-width ListHistoryEntryID'
+            }
+          >
             {props.id}
           </div>
         </div>
@@ -47,11 +57,12 @@ const ListHistoryEntry: React.FunctionComponent<ListHistoryEntryProps> = (props)
             config={props.config}
             data={props.data}
             updateConfig={props.updateConfig}
-            updateData={props.updateData} />
+            updateData={props.updateData}
+          />
         </div>
       </div>
     </div>
-  )
+  );
 };
 
 export default ListHistoryEntry;

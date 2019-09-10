@@ -1,16 +1,11 @@
-import React from 'react';
-
-import Method from './method/Method';
-import Headers, { Header } from './headers/Headers';
 import Destination from './destination/Destination';
-
+import Method from './method/Method';
 import Notice from '../shared/Notice';
+import React from 'react';
 import Toggler from '../shared/Toggler';
 
-import {
-  ColumnCount,
-  HTTPMethods,
-} from '../../enums';
+import { ColumnCount, HTTPMethods } from '../../enums';
+import Headers, { Header } from './headers/Headers';
 
 export interface ConfigData {
   method: HTTPMethods;
@@ -28,14 +23,14 @@ interface ConfigState {
   showConfigSettings: boolean;
 }
 
-export default class Config extends React.PureComponent <
+export default class Config extends React.PureComponent<
   ConfigProps,
-  ConfigState> {
-
+  ConfigState
+> {
   constructor(props: ConfigProps) {
     super(props);
     this.state = {
-      showConfigSettings: true,
+      showConfigSettings: true
     };
   }
 
@@ -43,7 +38,7 @@ export default class Config extends React.PureComponent <
     const data = this.props.data;
     data.method = value;
     this.props.updateConfig(data);
-  }
+  };
 
   updateHeaders = (value: Header | null, index: number): void => {
     const data = this.props.data;
@@ -58,20 +53,20 @@ export default class Config extends React.PureComponent <
       }
     }
     this.props.updateConfig(data);
-  }
+  };
 
   updateDestination = (domain: string, endpoint: string) => {
     const data = this.props.data;
     data.domain = domain;
     data.endpoint = endpoint;
     this.props.updateConfig(data);
-  }
+  };
 
   toggleConfigSettings = () => {
     this.setState(prevState => ({
-      showConfigSettings: !prevState.showConfigSettings,
+      showConfigSettings: !prevState.showConfigSettings
     }));
-  }
+  };
 
   render() {
     const destination = this.props.data.domain + this.props.data.endpoint;
@@ -79,56 +74,54 @@ export default class Config extends React.PureComponent <
       <>
         <div className="row">
           <Toggler
-            isToggled={this.state.showConfigSettings}
             className="Config"
+            isToggled={this.state.showConfigSettings}
             label="Config Settings"
-            onToggle={this.toggleConfigSettings}>
+            onToggle={this.toggleConfigSettings}
+          >
             <div className="row">
               <Headers
                 onUpdate={this.updateHeaders}
                 selected={this.props.data.headers}
-                width={ColumnCount.TWELVE} />
+                width={ColumnCount.TWELVE}
+              />
             </div>
             <div className="row">
-            <Method
-              selected={this.props.data.method}
-              width={ColumnCount.TWO}
-              onUpdate={this.updateMethod} />
-            <Destination
-              onUpdate={this.updateDestination}
-              domain={this.props.data.domain}
-              endpoint={this.props.data.endpoint}
-              width={ColumnCount.TEN} />
+              <Method
+                onUpdate={this.updateMethod}
+                selected={this.props.data.method}
+                width={ColumnCount.TWO}
+              />
+              <Destination
+                domain={this.props.data.domain}
+                endpoint={this.props.data.endpoint}
+                onUpdate={this.updateDestination}
+                width={ColumnCount.TEN}
+              />
             </div>
           </Toggler>
         </div>
-        {
-          !this.state.showConfigSettings && (
-            <Notice
-              heading="Request Config Settings">
-              Sending a [<strong>{this.props.data.method}</strong>] request
-              to: [<strong><a href={destination}>{destination}</a></strong>]
-              {
-                this.props.data.headers.length > 0 && (
+        {!this.state.showConfigSettings && (
+          <Notice heading="Request Config Settings">
+            Sending a [<strong>{this.props.data.method}</strong>] request to: [
+            <strong>
+              <a href={destination}>{destination}</a>
+            </strong>
+            ]
+            {this.props.data.headers.length > 0 && (
+              <>
+                , with the HTTP Headers:{' '}
+                {this.props.data.headers.map(header => (
                   <>
-                    , with the HTTP Headers: {
-                      this.props.data.headers.map(
-                        header => (
-                          <>
-                            <br />
-                            <strong>{header.type}</strong>: <em>{header.value}</em>
-                          </>
-                        )
-                      )
-                    }
+                    <br />
+                    <strong>{header.type}</strong>: <em>{header.value}</em>
                   </>
-                )
-              }
-            </Notice>
-          )
-        }
+                ))}
+              </>
+            )}
+          </Notice>
+        )}
       </>
     );
   }
-
 }

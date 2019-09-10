@@ -1,8 +1,7 @@
-import React from 'react';
-
-import Input from '../../../shared/Input'
-
 import './css/Endpoint.css';
+
+import Input from '../../../shared/Input';
+import React from 'react';
 
 interface EndpointProps {
   isFullWidth: boolean;
@@ -10,19 +9,17 @@ interface EndpointProps {
   onUpdate: (value: string) => void;
 }
 
-const Endpoint: React.FunctionComponent<EndpointProps> = (props) => {
+const Endpoint: React.FunctionComponent<EndpointProps> = props => {
   const updateValue = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    ;
     props.onUpdate(e.target.value);
-  }
-
-  ;
+  };
   return (
     <Input
       className={(props.isFullWidth ? 'u-full-width' : '') + ' Endpoint'}
       onChange={updateValue}
-      value={props.value} />
+      value={props.value}
+    />
   );
-}
+};
 
 export default Endpoint;

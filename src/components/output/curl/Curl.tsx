@@ -2,30 +2,19 @@
  * @file Curl component
  * @author Mattamorphic
  */
-import React from 'react';
+import './css/Curl.css';
 
-// Imported components
+import * as utils from '../../../utils';
+
+import { ConfigData } from '../../config/Config';
 import Copy from '../../shared/Copy';
+import { Header } from '../../config/headers/Headers';
+import React from 'react';
 import Saving from '../../shared/Saving';
 import TextArea from '../../shared/TextArea';
 
-// Resuable helper functions / objects
-import * as utils from '../../../utils';
-
-// Imported types / interfaces
-import {ConfigData} from '../../config/Config';
-import {DataData, payloadType} from '../../data/Data';
-import {Header} from '../../config/headers/Headers';
-
-// CSS imports
-import './css/Curl.css';
-
-// Enum imports
-import {
-  DataType,
-  HTTPHeaders,
-  HTTPMethods,
-} from '../../../enums';
+import { DataData, payloadType } from '../../data/Data';
+import { DataType, HTTPHeaders, HTTPMethods } from '../../../enums';
 
 interface DomainAndEndpoint {
   domain: string | null;
@@ -51,13 +40,12 @@ interface CurlState {
   hasDraft: boolean;
 }
 
-export default class Curl extends React.Component<CurlProps, CurlState>  {
-
+export default class Curl extends React.Component<CurlProps, CurlState> {
   constructor(props: CurlProps) {
     super(props);
     this.state = {
       draft: Curl.getValue(props.config, props.data),
-      hasDraft: false,
+      hasDraft: false
     };
   }
 
@@ -72,10 +60,10 @@ export default class Curl extends React.Component<CurlProps, CurlState>  {
     const regex = utils.regEx.curlHeader;
     const headers = [];
     let match = null;
-    while (match = regex.exec(value)) {
+    while ((match = regex.exec(value))) {
       headers.push({
         type: match[1] as HTTPHeaders,
-        value: match[2] as string,
+        value: match[2] as string
       });
     }
     if (headers.length === 0) {
@@ -144,7 +132,7 @@ export default class Curl extends React.Component<CurlProps, CurlState>  {
     }
     return {
       domain: match[1] || null,
-      endpoint: match[2] || null,
+      endpoint: match[2] || null
     };
   }
 
@@ -163,7 +151,7 @@ export default class Curl extends React.Component<CurlProps, CurlState>  {
     let hasNewConfig = false;
     let hasNewData = false;
 
-     // decide which method to use
+    // decide which method to use
     const method = this.getMethod(value);
 
     // decide which headers to use
@@ -176,9 +164,9 @@ export default class Curl extends React.Component<CurlProps, CurlState>  {
     const domainAndEndpoint = this.getDomainAndEndpoint(value);
 
     if (
-      method
-      && method !== config.method
-      && Object.values(HTTPMethods).includes(method)
+      method &&
+      method !== config.method &&
+      Object.values(HTTPMethods).includes(method)
     ) {
       hasNewConfig = true;
       config.method = method;
@@ -189,7 +177,10 @@ export default class Curl extends React.Component<CurlProps, CurlState>  {
       hasNewConfig = true;
       config.headers = headers;
     }
-    if (newData && JSON.stringify(newData) !== JSON.stringify(data.data[data.type])) {
+    if (
+      newData &&
+      JSON.stringify(newData) !== JSON.stringify(data.data[data.type])
+    ) {
       hasNewData = true;
       switch (data.type) {
         case DataType.GQL:
@@ -203,11 +194,17 @@ export default class Curl extends React.Component<CurlProps, CurlState>  {
       }
     }
     if (domainAndEndpoint) {
-      if (domainAndEndpoint.domain && domainAndEndpoint.domain !== config.domain) {
+      if (
+        domainAndEndpoint.domain &&
+        domainAndEndpoint.domain !== config.domain
+      ) {
         hasNewConfig = true;
         config.domain = domainAndEndpoint.domain;
       }
-      if (domainAndEndpoint.endpoint && domainAndEndpoint.endpoint !== config.endpoint) {
+      if (
+        domainAndEndpoint.endpoint &&
+        domainAndEndpoint.endpoint !== config.endpoint
+      ) {
         hasNewConfig = true;
         config.endpoint = domainAndEndpoint.endpoint;
       }
@@ -217,9 +214,9 @@ export default class Curl extends React.Component<CurlProps, CurlState>  {
       config,
       data,
       hasNewConfig,
-      hasNewData,
+      hasNewData
     };
-  }
+  };
 
   /**
    * @function Update the data from the curl string
@@ -228,19 +225,18 @@ export default class Curl extends React.Component<CurlProps, CurlState>  {
    */
   updateCurl = (value: string): void => {
     const curl = this.serializerCurl(value);
-    console.log(curl);
     if (curl.hasNewData || curl.hasNewConfig) {
       // set draft to null, we'll update with the new props
-      this.setState({hasDraft: false}, () => {
+      this.setState({ hasDraft: false }, () => {
         curl.hasNewData && this.props.updateData(curl.data);
         curl.hasNewConfig && this.props.updateConfig(curl.config);
       });
     }
     // set the draft to true, let's use this
     if (!curl.hasNewData && !curl.hasNewConfig) {
-      this.setState({draft: value, hasDraft: true});
+      this.setState({ draft: value, hasDraft: true });
     }
-  }
+  };
 
   /**
    * @function Pass the config and data into a curl string
@@ -248,10 +244,7 @@ export default class Curl extends React.Component<CurlProps, CurlState>  {
    * @params {ConfigData} config The Configuration data for the curl request
    * @params {DataData}   data   The data for the curl request
    */
-  static getValue(
-    config: ConfigData,
-    data: DataData,
-  ): string {
+  static getValue(config: ConfigData, data: DataData): string {
     let payload = {};
     switch (data.type) {
       case DataType.JSON:
@@ -265,18 +258,19 @@ export default class Curl extends React.Component<CurlProps, CurlState>  {
     }
 
     return (
-      `curl -X ${config.method} \\ \n`
-      + `${config.headers
-        .map(
-          header => `-H "${header.type}": "${header.value }" \\ \n`
-        ).join('')}`
-      + `${(payload
-          && Object.keys(payload).length > 0
-          && utils.methodHasPayload(config.method)
-        )
-         ? `-d '${Curl.parsePayloadString(JSON.stringify(payload))}' \\ \n`
-         : ''}`
-      + `${config.domain + config.endpoint}`);
+      `curl -X ${config.method} \\${'\n'}` +
+      `${config.headers
+        .map(header => `-H "${header.type}: ${header.value}" \\${'\n'}`)
+        .join('')}` +
+      `${
+        payload &&
+        Object.keys(payload).length > 0 &&
+        utils.methodHasPayload(config.method)
+          ? `-d '${Curl.parsePayloadString(JSON.stringify(payload))}' \\${'\n'}`
+          : ''
+      }` +
+      `${config.domain + config.endpoint}`
+    );
   }
 
   /**
@@ -291,28 +285,21 @@ export default class Curl extends React.Component<CurlProps, CurlState>  {
       .replace(utils.regEx.singleEscapedNewLine, '');
   }
 
-  render () {
+  render() {
     const draft = this.state.hasDraft
       ? this.state.draft
-      : Curl.getValue(
-        this.props.config,
-        this.props.data,
-      );
+      : Curl.getValue(this.props.config, this.props.data);
     return (
       <div className="Curl">
         <div className="row">
           <div className="two columns">
-            <Saving
-              className="u-full-width"
-              isSaved={!this.state.hasDraft} />
+            <Saving className="u-full-width" isSaved={!this.state.hasDraft} />
           </div>
           <div className="six columns">
             <div className="u-full-width" />
           </div>
           <div className="four columns">
-            <Copy
-              className="u-full-width"
-              content={draft} />
+            <Copy className="u-full-width" content={draft} />
           </div>
         </div>
         <div className="row">
@@ -322,11 +309,12 @@ export default class Curl extends React.Component<CurlProps, CurlState>  {
             style={{
               background: `url('${process.env.PUBLIC_URL}/images/textarea.png')`,
               backgroundAttachment: 'local',
-              backgroundRepeat: 'no-repeat',
               backgroundColor: '#19404A',
-              color: '#EEE8D5',
+              backgroundRepeat: 'no-repeat',
+              color: '#EEE8D5'
             }}
-            value={draft} />
+            value={draft}
+          />
         </div>
       </div>
     );

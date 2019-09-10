@@ -2,21 +2,16 @@
  * @file History component
  * @author Mattamorphic
  */
-import React from 'react';
-
 import './css/History.css';
 
-import {ConfigData} from '../config/Config';
-import {DataData} from '../data/Data';
-
 import ClearHistory from './clearhistory/ClearHistory';
-import ListHistory from './listhistory/ListHistory';
-
-import Toggler from '../shared/Toggler';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { ConfigData } from '../config/Config';
+import { DataData } from '../data/Data';
 import { faHistory } from '@fortawesome/free-solid-svg-icons';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import ListHistory from './listhistory/ListHistory';
+import React from 'react';
+import Toggler from '../shared/Toggler';
 
 export interface HistoryEntry {
   id: string;
@@ -35,15 +30,14 @@ interface HistoryState {
   showHistory: boolean;
 }
 
-
 export default class History extends React.PureComponent<
   HistoryProps,
-  HistoryState> {
-
+  HistoryState
+> {
   constructor(props: HistoryProps) {
     super(props);
     this.state = {
-      showHistory: false,
+      showHistory: false
     };
   }
 
@@ -56,28 +50,30 @@ export default class History extends React.PureComponent<
     this.props.updateConfig(payload.config);
     this.props.updateData(payload.data);
     return true;
-  }
+  };
 
   toggleHistory = (): void => {
     this.setState(prevState => ({
-      showHistory: !prevState.showHistory,
+      showHistory: !prevState.showHistory
     }));
-  }
+  };
 
   render() {
     return (
       <Toggler
-        isToggled={this.state.showHistory}
         className="History"
+        isToggled={this.state.showHistory}
         label={<FontAwesomeIcon icon={faHistory} size="lg" />}
-        onToggle={this.toggleHistory} >
+        onToggle={this.toggleHistory}
+      >
         <h4> History</h4>
         <ListHistory
           history={this.props.history}
           updateConfig={this.props.updateConfig}
-          updateData={this.props.updateData} />
+          updateData={this.props.updateData}
+        />
         <ClearHistory clear={this.props.clearHistory} />
       </Toggler>
-    )
+    );
   }
 }

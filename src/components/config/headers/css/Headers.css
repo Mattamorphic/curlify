@@ -1,14 +1,13 @@
 .Headers {
-
 }
 
 .Headers button {
-  border: 1px solid #69B8A4;
+  border: 1px solid #69b8a4;
   border-radius: 30px;
-  background-color: #9BDACA;
+  background-color: #9bdaca;
 }
 
 .Headers button:hover {
-  background-color: #C9F0E6;
-  border: 1px solid #EFFDF9;
+  background-color: #c9f0e6;
+  border: 1px solid #effdf9;
 }

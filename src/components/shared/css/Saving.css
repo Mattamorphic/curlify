@@ -1,5 +1,5 @@
 .SavingNotice {
-  border: 1px solid #D1D1D1;
+  border: 1px solid #d1d1d1;
   border-radius: 30px;
   font-weight: bold;
   height: 38px;
@@ -7,22 +7,21 @@
   margin-bottom: 10px;
   padding-left: 15px;
   padding-right: 15px;
-  text-align:center;
+  text-align: center;
   vertical-align: middle;
   word-break: break-all;
   word-wrap: break-word;
 }
 
 .Saved {
-  color: #79B28F;
-  background-color: #ADFFCD;
+  color: #79b28f;
+  background-color: #adffcd;
 }
 
 .NotSaved {
-  color: #B27979;
-  background-color: #FFADAD;
+  color: #b27979;
+  background-color: #ffadad;
 }
-
 
 .save-notice-enter {
   opacity: 0.01;
@@ -30,5 +29,5 @@
 
 .save-notice-enter.save-notice-enter-active {
   opacity: 1;
-  transition: opacity .5s ease-in;
+  transition: opacity 0.5s ease-in;
 }

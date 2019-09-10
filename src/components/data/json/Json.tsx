@@ -2,21 +2,16 @@
  * @file Curl component
  * @author Mattamorphic
  */
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagic } from '@fortawesome/free-solid-svg-icons';
-
-// Imported components
-import Button from '../../shared/Button';
-import Copy from '../../shared/Copy';
-import Saving from '../../shared/Saving';
-import TextArea from '../../shared/TextArea';
-
-// CSS imports
 import './css/Json.css';
 
-// Type imports
-import {payloadType} from '../Data';
+import Button from '../../shared/Button';
+import Copy from '../../shared/Copy';
+import { faMagic } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { payloadType } from '../Data';
+import React from 'react';
+import Saving from '../../shared/Saving';
+import TextArea from '../../shared/TextArea';
 
 interface JsonProps {
   data: payloadType;
@@ -29,12 +24,11 @@ interface JsonState {
 }
 
 export default class Json extends React.PureComponent<JsonProps, JsonState> {
-
   constructor(props: JsonProps) {
     super(props);
     this.state = {
       draft: JSON.stringify(props.data, null, 2),
-      hasDraft: false,
+      hasDraft: false
     };
   }
 
@@ -46,21 +40,27 @@ export default class Json extends React.PureComponent<JsonProps, JsonState> {
    *
    * @return {JsonState}
    */
-  static getDerivedStateFromProps(newProps: JsonProps, state: JsonState): JsonState {
+  static getDerivedStateFromProps(
+    newProps: JsonProps,
+    state: JsonState
+  ): JsonState {
     let draft = state.draft;
     let hasDraft = state.hasDraft;
-    if (!state.hasDraft && JSON.stringify(newProps.data) !== JSON.stringify(JSON.parse(state.draft))) {
+    if (
+      !state.hasDraft &&
+      JSON.stringify(newProps.data) !== JSON.stringify(JSON.parse(state.draft))
+    ) {
       draft = JSON.stringify(newProps.data, null, 2);
       hasDraft = false;
     } else {
       try {
         JSON.parse(draft);
         hasDraft = false;
-      } catch(_) {}
+      } catch (_) {}
     }
     return {
       draft,
-      hasDraft,
+      hasDraft
     };
   }
 
@@ -77,8 +77,10 @@ export default class Json extends React.PureComponent<JsonProps, JsonState> {
     try {
       const object = JSON.parse(value);
       this.props.onUpdateData(object);
-    } catch (_) {}
-  }
+    } catch (_) {
+      // Todo: print the error
+    }
+  };
 
   /**
    * @function Pretty print the json in the state
@@ -87,34 +89,32 @@ export default class Json extends React.PureComponent<JsonProps, JsonState> {
     try {
       this.setState({
         draft: JSON.stringify(JSON.parse(this.state.draft), null, 2),
-        hasDraft: true,
+        hasDraft: true
       });
     } catch (_) {
+      // Todo: Print the error;
       return;
     }
-  }
+  };
 
   render() {
     return (
       <div className="Json">
         <div className="row">
           <div className="two columns">
-            <Saving
-              className="u-full-width"
-              isSaved={!this.state.hasDraft} />
+            <Saving className="u-full-width" isSaved={!this.state.hasDraft} />
           </div>
           <div className="four columns">
             <Button
               className="u-full-width"
+              isPrimary={false}
               onClick={this.pretty}
-              isPrimary={false}>
+            >
               <FontAwesomeIcon icon={faMagic} size="lg" />
             </Button>
           </div>
           <div className="four columns">
-            <Copy
-              className="u-full-width"
-              content={this.state.draft} />
+            <Copy className="u-full-width" content={this.state.draft} />
           </div>
         </div>
         <div className="row">
@@ -124,13 +124,14 @@ export default class Json extends React.PureComponent<JsonProps, JsonState> {
             style={{
               background: `url('${process.env.PUBLIC_URL}/images/textarea.png')`,
               backgroundAttachment: 'local',
-              backgroundRepeat: 'no-repeat',
               backgroundColor: '#19404A',
-              color: '#EEE8D5',
+              backgroundRepeat: 'no-repeat',
+              color: '#EEE8D5'
             }}
-            value={this.state.draft} />
+            value={this.state.draft}
+          />
         </div>
       </div>
-    )
+    );
   }
 }

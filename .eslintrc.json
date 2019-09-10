@@ -1,0 +1,23 @@
+{
+  "extends": [
+    "react-app",
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "rules": {
+    "react/prop-types": [0],
+    "react/jsx-sort-props": [true, {
+      "ignoreCase": true,
+      "reservedFirst": true,
+      "shorthandLast": true
+    }],
+    "sort-imports": ["error", {
+      "ignoreCase": true,
+      "ignoreDeclarationSort": false,
+      "ignoreMemberSort": false,
+      "memberSyntaxSortOrder": ["none", "all", "single", "multiple"]
+    }],
+    "sort-keys": ["error", "asc"],
+    "sort-vars": ["error", { "ignoreCase": true }]
+  }
+}

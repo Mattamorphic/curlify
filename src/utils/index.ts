@@ -1,34 +1,30 @@
-import {parse} from 'graphql';
+import { ConfigData } from '../components/config/Config';
+import { DataData } from '../components/data/Data';
+import { Header } from '../components/config/headers/Headers';
+import { HistoryEntry } from '../components/history/History';
+import { parse } from 'graphql';
+import { ProxyData } from '../components/test/request/proxy/Proxy';
 
-import {HTTPHeaders, HTTPMethods} from '../enums';
+import { HTTPHeaders, HTTPMethods } from '../enums';
 
-import {ConfigData} from '../components/config/Config';
-import {DataData} from '../components/data/Data';
-import {Header} from '../components/config/headers/Headers';
-import {HistoryEntry} from '../components/history/History';
-import {ProxyData} from '../components/test/request/proxy/Proxy';
+export const methodHasPayload = (method: HTTPMethods) =>
+  ![HTTPMethods.GET, HTTPMethods.HEAD].includes(method);
 
-export const methodHasPayload = (method: HTTPMethods) => (
-  ![HTTPMethods.GET, HTTPMethods.HEAD]
-    .includes(method)
-)
-
-export const PROXY = "https://curlify-proxy.herokuapp.com/";
+export const PROXY = 'https://curlify-proxy.herokuapp.com/';
 
 export const regEx = {
-  url: /^((?:http(?:s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+))+([\w\-\._~:\/?#[\]@!\$&'\(\)\*\+,;=.]+)$/gim,
-  curlHeader: /(?:-H ")([\w\d]{1,})(?:\s{0,}:\s{0,})(.+?)(?=")/gim,
-  curlMethod: /(?:-X\s{0,})(\w{3,6})/gim,
   // Todo: convert to /gms https://github.com/babel/babel/pull/10347
   curlData: /(?:-d\s{0,}'|")({.*})(?=['|"])/gim,
+  curlHeader: /(?:-H ")([\w\d]{1,})(?:\s{0,}:\s{0,})(.+?)(?=")/gim,
+  curlMethod: /(?:-X\s{0,})(\w{3,6})/gim,
   dateTimeZoneChars: /[T|Z]/gim,
-  jsonData: /^( *)("[^"]+": )?("[^"].*"|[\w.+-]*)?([{}[\],]*)?$/mg,
+  jsonData: /^( *)("[^"]+": )?("[^"].*"|[\w.+-]*)?([{}[\],]*)?$/gm,
+  multipleSpaces: / +/gm,
   newLine: /[\r|\n]/gm,
   newLineAndTab: /[\n|\r|\t]/gm,
-  multipleSpaces: / +/gm,
-  quotes:/[\"\']/gim,
+  quotes: /["']/gim,
   singleEscapedNewLine: /(?<!\\)\\n/gm,
-
+  url: /^((?:http(?:s)?:\/\/)?[\w.-]+(?:.[\w.-]+))+([\w-._~:/?#[\]@!$&'()*+,;=.]+)$/gim
 };
 
 // export const hasDataChanged = (
@@ -49,36 +45,32 @@ export const hasProxyChanged = (
   prevProxy: ProxyData,
   newProxy: ProxyData
 ): boolean => {
-  return prevProxy.isEnabled !== newProxy.isEnabled
-    || prevProxy.url !== newProxy.url;
-}
+  return (
+    prevProxy.isEnabled !== newProxy.isEnabled || prevProxy.url !== newProxy.url
+  );
+};
 
-export const isValidMethod = (string: string): boolean => (
-  Object
-  .values(HTTPMethods)
-  .includes(string)
-)
+export const isValidMethod = (string: string): boolean =>
+  Object.values(HTTPMethods).includes(string);
 
 export const isValidURL = (domain: string, endpoint: string): boolean => {
-  const url = domain
-    + ((domain.charAt(domain.length-1) !== '/' && endpoint.charAt(0) !== '/')
+  const url =
+    domain +
+    (domain.charAt(domain.length - 1) !== '/' && endpoint.charAt(0) !== '/'
       ? '/'
-      : '')
-    + endpoint;
+      : '') +
+    endpoint;
 
-  const possUrl = (url).match(regEx.url);
-  return (!possUrl || possUrl[0] !== url) ? false : true;
-}
+  const possUrl = url.match(regEx.url);
+  return !possUrl || possUrl[0] !== url ? false : true;
+};
 
 export const isValidHeaders = (headers: Header[]): boolean => {
-  const types = Object.values(HTTPHeaders)
-  return headers.reduce(
-    (_: boolean, curr: Header) => {
-      return types.includes(curr.type); // TODO: validate the value
-    },
-    true,
-  );
-}
+  const types = Object.values(HTTPHeaders);
+  return headers.reduce((_: boolean, curr: Header) => {
+    return types.includes(curr.type); // TODO: validate the value
+  }, true);
+};
 
 export const isValidJsonString = (json: string) => {
   try {
@@ -87,7 +79,7 @@ export const isValidJsonString = (json: string) => {
   } catch (_) {
     return false;
   }
-}
+};
 
 export const isValidGraphQLString = (gql: string) => {
   try {
@@ -96,43 +88,39 @@ export const isValidGraphQLString = (gql: string) => {
   } catch (_) {
     return false;
   }
-}
+};
 
 export const isStringANumber = (value: string): boolean => {
   return !isNaN(parseInt(value));
-}
+};
 
 export const isStringADate = (value: string): boolean => {
   return !isNaN(Date.parse(value.replace(regEx.dateTimeZoneChars, ' ')));
-}
+};
 
 export const isStringBooleanOrNull = (value: string): boolean => {
   const permitted = ['true', 'false', 'null', 'nil', 'undefined'];
-  return (permitted.includes(value.toLowerCase()));
-}
+  return permitted.includes(value.toLowerCase());
+};
 
 export const isStringAURL = (value: string): boolean => {
   return !!value.replace(regEx.quotes, '').match(regEx.url);
-}
+};
 
 export const isStorageAvailable = (): boolean => {
   let storage;
   try {
-      storage = window['localStorage'];
-      var x = '__storage_test__';
-      storage.setItem(x, x);
-      storage.removeItem(x);
-      return true;
+    storage = window['localStorage'];
+    var x = '__storage_test__';
+    storage.setItem(x, x);
+    storage.removeItem(x);
+    return true;
+  } catch (e) {
+    return false;
   }
-  catch(e) {
-      return false;
-  }
-}
+};
 
-export const addToHistory = (
-  config: ConfigData,
-  data: DataData
-): string => {
+export const addToHistory = (config: ConfigData, data: DataData): string => {
   const storage = window.localStorage;
 
   if (storage.length + 1 === 20) {
@@ -150,14 +138,13 @@ export const addToHistory = (
   }
   const id = new Date().getTime().toString();
   const item = JSON.stringify({
-    id,
     config,
     data,
+    id
   });
-  console.log("adding, ", id, item);
   storage.setItem(id, item);
   return id;
-}
+};
 
 export const getHistory = () => {
   if (!isStorageAvailable()) {
@@ -174,11 +161,15 @@ export const getHistory = () => {
     if (!data) {
       break;
     }
-    requestHistory.push(JSON.parse(data));
+    try {
+      requestHistory.push(JSON.parse(data));
+    } catch (_) {
+      storage.removeItem(key);
+    }
   }
   return requestHistory.sort((a, b) => {
     const a_id = parseInt(a.id);
     const b_id = parseInt(b.id);
     return a_id > b_id ? -1 : a_id < b_id ? 1 : 0;
   });
-}
+};

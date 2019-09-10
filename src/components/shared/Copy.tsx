@@ -1,8 +1,7 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCopy } from '@fortawesome/free-solid-svg-icons';
-
 import Button from './Button';
+import { faCopy } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
 
 interface CopyProps {
   className?: string;
@@ -10,20 +9,16 @@ interface CopyProps {
   content: string;
 }
 
-const Copy: React.FunctionComponent<CopyProps> = (props) => {
-
+const Copy: React.FunctionComponent<CopyProps> = props => {
   const copy = async () => {
     await navigator.clipboard.writeText(props.content);
-  }
+  };
 
   return (
-    <Button
-      className={props.className || ''}
-      isPrimary={false}
-      onClick={copy}>
+    <Button className={props.className || ''} isPrimary={false} onClick={copy}>
       <FontAwesomeIcon icon={faCopy} size="lg" />
-      </Button>
-  )
-}
+    </Button>
+  );
+};
 
 export default Copy;

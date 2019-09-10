@@ -2,13 +2,13 @@
  * @file ListHistory component
  * @author Mattamorphic
  */
-import React from 'react';
-import ListHistoryEntry from './listhistoryentry/ListHistoryEntry';
 import './css/ListHistory.css';
 
-import {ConfigData} from '../../config/Config';
-import {DataData} from '../../data/Data';
-import {HistoryEntry} from '../History';
+import { ConfigData } from '../../config/Config';
+import { DataData } from '../../data/Data';
+import { HistoryEntry } from '../History';
+import ListHistoryEntry from './listhistoryentry/ListHistoryEntry';
+import React from 'react';
 
 interface ListHistoryProps {
   history: HistoryEntry[];
@@ -16,22 +16,22 @@ interface ListHistoryProps {
   updateData: (data: DataData) => void;
 }
 
-const ListHistory: React.FunctionComponent<ListHistoryProps> = (props) => {
+const ListHistory: React.FunctionComponent<ListHistoryProps> = props => {
   return (
     <div className="ListHistory">
-    {
-      props.history.map(
-        (historyEntry: HistoryEntry, i: number) => (
-          <ListHistoryEntry
-            className={i%2 === 0 ? 'dark': 'light'}
-            config={historyEntry.config}
-            data={historyEntry.data}
-            id={historyEntry.id}
-            updateConfig={props.updateConfig}
-            updateData={props.updateData} />))
-    }
+      {props.history.map((historyEntry: HistoryEntry, i: number) => (
+        <ListHistoryEntry
+          className={i % 2 === 0 ? 'dark' : 'light'}
+          config={historyEntry.config}
+          data={historyEntry.data}
+          id={historyEntry.id}
+          key={historyEntry.id}
+          updateConfig={props.updateConfig}
+          updateData={props.updateData}
+        />
+      ))}
     </div>
-  )
+  );
 };
 
 export default ListHistory;

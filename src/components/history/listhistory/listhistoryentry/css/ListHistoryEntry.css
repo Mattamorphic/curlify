@@ -1,7 +1,7 @@
 .ListHistoryEntry {
-  background-color: #002B36;
-  border: 1px solid #60B8A4;
-  color: #FFF;
+  background-color: #002b36;
+  border: 1px solid #60b8a4;
+  color: #fff;
   padding: 5px;
   padding-left: 20px;
   padding-right: 20px;
@@ -10,15 +10,15 @@
 }
 
 .ListHistoryEntry.dark {
-  background-color: #002B36;
+  background-color: #002b36;
 }
 
 .ListHistoryEntry.light {
-  background-color: #004A5D;
+  background-color: #004a5d;
 }
 
 .ListHistoryEntryMethod {
-  border: 1px solid #D1D1D1;
+  border: 1px solid #d1d1d1;
   border-radius: 30px;
   text-align: center;
   height: 38px;
@@ -27,26 +27,25 @@
 }
 
 .ListHistoryEntryMethod.get {
-  background-color: #43D1D9;
-  color: #16696D;
+  background-color: #43d1d9;
+  color: #16696d;
 }
 
 .ListHistoryEntryMethod.post {
-  background-color: #DCCE88;
-  color: #9C8B2E;
+  background-color: #dcce88;
+  color: #9c8b2e;
 }
 
 .ListHistoryEntryID {
-  color: #EEE8D5;
+  color: #eee8d5;
   text-align: center;
   height: 38px;
   line-height: 38px;
   vertical-align: middle;
 }
 
-
 .ListHistoryEntryDest {
-  color: #EEE8D5;
+  color: #eee8d5;
   text-align: center;
   height: 38px;
   line-height: 38px;
@@ -54,13 +53,13 @@
 }
 
 .ListHistoryEntryDest > a {
-  color: #EEE8D5;
+  color: #eee8d5;
 }
 
 .ListHistoryEntryAction > button {
-  background-color: #EEE8D5;
+  background-color: #eee8d5;
 }
 
 .ListHistoryEntryAction > button:hover {
-  background-color: #F9F7F1;
+  background-color: #f9f7f1;
 }
