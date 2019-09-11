@@ -1,6 +1,7 @@
+import './css/Config.css';
+
 import Destination from './destination/Destination';
 import Method from './method/Method';
-import Notice from '../shared/Notice';
 import React from 'react';
 import Toggler from '../shared/Toggler';
 
@@ -34,9 +35,16 @@ export default class Config extends React.PureComponent<
     };
   }
 
-  updateMethod = (value: HTTPMethods) => {
+  toggleConfigSettings = () => {
+    this.setState(prevState => ({
+      showConfigSettings: !prevState.showConfigSettings
+    }));
+  };
+
+  updateDestination = (domain: string, endpoint: string) => {
     const data = this.props.data;
-    data.method = value;
+    data.domain = domain;
+    data.endpoint = endpoint;
     this.props.updateConfig(data);
   };
 
@@ -55,17 +63,10 @@ export default class Config extends React.PureComponent<
     this.props.updateConfig(data);
   };
 
-  updateDestination = (domain: string, endpoint: string) => {
+  updateMethod = (value: HTTPMethods) => {
     const data = this.props.data;
-    data.domain = domain;
-    data.endpoint = endpoint;
+    data.method = value;
     this.props.updateConfig(data);
-  };
-
-  toggleConfigSettings = () => {
-    this.setState(prevState => ({
-      showConfigSettings: !prevState.showConfigSettings
-    }));
   };
 
   render() {
@@ -76,19 +77,11 @@ export default class Config extends React.PureComponent<
           <Toggler
             className="Config"
             isToggled={this.state.showConfigSettings}
+            heading="Request Config Settings"
             label="Config Settings"
+            tooltip="Toggle request config"
             onToggle={this.toggleConfigSettings}
           >
-            <div className="row">
-              <h4>Request Config Settings</h4>
-            </div>
-            <div className="row">
-              <Headers
-                onUpdate={this.updateHeaders}
-                selected={this.props.data.headers}
-                width={ColumnCount.TWELVE}
-              />
-            </div>
             <div className="row">
               <Method
                 onUpdate={this.updateMethod}
@@ -102,10 +95,17 @@ export default class Config extends React.PureComponent<
                 width={ColumnCount.TEN}
               />
             </div>
+            <div className="row">
+              <Headers
+                onUpdate={this.updateHeaders}
+                selected={this.props.data.headers}
+                width={ColumnCount.TWELVE}
+              />
+            </div>
           </Toggler>
         </div>
         {!this.state.showConfigSettings && (
-          <Notice heading="Request Config Settings">
+          <div className="ConfigPreview">
             Sending a [<strong>{this.props.data.method}</strong>] request to: [
             <strong>
               <a href={destination}>{destination}</a>
@@ -122,7 +122,7 @@ export default class Config extends React.PureComponent<
                 ))}
               </>
             )}
-          </Notice>
+          </div>
         )}
       </>
     );

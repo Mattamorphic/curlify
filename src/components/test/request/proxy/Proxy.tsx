@@ -62,7 +62,9 @@ export default class Proxy extends React.PureComponent<ProxyProps, ProxyState> {
       <Toggler
         className="Proxy"
         isToggled={this.state.showProxySettings}
+        heading="Proxy Settings"
         label="Proxy Settings"
+        tooltip="Toggle proxy settings"
         onToggle={this.toggleProxySettings}
       >
         <div className="row">

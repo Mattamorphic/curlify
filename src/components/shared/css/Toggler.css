@@ -1,0 +1,7 @@
+.Toggler > h4 {
+  padding-right: 10px;
+}
+
+.Toggler > button h4 {
+  line-height: 1.5;
+}

@@ -6,6 +6,7 @@ import Button from '../../shared/Button';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import Tooltip from '../../shared/Tooltip';
 
 interface ClearHistoryProps {
   clear: () => void;
@@ -14,7 +15,9 @@ interface ClearHistoryProps {
 const ClearHistory: React.FunctionComponent<ClearHistoryProps> = props => {
   return (
     <Button isPrimary={false} onClick={props.clear}>
-      <FontAwesomeIcon icon={faTrash} size="lg" />
+      <Tooltip text="Clear history">
+        <FontAwesomeIcon icon={faTrash} size="lg" />
+      </Tooltip>
     </Button>
   );
 };
