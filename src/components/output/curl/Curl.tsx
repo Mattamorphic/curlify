@@ -8,6 +8,7 @@ import * as utils from '../../../utils';
 
 import { ConfigData } from '../../config/Config';
 import Copy from '../../shared/Copy';
+import { debounce } from 'lodash';
 import { Header } from '../../config/headers/Headers';
 import React from 'react';
 import Saving from '../../shared/Saving';
@@ -224,18 +225,22 @@ export default class Curl extends React.Component<CurlProps, CurlState> {
    * @param {string} value The curl string
    */
   updateCurl = (value: string): void => {
-    const curl = this.serializerCurl(value);
-    if (curl.hasNewData || curl.hasNewConfig) {
-      // set draft to null, we'll update with the new props
-      this.setState({ hasDraft: false }, () => {
-        curl.hasNewData && this.props.updateData(curl.data);
-        curl.hasNewConfig && this.props.updateConfig(curl.config);
-      });
-    }
-    // set the draft to true, let's use this
-    if (!curl.hasNewData && !curl.hasNewConfig) {
-      this.setState({ draft: value, hasDraft: true });
-    }
+    this.setState(
+      {
+        draft: value,
+        hasDraft: true
+      },
+      debounce(() => {
+        const curl = this.serializerCurl(this.state.draft);
+        if (curl.hasNewData || curl.hasNewConfig) {
+          // set draft to null, we'll update with the new props
+          this.setState({ hasDraft: false }, () => {
+            curl.hasNewData && this.props.updateData(curl.data);
+            curl.hasNewConfig && this.props.updateConfig(curl.config);
+          });
+        }
+      }, 300)
+    );
   };
 
   /**

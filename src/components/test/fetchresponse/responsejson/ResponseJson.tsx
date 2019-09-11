@@ -7,7 +7,6 @@ import './css/ResponseJson.css';
 import * as utils from '../../../../utils';
 
 import { JsonValueTypes } from '../../../../enums';
-
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import Toggler from '../../../shared/Toggler';
@@ -17,6 +16,7 @@ interface ResponseJsonProps {
 }
 
 interface ResponseJsonState {
+  response: string;
   showJson: boolean;
 }
 
@@ -27,6 +27,10 @@ export default class ResponseJson extends React.PureComponent<
   constructor(props: ResponseJsonProps) {
     super(props);
     this.state = {
+      response: JSON.stringify(props.data, null, 3).replace(
+        utils.regEx.jsonData,
+        this.replacer
+      ),
       showJson: false
     };
   }
@@ -91,10 +95,7 @@ export default class ResponseJson extends React.PureComponent<
         <div
           className="ResponseJson"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(this.props.data, null, 3).replace(
-              utils.regEx.jsonData,
-              this.replacer
-            )
+            __html: this.state.response
           }}
         />
       </Toggler>
