@@ -11,15 +11,13 @@ import { ProxyData } from './components/test/request/proxy/Proxy';
 import React from 'react';
 
 // 'Multiple' imports
+import { ColumnCount, DataType, HTTPMethods, OutputType } from './enums';
 import Config, { ConfigData } from './components/config/Config';
 import Data, { DataData } from './components/data/Data';
-import { DataType, HTTPMethods, OutputType } from './enums';
 import History, { HistoryEntry } from './components/history/History';
 import Test, { ValidatePayloadResult } from './components/test/Test';
 
-interface OutputState {
-  type: OutputType;
-}
+interface AppProps {}
 
 interface AppState {
   config: ConfigData;
@@ -30,7 +28,9 @@ interface AppState {
   validation: ValidatePayloadResult;
 }
 
-interface AppProps {}
+interface OutputState {
+  type: OutputType;
+}
 
 export default class App extends React.Component<AppProps, AppState> {
   isStorageAvailable = false;
@@ -159,7 +159,7 @@ export default class App extends React.Component<AppProps, AppState> {
           <Config data={this.state.config} updateConfig={this.onConfigChange} />
         </div>
         <div className="row">
-          <div className={(showData ? 'six' : 'twelve') + ' columns'}>
+          <div className={showData ? ColumnCount.SIX : ColumnCount.TWELVE}>
             <Output
               className="u-full-width"
               config={this.state.config}

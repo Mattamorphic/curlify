@@ -4,17 +4,25 @@
 
 .Tooltip .TooltipText {
   visibility: hidden;
-  width: 120px;
+  min-width: 120px;
+  max-width: 200px;
+  word-wrap: break-word;
   background-color: black;
   color: #fff;
+  font-family: verdana;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 20px;
   text-align: center;
   border-radius: 6px;
-  padding: 5px 0;
+  padding: 2px 5px 2px 5px;
   position: absolute;
+  text-transform: none;
   z-index: 1;
   bottom: 150%;
   left: 50%;
   margin-left: -60px;
+  white-space: pre-wrap;
 }
 
 .Tooltip .TooltipText::after {
