@@ -62,10 +62,11 @@ export default class History extends React.PureComponent<
       <Toggler
         className="History"
         isToggled={this.state.showHistory}
+        heading="History"
         label="History"
         onToggle={this.toggleHistory}
+        tooltip="Toggle history"
       >
-        <h4> History</h4>
         <ListHistory
           history={this.props.history}
           updateConfig={this.props.updateConfig}
