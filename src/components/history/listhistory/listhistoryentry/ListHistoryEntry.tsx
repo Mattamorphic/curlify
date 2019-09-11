@@ -8,6 +8,7 @@ import { ConfigData } from '../../../config/Config';
 import { DataData } from '../../../data/Data';
 import LoadHistoryEntry from './loadhistoryentry/LoadHistoryEntry';
 import React from 'react';
+import Tooltip from '../../../shared/Tooltip';
 
 interface ListHistoryEntryProps {
   className?: string;
@@ -38,43 +39,55 @@ const ListHistoryEntry: React.FunctionComponent<
     <div className={(props.className || '') + ' ListHistoryEntry'}>
       <div className="row">
         <div className="two columns">
-          <div className={statusClass + ' u-full-width ListHistoryEntryStatus'}>
-            {props.status}
-          </div>
+          <Tooltip text="Status code">
+            <div
+              className={statusClass + ' u-full-width ListHistoryEntryStatus'}
+            >
+              {props.status}
+            </div>
+          </Tooltip>
         </div>
         <div className="two columns">
-          <div
-            className={
-              props.config.method.toLowerCase() +
-              ' u-full-width ListHistoryEntryMethod'
-            }
-          >
-            {props.config.method}
-          </div>
+          <Tooltip text="Request method">
+            <div
+              className={
+                props.config.method.toLowerCase() +
+                ' u-full-width ListHistoryEntryMethod'
+              }
+            >
+              {props.config.method}
+            </div>
+          </Tooltip>
         </div>
         <div className="two columns">
-          <div
-            className={
-              props.config.method.toLowerCase() +
-              ' u-full-width ListHistoryEntryID'
-            }
-          >
-            {props.id}
-          </div>
+          <Tooltip text="Timestamp / ID">
+            <div
+              className={
+                props.config.method.toLowerCase() +
+                ' u-full-width ListHistoryEntryID'
+              }
+            >
+              {props.id}
+            </div>
+          </Tooltip>
         </div>
         <div className="four columns">
-          <div className="u-full-width ListHistoryEntryDest">
-            <a href={url}>{url}</a>
-          </div>
+          <Tooltip text="Request destination">
+            <div className="u-full-width ListHistoryEntryDest">
+              <a href={url}>{url}</a>
+            </div>
+          </Tooltip>
         </div>
         <div className="two columns ListHistoryEntryAction">
-          <LoadHistoryEntry
-            className="u-full-width"
-            config={props.config}
-            data={props.data}
-            updateConfig={props.updateConfig}
-            updateData={props.updateData}
-          />
+          <Tooltip text="Load entry">
+            <LoadHistoryEntry
+              className="u-full-width"
+              config={props.config}
+              data={props.data}
+              updateConfig={props.updateConfig}
+              updateData={props.updateData}
+            />
+          </Tooltip>
         </div>
       </div>
     </div>

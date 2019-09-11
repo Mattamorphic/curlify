@@ -1,6 +1,7 @@
+import './css/Config.css';
+
 import Destination from './destination/Destination';
 import Method from './method/Method';
-import Notice from '../shared/Notice';
 import React from 'react';
 import Toggler from '../shared/Toggler';
 
@@ -104,7 +105,7 @@ export default class Config extends React.PureComponent<
           </Toggler>
         </div>
         {!this.state.showConfigSettings && (
-          <Notice heading="Request Config Settings">
+          <div className="ConfigPreview">
             Sending a [<strong>{this.props.data.method}</strong>] request to: [
             <strong>
               <a href={destination}>{destination}</a>
@@ -121,7 +122,7 @@ export default class Config extends React.PureComponent<
                 ))}
               </>
             )}
-          </Notice>
+          </div>
         )}
       </>
     );

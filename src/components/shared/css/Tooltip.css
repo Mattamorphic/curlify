@@ -23,6 +23,7 @@
   left: 50%;
   margin-left: -60px;
   white-space: pre-wrap;
+  z-index: 100;
 }
 
 .Tooltip .TooltipText::after {
