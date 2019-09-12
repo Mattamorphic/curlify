@@ -22,11 +22,7 @@ const Request: React.FunctionComponent<RequestProps> = props => {
   return (
     <div className="row">
       <div className="Request">
-        <Proxy
-          isExpanded={!props.hasRun}
-          onUpdateProxy={props.onUpdateProxy}
-          proxy={props.proxy}
-        />
+        <Proxy onUpdateProxy={props.onUpdateProxy} proxy={props.proxy} />
         {props.shouldConfirm ? (
           <Confirm
             className="u-full-width"
