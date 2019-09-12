@@ -1,7 +1,9 @@
 /* From this palette https://ethanschoonover.com/solarized/ */
 .ResponseJson {
   background-color: #002b36;
-  font-size: 12px;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New';
+  font-size: 0.85em;
+  padding: 10px;
 }
 
 .ResponseJson > span {

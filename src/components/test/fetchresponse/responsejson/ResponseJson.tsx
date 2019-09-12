@@ -89,6 +89,7 @@ export default class ResponseJson extends React.PureComponent<
     return (
       <Toggler
         isToggled={this.state.showJson}
+        heading="JSON Response"
         label="Data"
         onToggle={this.toggleJson}
       >

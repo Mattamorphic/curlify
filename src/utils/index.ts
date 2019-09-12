@@ -24,7 +24,7 @@ export const regEx = {
   newLineAndTab: /[\n|\r|\t]/gm,
   quotes: /["']/gim,
   singleEscapedNewLine: /(?<!\\)\\n/gm,
-  url: /^((?:http(?:s)?:\/\/)?[\w.-]+(?:.[\w.-]+))+([\w-._~:/?#[\]@!$&'()*+,;=.]+)$/gim
+  url: /^((?:http(?:s)?:\/\/)+[\w.-]+(?:.[\w.-]+))+([\w-._~:/?#[\]@!$&'()*+,;=.]+)$/gim
 };
 
 // export const hasDataChanged = (

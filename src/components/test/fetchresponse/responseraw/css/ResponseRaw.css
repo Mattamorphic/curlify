@@ -1,5 +1,7 @@
 .ResponseRaw {
   background-color: #002b36;
   color: #eee8d5;
-  font-size: 12px;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New';
+  font-size: 0.85em;
+  padding: 10px;
 }
