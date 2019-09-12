@@ -1,7 +1,4 @@
 .ListHistoryEntry {
-  background-color: #002b36;
-  border: 1px solid #60b8a4;
-  color: #fff;
   padding: 5px;
   padding-left: 20px;
   padding-right: 20px;
@@ -10,19 +7,23 @@
 }
 
 .ListHistoryEntry.dark {
-  background-color: #002b36;
 }
 
 .ListHistoryEntry.light {
-  background-color: #004a5d;
 }
 
 .ListHistoryEntryMethod,
-.ListHistoryEntryStatus {
+.ListHistoryEntryStatus,
+.ListHistoryEntryID,
+.ListHistoryEntryDest {
   border: 1px solid #d1d1d1;
-  border-radius: 30px;
+  border-radius: 10px;
+  font-weight: bold;
   text-align: center;
+  padding: 5px;
   vertical-align: middle;
+  word-break: break-all;
+  word-wrap: break-word;
 }
 
 .ListHistoryEntryMethod.get {
@@ -35,22 +36,18 @@
   color: #9c8b2e;
 }
 
-.ListHistoryEntryID {
-  color: #eee8d5;
-  text-align: center;
-  vertical-align: middle;
+.ListHistoryEntryID,
+.ListHistoryEntryDest {
+  cursor: pointer;
+  font-weight: normal;
 }
 
-.ListHistoryEntryDest {
-  color: #eee8d5;
-  text-align: center;
-  vertical-align: middle;
-  word-break: break-all;
-  word-wrap: break-word;
+.ListHistoryEntryID:hover,
+.ListHistoryEntryDest:hover {
+  border: 1px solid #777;
 }
 
 .ListHistoryEntryDest > a {
-  color: #eee8d5;
 }
 
 .ListHistoryEntryAction > button {
