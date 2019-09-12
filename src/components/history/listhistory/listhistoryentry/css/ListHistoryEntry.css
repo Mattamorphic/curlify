@@ -16,10 +16,9 @@
 .ListHistoryEntryStatus,
 .ListHistoryEntryID,
 .ListHistoryEntryDest {
-  border: 1px solid #d1d1d1;
-  border-radius: 10px;
   font-weight: bold;
   text-align: center;
+  margin-top: 5px;
   padding: 5px;
   vertical-align: middle;
   word-break: break-all;
@@ -44,18 +43,23 @@
 
 .ListHistoryEntryID:hover,
 .ListHistoryEntryDest:hover {
-  border: 1px solid #777;
+  text-decoration: underline;
 }
 
 .ListHistoryEntryDest > a {
 }
 
-.ListHistoryEntryAction > button {
+.ListHistoryEntryAction > div > button {
   background-color: #eee8d5;
 }
 
-.ListHistoryEntryAction > button:hover {
+.ListHistoryEntryAction > div > button:hover {
   background-color: #f9f7f1;
+}
+
+.ListHistoryEntryAction > div > button:active {
+  color: #79b28f;
+  background-color: #adffcd;
 }
 
 .ListHistoryEntryStatus.success {
@@ -76,4 +80,14 @@
 .ListHistoryEntryStatus.server {
   background-color: #dc889e;
   color: #754955;
+}
+
+/* Larger than phablet */
+@media (max-width: 550px) {
+  .ListHistoryEntryMethod,
+  .ListHistoryEntryStatus,
+  .ListHistoryEntryID,
+  .ListHistoryEntryDest {
+    margin-top: 5px;
+  }
 }

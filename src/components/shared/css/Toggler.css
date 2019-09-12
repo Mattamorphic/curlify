@@ -1,7 +1,11 @@
-.Toggler > h4 {
-  padding-right: 10px;
+.Toggler > div > button {
+  padding: 0;
+  text-align: center;
 }
 
-.Toggler > button h4 {
-  line-height: 1.5;
+.TogglerPreview {
+  text-align: left;
+  line-height: 38px;
+  word-wrap: break-word;
+  word-break: break-all;
 }

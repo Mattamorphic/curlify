@@ -61,6 +61,7 @@ export default class History extends React.PureComponent<
     return (
       <Toggler
         className="History"
+        collapsedData={<>{this.props.history.length} items in history</>}
         isToggled={this.state.showHistory}
         heading="History"
         label="History"

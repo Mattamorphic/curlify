@@ -73,57 +73,56 @@ export default class Config extends React.PureComponent<
     const destination = this.props.data.domain + this.props.data.endpoint;
     return (
       <>
-        <div className="row">
-          <Toggler
-            className="Config"
-            isToggled={this.state.showConfigSettings}
-            heading="Request Config Settings"
-            label="Config Settings"
-            tooltip="Toggle request config"
-            onToggle={this.toggleConfigSettings}
-          >
-            <div className="row">
-              <Method
-                onUpdate={this.updateMethod}
-                selected={this.props.data.method}
-                width={ColumnCount.TWO}
-              />
-              <Destination
-                domain={this.props.data.domain}
-                endpoint={this.props.data.endpoint}
-                onUpdate={this.updateDestination}
-                width={ColumnCount.TEN}
-              />
-            </div>
-            <div className="row">
-              <Headers
-                onUpdate={this.updateHeaders}
-                selected={this.props.data.headers}
-                width={ColumnCount.TWELVE}
-              />
-            </div>
-          </Toggler>
-        </div>
-        {!this.state.showConfigSettings && (
-          <div className="ConfigPreview">
-            Sending a [<strong>{this.props.data.method}</strong>] request to: [
-            <strong>
-              <a href={destination}>{destination}</a>
-            </strong>
-            ]
-            {this.props.data.headers.length > 0 && (
-              <>
-                , with the HTTP Headers:{' '}
-                {this.props.data.headers.map(header => (
-                  <>
-                    <br />
-                    <strong>{header.type}</strong>: <em>{header.value}</em>
-                  </>
-                ))}
-              </>
-            )}
+        <Toggler
+          className="Config"
+          collapsedData={
+            <>
+              Sending a [<strong>{this.props.data.method}</strong>] request to:
+              [
+              <strong>
+                <a href={destination}>{destination}</a>
+              </strong>
+              ]
+              {this.props.data.headers.length > 0 && (
+                <>
+                  , with the HTTP Headers:{' '}
+                  {this.props.data.headers.map(header => (
+                    <>
+                      <br />
+                      <strong>{header.type}</strong>: <em>{header.value}</em>
+                    </>
+                  ))}
+                </>
+              )}
+            </>
+          }
+          isToggled={this.state.showConfigSettings}
+          heading="Request Config Settings"
+          label="Config Settings"
+          tooltip="Toggle request config"
+          onToggle={this.toggleConfigSettings}
+        >
+          <div className="row">
+            <Method
+              onUpdate={this.updateMethod}
+              selected={this.props.data.method}
+              width={ColumnCount.TWO}
+            />
+            <Destination
+              domain={this.props.data.domain}
+              endpoint={this.props.data.endpoint}
+              onUpdate={this.updateDestination}
+              width={ColumnCount.TEN}
+            />
           </div>
-        )}
+          <div className="row">
+            <Headers
+              onUpdate={this.updateHeaders}
+              selected={this.props.data.headers}
+              width={ColumnCount.TWELVE}
+            />
+          </div>
+        </Toggler>
       </>
     );
   }

@@ -25,3 +25,8 @@
 
 .json-not-saved {
 }
+
+.JsonPretty:active {
+  color: #79b28f;
+  background-color: #adffcd;
+}

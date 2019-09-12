@@ -61,6 +61,20 @@ export default class Proxy extends React.PureComponent<ProxyProps, ProxyState> {
       <>
         <Toggler
           className="Proxy"
+          collapsedData={
+            <>
+              {this.props.proxy.isEnabled ? (
+                <>
+                  Proxy [<strong>enabled</strong>] through [
+                  <a href={this.props.proxy.url}>{this.props.proxy.url}</a>]
+                </>
+              ) : (
+                <>
+                  Proxy [<strong>disabled</strong>]
+                </>
+              )}
+            </>
+          }
           isToggled={this.state.showProxySettings}
           heading="Proxy Settings"
           label="Proxy Settings"
@@ -68,10 +82,7 @@ export default class Proxy extends React.PureComponent<ProxyProps, ProxyState> {
           onToggle={this.toggleProxySettings}
         >
           <div className="row">
-            <Notice
-              className="twelve columns u-full-width"
-              heading="Proxy Overview"
-            >
+            <Notice className="u-full-width" heading="Proxy Overview">
               Requests are proxied through a copy of cors-anywhere <br />
               This is hosted on: <a href={utils.PROXY}>{utils.PROXY}</a> <br />
               You can find the code for this at{' '}
@@ -106,20 +117,6 @@ export default class Proxy extends React.PureComponent<ProxyProps, ProxyState> {
             />
           </div>
         </Toggler>
-        {!this.state.showProxySettings && (
-          <div className="ProxyPreview">
-            {this.props.proxy.isEnabled ? (
-              <>
-                Proxy [<strong>enabled</strong>] through [
-                <a href={this.props.proxy.url}>{this.props.proxy.url}</a>]
-              </>
-            ) : (
-              <>
-                Proxy [<strong>disabled</strong>]
-              </>
-            )}
-          </div>
-        )}
       </>
     );
   }

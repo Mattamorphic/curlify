@@ -1,3 +1,5 @@
+import './css/Copy.css';
+
 import Button from './Button';
 import { faCopy } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -20,7 +22,7 @@ const Copy: React.FunctionComponent<CopyProps> = props => {
     return (
       <Tooltip text={props.tooltip || 'Copy'}>
         <Button
-          className={props.className || ''}
+          className={(props.className || '') + ' Copy'}
           isPrimary={false}
           onClick={copy}
         >
@@ -32,7 +34,7 @@ const Copy: React.FunctionComponent<CopyProps> = props => {
   }
   return (
     <Tooltip text={props.tooltip || 'Copy'}>
-      <div className={props.className || ''} onClick={copy}>
+      <div className={(props.className || '') + ' Copy'} onClick={copy}>
         {!props.noIcon && <FontAwesomeIcon icon={faCopy} size="lg" />}
         {props.children}
       </div>
