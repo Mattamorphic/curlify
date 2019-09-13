@@ -61,7 +61,10 @@ class Test extends React.PureComponent<TestProps, TestState> {
   }
 
   getDestination = (): string => {
-    const destination = this.props.config.domain + this.props.config.endpoint;
+    const destination =
+      this.props.config.domain +
+      this.props.config.endpoint +
+      utils.convertObjToQueryParams(this.props.config.queryParams);
     return this.props.proxy.isEnabled
       ? this.props.proxy.url + destination
       : destination;

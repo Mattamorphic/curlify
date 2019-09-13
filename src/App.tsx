@@ -43,7 +43,7 @@ export default class App extends React.Component<AppProps, AppState> {
         endpoint: '/users/octocat',
         headers: [],
         method: HTTPMethods.GET,
-        queryParams: {}
+        queryParams: []
       },
       data: {
         data: {
@@ -95,7 +95,7 @@ export default class App extends React.Component<AppProps, AppState> {
           endpoint: config.endpoint,
           headers: config.headers.map(header => header),
           method: config.method,
-          queryParams: config.queryParams
+          queryParams: config.queryParams.map(qp => qp)
         }
       },
       () => this.setState({ validation: this.validatePayload() })

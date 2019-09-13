@@ -8,14 +8,14 @@ import Toggler from '../shared/Toggler';
 import { ColumnCount, HTTPMethods } from '../../enums';
 import Headers from './headers/Headers';
 import { KeyValueEntry } from '../shared/KeyValueInput';
-import QueryParams, { QueryParamsData } from './queryparams/QueryParams';
+import QueryParams from './queryparams/QueryParams';
 
 export interface ConfigData {
   method: HTTPMethods;
   headers: KeyValueEntry[];
   domain: string;
   endpoint: string;
-  queryParams: { [key: string]: any };
+  queryParams: KeyValueEntry[];
 }
 
 interface ConfigProps {
@@ -74,9 +74,20 @@ export default class Config extends React.PureComponent<
     this.props.updateConfig(data);
   };
 
-  updateQueryParams = (value: QueryParamsData) => {
+  updateQueryParams = (value: KeyValueEntry, index: number): void => {
     const data = this.props.data;
-    data.queryParams = value;
+    if (!data.queryParams[index] && value) {
+      data.queryParams.push(value);
+    } else {
+      data.queryParams[index] = value;
+    }
+    this.props.updateConfig(data);
+  };
+
+  removeQueryParameter = (index: number): void => {
+    const data = this.props.data;
+    delete data.queryParams[index];
+    data.queryParams = data.queryParams.filter(queryparam => queryparam);
     this.props.updateConfig(data);
   };
 
@@ -128,8 +139,9 @@ export default class Config extends React.PureComponent<
           </div>
           <div className="row">
             <QueryParams
-              queryParams={this.props.data.queryParams}
-              updateQueryParams={this.updateQueryParams}
+              onUpdate={this.updateQueryParams}
+              onRemove={this.removeQueryParameter}
+              selected={this.props.data.queryParams}
             />
           </div>
           <div className="row">

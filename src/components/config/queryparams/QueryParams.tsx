@@ -2,16 +2,17 @@
  * @file QueryParams component
  * @author Mattamorphic
  */
+import './css/QueryParams.css';
+
 import React from 'react';
 import Toggler from '../../shared/Toggler';
 
-export interface QueryParamsData {
-  [key: string]: any;
-}
+import KeyValueInput, { KeyValueEntry } from '../../shared/KeyValueInput';
 
 interface QueryParamsProps {
-  queryParams: QueryParamsData;
-  updateQueryParams: (qp: QueryParamsData) => void;
+  onUpdate: (entry: KeyValueEntry, index: number) => void;
+  onRemove: (index: number) => void;
+  selected: KeyValueEntry[];
 }
 
 interface QueryParamsState {
@@ -25,9 +26,20 @@ export default class QueryParams extends React.PureComponent<
   constructor(props: QueryParamsProps) {
     super(props);
     this.state = {
-      showQueryParams: Object.keys(this.props.queryParams).length > 0
+      showQueryParams: Object.keys(this.props.selected).length > 0
     };
   }
+
+  addQueryParam = (): void => {
+    // create a pending header, add this to the end of the index
+    this.props.onUpdate(
+      {
+        key: '',
+        value: ''
+      },
+      this.props.selected.length
+    );
+  };
 
   toggleQueryParams = () => {
     this.setState(prevState => ({
@@ -40,7 +52,7 @@ export default class QueryParams extends React.PureComponent<
       <Toggler
         collapsedData={
           <em>
-            {Object.keys(this.props.queryParams).join(', ')}
+            {this.props.selected.map(s => s.key).join(', ')}
             &nbsp;
           </em>
         }
@@ -50,7 +62,22 @@ export default class QueryParams extends React.PureComponent<
         isToggled={this.state.showQueryParams}
         tooltip="Configure query parameters"
       >
-        <>Test</>
+        <KeyValueInput
+          className="QueryParams"
+          id="QueryParameters"
+          keyInput={{
+            placeholder: 'Enter QueryParameter',
+            type: 'TEXT'
+          }}
+          valueInput={{
+            placeholder: 'Enter Value',
+            type: 'TEXT'
+          }}
+          selected={this.props.selected}
+          onAddEntry={this.addQueryParam}
+          onUpdateEntry={this.props.onUpdate}
+          onRemoveEntry={this.props.onRemove}
+        />
       </Toggler>
     );
   }

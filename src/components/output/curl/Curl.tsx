@@ -15,12 +15,12 @@ import Saving from '../../shared/Saving';
 import TextArea from '../../shared/TextArea';
 
 import { DataData, payloadType } from '../../data/Data';
-import { DataType, HTTPHeaders, HTTPMethods } from '../../../enums';
+import { DataType, HTTPMethods } from '../../../enums';
 
 interface ParsedURL {
   domain: string | null;
   endpoint: string | null;
-  queryParams: { [key: string]: any } | null;
+  queryParams: KeyValueEntry[] | null;
 }
 
 interface SerializedCurl {
@@ -133,10 +133,11 @@ export default class Curl extends React.Component<CurlProps, CurlState> {
       return null;
     }
     const uri = new URL(match[0]);
+    const params = Object.fromEntries(new URLSearchParams(uri.search));
     return {
       domain: uri.origin,
       endpoint: uri.pathname,
-      queryParams: Object.fromEntries(new URLSearchParams(uri.search))
+      queryParams: Object.keys(params).map(key => ({ key, value: params[key] }))
     };
   }
 

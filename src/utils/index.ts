@@ -189,20 +189,11 @@ export const isNull = (value: any) => {
   return false;
 };
 
-export const convertObjToQueryParams = (obj: {
-  [key: string]: any;
-}): string => {
-  const keys = Object.keys(obj);
-  if (keys.length === 0) {
+export const convertObjToQueryParams = (qp: KeyValueEntry[]): string => {
+  if (qp.length === 0) {
     return '';
   }
   return (
-    '?' +
-    Object.keys(obj)
-      .map(key => {
-        const value = isNull(obj[key]) ? '' : '=' + obj[key];
-        return key + value;
-      })
-      .join('&')
+    '?' + qp.map(p => p.key + (isNull(p.value) ? '' : '=' + p.value)).join('&')
   );
 };

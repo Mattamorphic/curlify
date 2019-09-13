@@ -1,0 +1,10 @@
+.QueryParams input {
+  width: 100%;
+  background-color: #effdf9 !important;
+  border-radius: 30px !important;
+  padding-left: 15px !important;
+}
+
+.QueryParams input:hover {
+  border: 1px solid #777 !important;
+}
