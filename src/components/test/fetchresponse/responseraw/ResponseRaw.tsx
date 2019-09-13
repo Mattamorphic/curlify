@@ -36,6 +36,7 @@ export default class ResponseRaw extends React.PureComponent<
     return (
       <Toggler
         isToggled={this.state.showRaw}
+        heading="Raw Response"
         label="Raw"
         onToggle={this.toggleRaw}
       >

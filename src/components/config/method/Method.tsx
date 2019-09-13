@@ -13,17 +13,15 @@ interface methodProps {
 }
 
 const Method: React.FunctionComponent<methodProps> = props => {
-  const updateSelected = (e: React.ChangeEvent<HTMLSelectElement>): void => {
-    const value: HTTPMethods = e.target.value as HTTPMethods;
-    props.onUpdate(value);
+  const onUpdate = (value: string): void => {
+    props.onUpdate(value as HTTPMethods);
   };
-
   return (
     <div className={props.width}>
       <Tooltip text="Method">
         <Select
           className="u-full-width Method"
-          onChange={updateSelected}
+          onChange={onUpdate}
           selected={props.selected}
           values={Object.values(HTTPMethods)}
         />

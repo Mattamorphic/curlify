@@ -5,6 +5,7 @@
 import './css/ListHistoryEntry.css';
 
 import { ConfigData } from '../../../config/Config';
+import Copy from '../../../shared/Copy';
 import { DataData } from '../../../data/Data';
 import LoadHistoryEntry from './loadhistoryentry/LoadHistoryEntry';
 import React from 'react';
@@ -60,23 +61,26 @@ const ListHistoryEntry: React.FunctionComponent<
           </Tooltip>
         </div>
         <div className="two columns">
-          <Tooltip text="Timestamp / ID">
-            <div
-              className={
-                props.config.method.toLowerCase() +
-                ' u-full-width ListHistoryEntryID'
-              }
+          <div
+            className={
+              props.config.method.toLowerCase() +
+              ' u-full-width ListHistoryEntryID'
+            }
+          >
+            <Copy
+              content={props.id}
+              noIcon={true}
+              tooltip="Copy Timestamp / ID"
+              useDiv={true}
             >
               {props.id}
-            </div>
-          </Tooltip>
+            </Copy>
+          </div>
         </div>
         <div className="four columns">
-          <Tooltip text="Request destination">
-            <div className="u-full-width ListHistoryEntryDest">
-              <a href={url}>{url}</a>
-            </div>
-          </Tooltip>
+          <Copy content={url} noIcon={true} tooltip="Copy URL" useDiv={true}>
+            <div className="u-full-width ListHistoryEntryDest">{url}</div>
+          </Copy>
         </div>
         <div className="two columns ListHistoryEntryAction">
           <Tooltip text="Load entry">

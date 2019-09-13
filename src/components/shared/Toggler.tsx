@@ -5,10 +5,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import Tooltip from './Tooltip';
 
-import { faMinusCircle, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
 interface TogglerProps {
   className?: string;
+  collapsedData?: JSX.Element;
   heading?: string;
   label: string | JSX.Element;
   onToggle: () => void;
@@ -21,24 +22,37 @@ const Toggler: React.FunctionComponent<TogglerProps> = props => {
     return (
       <>
         <div className="row Toggler">
-          <h4 className="u-pull-left"> {props.heading} </h4>
-          <Button
-            className="u-pull-left"
-            isPrimary={false}
-            onClick={props.onToggle}
-          >
-            <Tooltip text={props.tooltip || 'show/hide'}>
-              {typeof props.label === 'string' ? (
-                !props.isToggled ? (
-                  <FontAwesomeIcon icon={faPlusCircle} size="lg" />
-                ) : (
-                  <FontAwesomeIcon icon={faMinusCircle} size="lg" />
-                )
+          <div className="five columns">
+            <h4 className="u-pull-left"> {props.heading} </h4>
+          </div>
+          <div className="six columns">
+            <span className="TogglerPreview">
+              {!props.isToggled ? (
+                props.collapsedData || <span>&nbsp;</span>
               ) : (
-                props.label
+                <span>&nbsp;</span>
               )}
-            </Tooltip>
-          </Button>
+            </span>
+          </div>
+          <div className="one column">
+            <Button
+              className="u-full-width"
+              isPrimary={false}
+              onClick={props.onToggle}
+            >
+              <Tooltip text={props.tooltip || 'show/hide'}>
+                {typeof props.label === 'string' ? (
+                  !props.isToggled ? (
+                    <FontAwesomeIcon icon={faChevronDown} size="lg" />
+                  ) : (
+                    <FontAwesomeIcon icon={faChevronUp} size="lg" />
+                  )
+                ) : (
+                  props.label
+                )}
+              </Tooltip>
+            </Button>
+          </div>
         </div>
         <div className="row">
           {props.isToggled && (
@@ -62,15 +76,16 @@ const Toggler: React.FunctionComponent<TogglerProps> = props => {
           <Tooltip text={props.tooltip || 'show/hide'}>
             {typeof props.label === 'string' ? (
               !props.isToggled ? (
-                <FontAwesomeIcon icon={faPlusCircle} size="lg" />
+                <FontAwesomeIcon icon={faChevronDown} size="lg" />
               ) : (
-                <FontAwesomeIcon icon={faMinusCircle} size="lg" />
+                <FontAwesomeIcon icon={faChevronUp} size="lg" />
               )
             ) : (
               props.label
             )}
           </Tooltip>
         </Button>
+        {!props.isToggled && props.collapsedData}
       </div>
       {props.isToggled && (
         <div className={props.className || ''}>

@@ -1,33 +1,38 @@
 import './css/Destination.css';
 
+import * as utils from '../../../utils';
+
 import { ColumnCount } from '../../../enums';
 import Domain from './domain/Domain';
 import Endpoint from './endpoint/Endpoint';
+import { KeyValueEntry } from '../../shared/KeyValueInput';
 import React from 'react';
 
-type DomainOrEndpoint = 'domain' | 'endpoint';
-
 interface DestinationProps {
-  onUpdate: (domain: string, endpoint: string) => void;
+  onUpdate: (
+    domain: string,
+    endpoint: string,
+    queryParams: KeyValueEntry[]
+  ) => void;
   domain: string;
   endpoint: string;
+  queryParams: KeyValueEntry[];
   width: ColumnCount;
 }
 
 const Destination: React.FunctionComponent<DestinationProps> = props => {
-  const onUpdate = (value: string, type: DomainOrEndpoint): void => {
-    props.onUpdate(
-      type === 'domain' ? value : props.domain,
-      type === 'endpoint' ? value : props.endpoint
-    );
+  const onUpdate = (value: string): void => {
+    const url = utils.parseURLString(value);
+    // TODO: handle query params / draft state
+    props.onUpdate(url.domain, url.endpoint, url.queryParams);
   };
 
   const onUpdateEndpoint = (endpoint: string): void => {
-    onUpdate(endpoint, 'endpoint');
+    onUpdate(props.domain + endpoint);
   };
 
   const onUpdateDomain = (domain: string): void => {
-    onUpdate(domain, 'domain');
+    onUpdate(domain + props.endpoint);
   };
 
   return (
@@ -44,7 +49,9 @@ const Destination: React.FunctionComponent<DestinationProps> = props => {
           <Endpoint
             isFullWidth={true}
             onUpdate={onUpdateEndpoint}
-            value={props.endpoint}
+            value={
+              props.endpoint + utils.convertObjToQueryParams(props.queryParams)
+            }
           />
         </div>
       </div>

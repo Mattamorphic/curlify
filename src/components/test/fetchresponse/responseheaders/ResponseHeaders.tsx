@@ -57,16 +57,18 @@ export default class ResponseHeaders extends React.PureComponent<
   };
 
   render() {
+    const headerKeys = Array.from(this.props.headers.keys());
     return (
       <Toggler
         className="ResponseHeaders"
         isToggled={this.state.showHeaders}
+        heading="Response Headers"
         label="Headers"
         onToggle={this.toggleHeaders}
       >
         <Table
           className="u-max-full-width ResponseHeadersTable"
-          data={Array.from(this.props.headers.keys()).map(key => ({
+          data={headerKeys.map(key => ({
             Header: this.parse(key),
             Value: this.parse(this.props.headers.get(key) || '')
           }))}

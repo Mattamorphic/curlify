@@ -11,9 +11,8 @@ interface TypeProps {
 }
 
 const Type: React.FunctionComponent<TypeProps> = props => {
-  const updateSelected = (e: React.ChangeEvent<HTMLSelectElement>): void => {
-    const value: GraphQLType = e.target.value as GraphQLType;
-    props.onUpdate(value);
+  const updateSelected = (value: string): void => {
+    props.onUpdate(value as GraphQLType);
   };
 
   return (

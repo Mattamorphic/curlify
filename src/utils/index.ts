@@ -1,11 +1,16 @@
 import { ConfigData } from '../components/config/Config';
 import { DataData } from '../components/data/Data';
-import { Header } from '../components/config/headers/Headers';
+import { KeyValueEntry } from '../components/shared/KeyValueInput';
 import { HistoryEntry } from '../components/history/History';
+import { HTTPMethods } from '../enums';
 import { parse } from 'graphql';
 import { ProxyData } from '../components/test/request/proxy/Proxy';
 
-import { HTTPHeaders, HTTPMethods } from '../enums';
+export interface ParsedURL {
+  domain: string | null;
+  endpoint: string | null;
+  queryParams: KeyValueEntry[] | null;
+}
 
 export const methodHasPayload = (method: HTTPMethods) =>
   ![HTTPMethods.GET, HTTPMethods.HEAD].includes(method);
@@ -24,7 +29,7 @@ export const regEx = {
   newLineAndTab: /[\n|\r|\t]/gm,
   quotes: /["']/gim,
   singleEscapedNewLine: /(?<!\\)\\n/gm,
-  url: /^((?:http(?:s)?:\/\/)?[\w.-]+(?:.[\w.-]+))+([\w-._~:/?#[\]@!$&'()*+,;=.]+)$/gim
+  url: /^((?:http(?:s)?:\/\/)+[\w.-]+(?:.[\w.-]+))+([\w-._~:/?#[\]@!$&'()*+,;=.]+)$/gim
 };
 
 // export const hasDataChanged = (
@@ -65,10 +70,14 @@ export const isValidURL = (domain: string, endpoint: string): boolean => {
   return !possUrl || possUrl[0] !== url ? false : true;
 };
 
-export const isValidHeaders = (headers: Header[]): boolean => {
-  const types = Object.values(HTTPHeaders);
-  return headers.reduce((_: boolean, curr: Header) => {
-    return types.includes(curr.type); // TODO: validate the value
+export const isValidHeaders = (headers: KeyValueEntry[]): boolean => {
+  return headers.reduce((_: boolean, curr: KeyValueEntry) => {
+    return (
+      curr.key !== null &&
+      curr.key !== undefined &&
+      typeof curr.key === 'string' &&
+      curr.key !== ''
+    );
   }, true);
 };
 
@@ -177,4 +186,30 @@ export const getHistory = () => {
     const b_id = parseInt(b.id);
     return a_id > b_id ? -1 : a_id < b_id ? 1 : 0;
   });
+};
+
+export const parseURLString = (str: string) => {
+  const uri = new URL(str);
+  const params = Object.fromEntries(new URLSearchParams(uri.search));
+  return {
+    domain: uri.origin,
+    endpoint: uri.pathname,
+    queryParams: Object.keys(params).map(key => ({ key, value: params[key] }))
+  };
+};
+
+export const isNull = (value: any) => {
+  if (value === null || value === undefined || value === '') {
+    return true;
+  }
+  return false;
+};
+
+export const convertObjToQueryParams = (qp: KeyValueEntry[]): string => {
+  if (qp.length === 0) {
+    return '';
+  }
+  return (
+    '?' + qp.map(p => p.key + (isNull(p.value) ? '' : '=' + p.value)).join('&')
+  );
 };

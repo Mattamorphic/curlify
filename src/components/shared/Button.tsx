@@ -6,7 +6,8 @@ interface ButtonProps {
   isDisabled?: boolean;
   isPrimary: boolean;
   label?: string;
-  onClick: (val: any) => void;
+  name?: string;
+  onClick: (val: any, name?: string) => void;
   onClickRaw?: (e: React.MouseEvent<HTMLElement>) => void;
   clickValue?: any;
 }
@@ -14,7 +15,7 @@ interface ButtonProps {
 const Button: React.FunctionComponent<ButtonProps> = props => {
   const clickHandler = (e: React.MouseEvent) => {
     e.preventDefault();
-    props.onClick(props.clickValue);
+    props.onClick(props.clickValue, props.name);
   };
 
   return (

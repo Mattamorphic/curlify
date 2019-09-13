@@ -9,18 +9,13 @@ import * as utils from '../../../utils';
 import { ConfigData } from '../../config/Config';
 import Copy from '../../shared/Copy';
 import { debounce } from 'lodash';
-import { Header } from '../../config/headers/Headers';
+import { KeyValueEntry } from '../../shared/KeyValueInput';
 import React from 'react';
 import Saving from '../../shared/Saving';
 import TextArea from '../../shared/TextArea';
 
 import { DataData, payloadType } from '../../data/Data';
-import { DataType, HTTPHeaders, HTTPMethods } from '../../../enums';
-
-interface DomainAndEndpoint {
-  domain: string | null;
-  endpoint: string | null;
-}
+import { DataType, HTTPMethods } from '../../../enums';
 
 interface SerializedCurl {
   config: ConfigData;
@@ -57,13 +52,13 @@ export default class Curl extends React.Component<CurlProps, CurlState> {
    *
    * @returns {Header[] | null}
    */
-  getHeaders(value: string): Header[] | null {
+  getHeaders(value: string): KeyValueEntry[] | null {
     const regex = utils.regEx.curlHeader;
     const headers = [];
     let match = null;
     while ((match = regex.exec(value))) {
       headers.push({
-        type: match[1] as HTTPHeaders,
+        key: match[1] as string,
         value: match[2] as string
       });
     }
@@ -120,9 +115,9 @@ export default class Curl extends React.Component<CurlProps, CurlState> {
    *
    * @param {string} value A Curl string
    *
-   * @returns {DomainAndEndpoint | null}
+   * @returns {ParsedURL | null}
    */
-  getDomainAndEndpoint(value: string): DomainAndEndpoint | null {
+  parseUrl(value: string): utils.ParsedURL | null {
     const regex = utils.regEx.url;
     if (!value.match(regex)) {
       return null;
@@ -131,10 +126,7 @@ export default class Curl extends React.Component<CurlProps, CurlState> {
     if (!match) {
       return null;
     }
-    return {
-      domain: match[1] || null,
-      endpoint: match[2] || null
-    };
+    return utils.parseURLString(match[0]);
   }
 
   /**
@@ -162,7 +154,7 @@ export default class Curl extends React.Component<CurlProps, CurlState> {
     const newData = this.getData(value);
 
     // decide which domain and endpoint to use
-    const domainAndEndpoint = this.getDomainAndEndpoint(value);
+    const url = this.parseUrl(value);
 
     if (
       method &&
@@ -194,20 +186,21 @@ export default class Curl extends React.Component<CurlProps, CurlState> {
           break;
       }
     }
-    if (domainAndEndpoint) {
-      if (
-        domainAndEndpoint.domain &&
-        domainAndEndpoint.domain !== config.domain
-      ) {
+    if (url) {
+      if (url.domain && url.domain !== config.domain) {
         hasNewConfig = true;
-        config.domain = domainAndEndpoint.domain;
+        config.domain = url.domain;
+      }
+      if (url.endpoint && url.endpoint !== config.endpoint) {
+        hasNewConfig = true;
+        config.endpoint = url.endpoint;
       }
       if (
-        domainAndEndpoint.endpoint &&
-        domainAndEndpoint.endpoint !== config.endpoint
+        url.queryParams &&
+        JSON.stringify(url.queryParams) !== JSON.stringify(config.queryParams)
       ) {
         hasNewConfig = true;
-        config.endpoint = domainAndEndpoint.endpoint;
+        config.queryParams = url.queryParams;
       }
     }
 
@@ -265,7 +258,7 @@ export default class Curl extends React.Component<CurlProps, CurlState> {
     return (
       `curl -X ${config.method} \\${'\n'}` +
       `${config.headers
-        .map(header => `-H "${header.type}: ${header.value}" \\${'\n'}`)
+        .map(header => `-H "${header.key}: ${header.value}" \\${'\n'}`)
         .join('')}` +
       `${
         payload &&
@@ -274,7 +267,9 @@ export default class Curl extends React.Component<CurlProps, CurlState> {
           ? `-d '${Curl.parsePayloadString(JSON.stringify(payload))}' \\${'\n'}`
           : ''
       }` +
-      `${config.domain + config.endpoint}`
+      `${config.domain +
+        config.endpoint +
+        utils.convertObjToQueryParams(config.queryParams)}`
     );
   }
 

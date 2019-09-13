@@ -122,8 +122,8 @@ export default class Json extends React.PureComponent<JsonProps, JsonState> {
           <div className="four columns">
             <Tooltip text="Pretty payload">
               <Button
-                className="u-full-width"
-                isDisabled={!this.state.hasDraft}
+                className="u-full-width JsonPretty"
+                isDisabled={this.state.hasDraft}
                 isPrimary={false}
                 onClick={this.pretty}
               >

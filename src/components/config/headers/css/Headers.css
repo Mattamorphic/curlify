@@ -1,13 +1,10 @@
-.Headers {
+.Headers input {
+  width: 100%;
+  background-color: #effdf9 !important;
+  border-radius: 30px !important;
+  padding-left: 15px !important;
 }
 
-.Headers button {
-  border: 1px solid #69b8a4;
-  border-radius: 30px;
-  background-color: #9bdaca;
-}
-
-.Headers button:hover {
-  background-color: #c9f0e6;
-  border: 1px solid #effdf9;
+.Headers input:hover {
+  border: 1px solid #777 !important;
 }

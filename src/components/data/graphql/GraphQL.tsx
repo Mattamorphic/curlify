@@ -157,7 +157,7 @@ export default class GraphQL extends React.PureComponent<
           <div className="two columns">
             <Tooltip text="Pretty payload">
               <Button
-                className="u-full-width"
+                className="u-full-width GraphQLPretty"
                 isDisabled={!this.state.isSaved}
                 isPrimary={false}
                 onClick={this.pretty}
