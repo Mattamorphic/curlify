@@ -9,8 +9,10 @@ import React from 'react';
 
 interface AutocompleteProps {
   className?: string;
+  name?: string;
+  placeholder?: string;
   suggestions: string[];
-  onSelectSuggestion: (value: string) => void;
+  onSelectSuggestion: (value: string, name?: string) => void;
   selected: string;
 }
 
@@ -53,12 +55,18 @@ export default class Autocomplete extends React.PureComponent<
   // onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {}
   onSuggestionMouseDown = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
-    this.props.onSelectSuggestion(e.currentTarget.innerText);
+    const userInput = e.currentTarget.innerText;
+    this.setState({ userInput }, () =>
+      this.props.onSelectSuggestion(userInput, this.props.name)
+    );
   };
 
   onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     e.preventDefault();
-    this.props.onSelectSuggestion(e.currentTarget.value);
+    const userInput = e.currentTarget.value;
+    this.setState({ userInput }, () =>
+      this.props.onSelectSuggestion(userInput, this.props.name)
+    );
   };
 
   render() {
@@ -67,6 +75,7 @@ export default class Autocomplete extends React.PureComponent<
         <input
           onChange={this.onChange}
           onBlur={this.onBlur}
+          placeholder={this.props.placeholder || ''}
           type="text"
           value={this.state.userInput}
         />

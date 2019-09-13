@@ -1,6 +1,6 @@
 import { ConfigData } from '../components/config/Config';
 import { DataData } from '../components/data/Data';
-import { Header } from '../components/config/headers/Headers';
+import { KeyValueEntry } from '../components/shared/KeyValueInput';
 import { HistoryEntry } from '../components/history/History';
 import { HTTPMethods } from '../enums';
 import { parse } from 'graphql';
@@ -64,13 +64,13 @@ export const isValidURL = (domain: string, endpoint: string): boolean => {
   return !possUrl || possUrl[0] !== url ? false : true;
 };
 
-export const isValidHeaders = (headers: Header[]): boolean => {
-  return headers.reduce((_: boolean, curr: Header) => {
+export const isValidHeaders = (headers: KeyValueEntry[]): boolean => {
+  return headers.reduce((_: boolean, curr: KeyValueEntry) => {
     return (
-      curr.type !== null &&
-      curr.type !== undefined &&
-      typeof curr.type === 'string' &&
-      curr.type !== ''
+      curr.key !== null &&
+      curr.key !== undefined &&
+      typeof curr.key === 'string' &&
+      curr.key !== ''
     );
   }, true);
 };

@@ -87,6 +87,7 @@ export default class App extends React.Component<AppProps, AppState> {
   };
 
   onConfigChange = (config: ConfigData): void => {
+    console.log(config.headers);
     this.setState(
       {
         config: {

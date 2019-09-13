@@ -6,12 +6,13 @@ import React from 'react';
 import Toggler from '../shared/Toggler';
 
 import { ColumnCount, HTTPMethods } from '../../enums';
-import Headers, { Header } from './headers/Headers';
+import Headers from './headers/Headers';
+import { KeyValueEntry } from '../shared/KeyValueInput';
 import QueryParams, { QueryParamsData } from './queryparams/QueryParams';
 
 export interface ConfigData {
   method: HTTPMethods;
-  headers: Header[];
+  headers: KeyValueEntry[];
   domain: string;
   endpoint: string;
   queryParams: { [key: string]: any };
@@ -50,18 +51,20 @@ export default class Config extends React.PureComponent<
     this.props.updateConfig(data);
   };
 
-  updateHeaders = (value: Header | null, index: number): void => {
+  updateHeaders = (value: KeyValueEntry, index: number): void => {
     const data = this.props.data;
     if (!data.headers[index] && value) {
       data.headers.push(value);
     } else {
-      if (!value) {
-        delete data.headers[index];
-        data.headers = data.headers.filter(header => header);
-      } else {
-        data.headers[index] = value;
-      }
+      data.headers[index] = value;
     }
+    this.props.updateConfig(data);
+  };
+
+  removeHeader = (index: number): void => {
+    const data = this.props.data;
+    delete data.headers[index];
+    data.headers = data.headers.filter(header => header);
     this.props.updateConfig(data);
   };
 
@@ -95,10 +98,10 @@ export default class Config extends React.PureComponent<
                 <>
                   , with the HTTP Headers:{' '}
                   {this.props.data.headers.map(header => (
-                    <>
+                    <span key={header.key + '_snip'}>
                       <br />
-                      <strong>{header.type}</strong>: <em>{header.value}</em>
-                    </>
+                      <strong>{header.key}</strong>: <em>{header.value}</em>
+                    </span>
                   ))}
                 </>
               )}
@@ -131,6 +134,7 @@ export default class Config extends React.PureComponent<
           </div>
           <div className="row">
             <Headers
+              onRemove={this.removeHeader}
               onUpdate={this.updateHeaders}
               selected={this.props.data.headers}
               width={ColumnCount.TWELVE}

@@ -2,10 +2,12 @@ import React from 'react';
 
 interface selectProps {
   className?: string;
+  id?: string;
   isDisabled?: boolean;
   label?: string;
   name?: string;
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onChange: (value: string, name?: string) => void;
+  placeholder?: string;
   selected?: string | string[] | null;
   style?: { [key: string]: string };
   values: string[];
@@ -14,6 +16,10 @@ interface selectProps {
 }
 
 const Select: React.FunctionComponent<selectProps> = props => {
+  const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    props.onChange(e.target.value, props.name);
+  };
+
   const selected = props.selected || '';
   return (
     <>
@@ -21,15 +27,16 @@ const Select: React.FunctionComponent<selectProps> = props => {
       <select
         className={props.className || ''}
         disabled={props.isDisabled || false}
+        id={props.id || ''}
         multiple={props.isMultiple || false}
         name={props.name || ''}
-        onChange={props.onChange || null}
+        onChange={onChange}
         size={props.size || 0}
         style={props.style || {}}
         value={selected}
       >
         <option value="" disabled>
-          Please Select
+          {props.placeholder || 'Please Select'}
         </option>
         {props.values.map((value: string, i: number) => (
           <option key={`${value}_${i}`} value={value}>

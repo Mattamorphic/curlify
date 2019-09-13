@@ -1,23 +1,16 @@
 import './css/Headers.css';
 
-import Button from '../../shared/Button';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import Toggler from '../../shared/Toggler';
-import Types from './type/Types';
-import Value from './value/Value';
+
+import KeyValueInput, { KeyValueEntry } from '../../shared/KeyValueInput';
 
 import { ColumnCount, HTTPHeaders } from '../../../enums';
-import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
-
-export interface Header {
-  type: HTTPHeaders | string;
-  value: string;
-}
 
 interface HeadersProps {
-  onUpdate: (value: Header | null, index: number) => void;
-  selected: Header[];
+  onUpdate: (entry: KeyValueEntry, index: number) => void;
+  onRemove: (index: number) => void;
+  selected: KeyValueEntry[];
   width: ColumnCount;
 }
 
@@ -42,44 +35,20 @@ export default class Headers extends React.PureComponent<
     }));
   };
 
-  updateType = (type: string, index: number): void => {
-    let header = this.props.selected[index];
-    header.type = type;
-    this.props.onUpdate(header, index);
-  };
-
-  updateValue = (value: string, index: number): void => {
-    const header = this.props.selected[index];
-    header.value = value;
-    this.props.onUpdate(header, index);
-  };
-
-  addHeader = (e: React.MouseEvent<HTMLElement>): void => {
-    e.preventDefault();
+  addHeader = (): void => {
     // create a pending header, add this to the end of the index
     this.props.onUpdate(
       {
-        type: '',
+        key: '',
         value: ''
       },
       this.props.selected.length
     );
   };
 
-  removeHeader = (e: React.MouseEvent<HTMLElement>): void => {
-    e.preventDefault();
-    const index = e.currentTarget.id.split('_').pop();
-
-    if (index === undefined) {
-      // oh no...
-      return;
-    }
-    this.props.onUpdate(null, parseInt(index));
-  };
-
   render() {
     // Don't allow duplicate headers.
-    const selected = this.props.selected.map(header => header.type);
+    const selected = this.props.selected.map(header => header.key);
     const values = Object.values(HTTPHeaders).filter(
       header => !selected.includes(header)
     );
@@ -87,7 +56,7 @@ export default class Headers extends React.PureComponent<
       <Toggler
         collapsedData={
           <em>
-            {this.props.selected.map(h => h.type).join(', ')}
+            {this.props.selected.map(h => h.key).join(', ')}
             &nbsp;
           </em>
         }
@@ -97,62 +66,23 @@ export default class Headers extends React.PureComponent<
         isToggled={this.state.showHeaders}
         tooltip="Configure HTTP Headers"
       >
-        <div className={this.props.width + ' Headers'}>
-          {this.props.selected.map((header: Header, index: number) => (
-            <div key={`${header.type}_${index}`} className="row">
-              <div className="two columns">
-                <Button
-                  className="u-full-width"
-                  id={`remove_${index}`}
-                  isPrimary={false}
-                  onClick={() => {}}
-                  onClickRaw={this.removeHeader}
-                >
-                  <FontAwesomeIcon icon={faMinus} size="lg" />
-                </Button>
-              </div>
-              <div className="four columns">
-                <Types
-                  index={index}
-                  isFullWidth={true}
-                  onUpdate={this.updateType}
-                  selected={header.type}
-                  suggested={[...values, header.type]}
-                />
-              </div>
-              <div className="four columns">
-                <Value
-                  index={index}
-                  isFullWidth={true}
-                  onUpdate={this.updateValue}
-                  value={header.value || ''}
-                />
-              </div>
-              <div className="two columns">
-                <Button
-                  className="u-full-width"
-                  isPrimary={false}
-                  onClick={() => {}}
-                  onClickRaw={this.addHeader}
-                >
-                  <FontAwesomeIcon icon={faPlus} size="lg" />
-                </Button>
-              </div>
-            </div>
-          ))}
-          {this.props.selected.length === 0 && (
-            <div className="row">
-              <Button
-                className="u-full-width"
-                isPrimary={false}
-                onClick={() => {}}
-                onClickRaw={this.addHeader}
-              >
-                Configure Headers
-              </Button>
-            </div>
-          )}
-        </div>
+        <KeyValueInput
+          className="Headers"
+          id="HTTPHeaders"
+          keyInput={{
+            placeholder: 'Enter HTTP Header',
+            type: 'AUTOCOMPLETE',
+            values: values
+          }}
+          valueInput={{
+            placeholder: 'Enter Value',
+            type: 'TEXT'
+          }}
+          selected={this.props.selected}
+          onAddEntry={this.addHeader}
+          onUpdateEntry={this.props.onUpdate}
+          onRemoveEntry={this.props.onRemove}
+        />
       </Toggler>
     );
   }

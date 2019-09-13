@@ -11,9 +11,8 @@ interface SelectorProps {
 }
 
 const Selector: React.FunctionComponent<SelectorProps> = props => {
-  const updateSelected = (e: React.ChangeEvent<HTMLSelectElement>): void => {
-    const value: OutputType = e.target.value as OutputType;
-    props.onUpdate(value);
+  const updateSelected = (value: string): void => {
+    props.onUpdate(value as OutputType);
   };
 
   return (

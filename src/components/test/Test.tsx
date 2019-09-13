@@ -71,7 +71,7 @@ class Test extends React.PureComponent<TestProps, TestState> {
     const fetchData: RequestInit = {
       body: null,
       headers: new Headers(
-        this.props.config.headers.map(header => [header.type, header.value])
+        this.props.config.headers.map(header => [header.key, header.value])
       ),
       method: this.props.config.method
     };

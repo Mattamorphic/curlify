@@ -9,7 +9,7 @@ interface InputProps {
   label?: string;
   name?: string;
   id?: string;
-  onChange?: (value: string) => void;
+  onChange?: (value: string, name?: string) => void;
   onChangeRaw?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   type?: InputTypes;
@@ -22,7 +22,7 @@ const Input: React.FunctionComponent<InputProps> = props => {
     if (props.onChangeRaw) {
       return props.onChangeRaw(e);
     } else if (props.onChange) {
-      return props.onChange(e.target.value);
+      return props.onChange(e.target.value, props.name);
     }
   };
 

@@ -9,7 +9,7 @@ import * as utils from '../../../utils';
 import { ConfigData } from '../../config/Config';
 import Copy from '../../shared/Copy';
 import { debounce } from 'lodash';
-import { Header } from '../../config/headers/Headers';
+import { KeyValueEntry } from '../../shared/KeyValueInput';
 import React from 'react';
 import Saving from '../../shared/Saving';
 import TextArea from '../../shared/TextArea';
@@ -58,13 +58,13 @@ export default class Curl extends React.Component<CurlProps, CurlState> {
    *
    * @returns {Header[] | null}
    */
-  getHeaders(value: string): Header[] | null {
+  getHeaders(value: string): KeyValueEntry[] | null {
     const regex = utils.regEx.curlHeader;
     const headers = [];
     let match = null;
     while ((match = regex.exec(value))) {
       headers.push({
-        type: match[1] as HTTPHeaders,
+        key: match[1] as string,
         value: match[2] as string
       });
     }
@@ -269,7 +269,7 @@ export default class Curl extends React.Component<CurlProps, CurlState> {
     return (
       `curl -X ${config.method} \\${'\n'}` +
       `${config.headers
-        .map(header => `-H "${header.type}: ${header.value}" \\${'\n'}`)
+        .map(header => `-H "${header.key}: ${header.value}" \\${'\n'}`)
         .join('')}` +
       `${
         payload &&
