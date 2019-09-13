@@ -42,7 +42,7 @@ export default class Headers extends React.PureComponent<
     }));
   };
 
-  updateType = (type: HTTPHeaders, index: number): void => {
+  updateType = (type: string, index: number): void => {
     let header = this.props.selected[index];
     header.type = type;
     this.props.onUpdate(header, index);
@@ -117,7 +117,7 @@ export default class Headers extends React.PureComponent<
                   isFullWidth={true}
                   onUpdate={this.updateType}
                   selected={header.type}
-                  values={[...values, header.type]}
+                  suggested={[...values, header.type]}
                 />
               </div>
               <div className="four columns">

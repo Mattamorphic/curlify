@@ -1,8 +1,10 @@
-.Types {
+.Types > input {
   background-color: #effdf9 !important;
-  padding-left: 10px !important;
+  border-radius: 30px !important;
+  padding-left: 15px !important;
+  width: 100%;
 }
 
-.Types:hover {
+.Types > input:hover {
   border: 1px solid #777 !important;
 }

@@ -2,10 +2,9 @@ import { ConfigData } from '../components/config/Config';
 import { DataData } from '../components/data/Data';
 import { Header } from '../components/config/headers/Headers';
 import { HistoryEntry } from '../components/history/History';
+import { HTTPMethods } from '../enums';
 import { parse } from 'graphql';
 import { ProxyData } from '../components/test/request/proxy/Proxy';
-
-import { HTTPHeaders, HTTPMethods } from '../enums';
 
 export const methodHasPayload = (method: HTTPMethods) =>
   ![HTTPMethods.GET, HTTPMethods.HEAD].includes(method);
@@ -66,9 +65,13 @@ export const isValidURL = (domain: string, endpoint: string): boolean => {
 };
 
 export const isValidHeaders = (headers: Header[]): boolean => {
-  const types = Object.values(HTTPHeaders);
   return headers.reduce((_: boolean, curr: Header) => {
-    return types.includes(curr.type); // TODO: validate the value
+    return (
+      curr.type !== null &&
+      curr.type !== undefined &&
+      typeof curr.type === 'string' &&
+      curr.type !== ''
+    );
   }, true);
 };
 

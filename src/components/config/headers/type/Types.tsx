@@ -2,28 +2,28 @@ import './css/Types.css';
 
 import { HTTPHeaders } from '../../../../enums';
 import React from 'react';
-import Select from '../../../shared/Select';
+// import Select from '../../../shared/Select';
+import Autocomplete from '../../../shared/Autocomplete';
 
 interface TypeProps {
   index: number;
   isFullWidth: boolean;
-  values: (HTTPHeaders | string)[];
+  suggested: (HTTPHeaders | string)[];
   selected: HTTPHeaders | string;
-  onUpdate: (value: HTTPHeaders, index: number) => void;
+  onUpdate: (value: string, index: number) => void;
 }
 
 const Types: React.FunctionComponent<TypeProps> = props => {
-  const updateSelected = (e: React.ChangeEvent<HTMLSelectElement>): void => {
-    const value: HTTPHeaders = e.target.value as HTTPHeaders;
+  const updateSelected = (value: string): void => {
     props.onUpdate(value, props.index);
   };
 
   return (
-    <Select
-      className={(props.isFullWidth ? 'u-full-width' : '') + ' Types'}
-      onChange={updateSelected}
+    <Autocomplete
+      className="Types"
+      onSelectSuggestion={updateSelected}
       selected={props.selected}
-      values={props.values}
+      suggestions={props.suggested}
     />
   );
 };
