@@ -44,10 +44,15 @@ export default class Config extends React.PureComponent<
     }));
   };
 
-  updateDestination = (domain: string, endpoint: string) => {
+  updateDestination = (
+    domain: string,
+    endpoint: string,
+    queryParams: KeyValueEntry[]
+  ) => {
     const data = this.props.data;
     data.domain = domain;
     data.endpoint = endpoint;
+    data.queryParams = queryParams;
     this.props.updateConfig(data);
   };
 
@@ -133,6 +138,7 @@ export default class Config extends React.PureComponent<
             <Destination
               domain={this.props.data.domain}
               endpoint={this.props.data.endpoint}
+              queryParams={this.props.data.queryParams}
               onUpdate={this.updateDestination}
               width={ColumnCount.TEN}
             />

@@ -6,6 +6,12 @@ import { HTTPMethods } from '../enums';
 import { parse } from 'graphql';
 import { ProxyData } from '../components/test/request/proxy/Proxy';
 
+export interface ParsedURL {
+  domain: string | null;
+  endpoint: string | null;
+  queryParams: KeyValueEntry[] | null;
+}
+
 export const methodHasPayload = (method: HTTPMethods) =>
   ![HTTPMethods.GET, HTTPMethods.HEAD].includes(method);
 
@@ -180,6 +186,16 @@ export const getHistory = () => {
     const b_id = parseInt(b.id);
     return a_id > b_id ? -1 : a_id < b_id ? 1 : 0;
   });
+};
+
+export const parseURLString = (str: string) => {
+  const uri = new URL(str);
+  const params = Object.fromEntries(new URLSearchParams(uri.search));
+  return {
+    domain: uri.origin,
+    endpoint: uri.pathname,
+    queryParams: Object.keys(params).map(key => ({ key, value: params[key] }))
+  };
 };
 
 export const isNull = (value: any) => {

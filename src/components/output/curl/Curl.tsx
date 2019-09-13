@@ -17,12 +17,6 @@ import TextArea from '../../shared/TextArea';
 import { DataData, payloadType } from '../../data/Data';
 import { DataType, HTTPMethods } from '../../../enums';
 
-interface ParsedURL {
-  domain: string | null;
-  endpoint: string | null;
-  queryParams: KeyValueEntry[] | null;
-}
-
 interface SerializedCurl {
   config: ConfigData;
   data: DataData;
@@ -123,7 +117,7 @@ export default class Curl extends React.Component<CurlProps, CurlState> {
    *
    * @returns {ParsedURL | null}
    */
-  parseUrl(value: string): ParsedURL | null {
+  parseUrl(value: string): utils.ParsedURL | null {
     const regex = utils.regEx.url;
     if (!value.match(regex)) {
       return null;
@@ -132,13 +126,7 @@ export default class Curl extends React.Component<CurlProps, CurlState> {
     if (!match) {
       return null;
     }
-    const uri = new URL(match[0]);
-    const params = Object.fromEntries(new URLSearchParams(uri.search));
-    return {
-      domain: uri.origin,
-      endpoint: uri.pathname,
-      queryParams: Object.keys(params).map(key => ({ key, value: params[key] }))
-    };
+    return utils.parseURLString(match[0]);
   }
 
   /**
