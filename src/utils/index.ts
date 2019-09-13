@@ -178,3 +178,28 @@ export const getHistory = () => {
     return a_id > b_id ? -1 : a_id < b_id ? 1 : 0;
   });
 };
+
+export const isNull = (value: any) => {
+  if (value === null || value === undefined || value === '') {
+    return true;
+  }
+  return false;
+};
+
+export const convertObjToQueryParams = (obj: {
+  [key: string]: any;
+}): string => {
+  const keys = Object.keys(obj);
+  if (keys.length === 0) {
+    return '';
+  }
+  return (
+    '?' +
+    Object.keys(obj)
+      .map(key => {
+        const value = isNull(obj[key]) ? '' : '=' + obj[key];
+        return key + value;
+      })
+      .join('&')
+  );
+};

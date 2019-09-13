@@ -42,7 +42,8 @@ export default class App extends React.Component<AppProps, AppState> {
         domain: 'https://api.github.com',
         endpoint: '/users/octocat',
         headers: [],
-        method: HTTPMethods.GET
+        method: HTTPMethods.GET,
+        queryParams: {}
       },
       data: {
         data: {
@@ -91,8 +92,9 @@ export default class App extends React.Component<AppProps, AppState> {
         config: {
           domain: config.domain,
           endpoint: config.endpoint,
-          headers: config.headers,
-          method: config.method
+          headers: config.headers.map(header => header),
+          method: config.method,
+          queryParams: config.queryParams
         }
       },
       () => this.setState({ validation: this.validatePayload() })

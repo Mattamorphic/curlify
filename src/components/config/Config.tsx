@@ -7,12 +7,14 @@ import Toggler from '../shared/Toggler';
 
 import { ColumnCount, HTTPMethods } from '../../enums';
 import Headers, { Header } from './headers/Headers';
+import QueryParams, { QueryParamsData } from './queryparams/QueryParams';
 
 export interface ConfigData {
   method: HTTPMethods;
   headers: Header[];
   domain: string;
   endpoint: string;
+  queryParams: { [key: string]: any };
 }
 
 interface ConfigProps {
@@ -69,6 +71,12 @@ export default class Config extends React.PureComponent<
     this.props.updateConfig(data);
   };
 
+  updateQueryParams = (value: QueryParamsData) => {
+    const data = this.props.data;
+    data.queryParams = value;
+    this.props.updateConfig(data);
+  };
+
   render() {
     const destination = this.props.data.domain + this.props.data.endpoint;
     return (
@@ -113,6 +121,12 @@ export default class Config extends React.PureComponent<
               endpoint={this.props.data.endpoint}
               onUpdate={this.updateDestination}
               width={ColumnCount.TEN}
+            />
+          </div>
+          <div className="row">
+            <QueryParams
+              queryParams={this.props.data.queryParams}
+              updateQueryParams={this.updateQueryParams}
             />
           </div>
           <div className="row">
