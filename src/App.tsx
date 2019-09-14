@@ -43,7 +43,8 @@ export default class App extends React.Component<AppProps, AppState> {
         endpoint: '/users/octocat',
         headers: [],
         method: HTTPMethods.GET,
-        queryParams: []
+        queryParams: [],
+        urlString: 'https://api.github.com/users/octocat'
       },
       data: {
         data: {
@@ -87,7 +88,6 @@ export default class App extends React.Component<AppProps, AppState> {
   };
 
   onConfigChange = (config: ConfigData): void => {
-    console.log(config.headers);
     this.setState(
       {
         config: {
@@ -95,7 +95,8 @@ export default class App extends React.Component<AppProps, AppState> {
           endpoint: config.endpoint,
           headers: config.headers.map(header => header),
           method: config.method,
-          queryParams: config.queryParams.map(qp => qp)
+          queryParams: config.queryParams.map(qp => qp),
+          urlString: config.urlString
         }
       },
       () => this.setState({ validation: this.validatePayload() })

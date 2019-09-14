@@ -12,7 +12,8 @@ interface DestinationProps {
   onUpdate: (
     domain: string,
     endpoint: string,
-    queryParams: KeyValueEntry[]
+    queryParams: KeyValueEntry[],
+    rawUrl: string
   ) => void;
   domain: string;
   endpoint: string;
@@ -23,8 +24,9 @@ interface DestinationProps {
 const Destination: React.FunctionComponent<DestinationProps> = props => {
   const onUpdate = (value: string): void => {
     const url = utils.parseURLString(value);
+
     // TODO: handle query params / draft state
-    props.onUpdate(url.domain, url.endpoint, url.queryParams);
+    props.onUpdate(url.domain, url.endpoint, url.queryParams, url.rawUrl);
   };
 
   const onUpdateEndpoint = (endpoint: string): void => {
@@ -49,9 +51,7 @@ const Destination: React.FunctionComponent<DestinationProps> = props => {
           <Endpoint
             isFullWidth={true}
             onUpdate={onUpdateEndpoint}
-            value={
-              props.endpoint + utils.convertObjToQueryParams(props.queryParams)
-            }
+            value={props.endpoint}
           />
         </div>
       </div>

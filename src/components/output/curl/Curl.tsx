@@ -155,6 +155,7 @@ export default class Curl extends React.Component<CurlProps, CurlState> {
 
     // decide which domain and endpoint to use
     const url = this.parseUrl(value);
+    console.log(url);
 
     if (
       method &&
@@ -201,6 +202,10 @@ export default class Curl extends React.Component<CurlProps, CurlState> {
       ) {
         hasNewConfig = true;
         config.queryParams = url.queryParams;
+      }
+      if (url.rawUrl !== config.urlString) {
+        hasNewConfig = true;
+        config.urlString = url.rawUrl;
       }
     }
 
@@ -267,9 +272,7 @@ export default class Curl extends React.Component<CurlProps, CurlState> {
           ? `-d '${Curl.parsePayloadString(JSON.stringify(payload))}' \\${'\n'}`
           : ''
       }` +
-      `${config.domain +
-        config.endpoint +
-        utils.convertObjToQueryParams(config.queryParams)}`
+      `${config.urlString}`
     );
   }
 

@@ -1,5 +1,7 @@
 import './css/Config.css';
 
+import * as utils from '../../utils';
+
 import Destination from './destination/Destination';
 import Method from './method/Method';
 import React from 'react';
@@ -16,6 +18,7 @@ export interface ConfigData {
   domain: string;
   endpoint: string;
   queryParams: KeyValueEntry[];
+  urlString: string;
 }
 
 interface ConfigProps {
@@ -47,12 +50,14 @@ export default class Config extends React.PureComponent<
   updateDestination = (
     domain: string,
     endpoint: string,
-    queryParams: KeyValueEntry[]
+    queryParams: KeyValueEntry[],
+    rawUrl: string
   ) => {
     const data = this.props.data;
     data.domain = domain;
     data.endpoint = endpoint;
     data.queryParams = queryParams;
+    data.urlString = rawUrl;
     this.props.updateConfig(data);
   };
 
@@ -86,6 +91,10 @@ export default class Config extends React.PureComponent<
     } else {
       data.queryParams[index] = value;
     }
+    data.urlString =
+      data.domain +
+      data.endpoint +
+      utils.convertObjToQueryParams(data.queryParams);
     this.props.updateConfig(data);
   };
 

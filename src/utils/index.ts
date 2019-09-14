@@ -10,6 +10,7 @@ export interface ParsedURL {
   domain: string | null;
   endpoint: string | null;
   queryParams: KeyValueEntry[] | null;
+  rawUrl: string;
 }
 
 export const methodHasPayload = (method: HTTPMethods) =>
@@ -29,7 +30,8 @@ export const regEx = {
   newLineAndTab: /[\n|\r|\t]/gm,
   quotes: /["']/gim,
   singleEscapedNewLine: /(?<!\\)\\n/gm,
-  url: /^((?:http(?:s)?:\/\/)+[\w.-]+(?:.[\w.-]+))+([\w-._~:/?#[\]@!$&'()*+,;=.]+)$/gim
+  url: /^((?:http(?:s)?:\/\/)+[\w.-]+(?:.[\w.-]+))+([\w-._~:/?#[\]@!$&'()*+,;=.]+)$/gim,
+  queryParams: /(\?.*)/g
 };
 
 // export const hasDataChanged = (
@@ -189,12 +191,19 @@ export const getHistory = () => {
 };
 
 export const parseURLString = (str: string) => {
+  // const qpRegEx = str.split(regEx.queryParams);
+  console.log(str);
   const uri = new URL(str);
   const params = Object.fromEntries(new URLSearchParams(uri.search));
+  let endpoint = uri.pathname;
+  if (str.charAt(str.length - 1) === '?' && uri.search === '') {
+    endpoint += '?';
+  }
   return {
     domain: uri.origin,
-    endpoint: uri.pathname,
-    queryParams: Object.keys(params).map(key => ({ key, value: params[key] }))
+    endpoint,
+    queryParams: Object.keys(params).map(key => ({ key, value: params[key] })),
+    rawUrl: uri.href
   };
 };
 
@@ -210,6 +219,12 @@ export const convertObjToQueryParams = (qp: KeyValueEntry[]): string => {
     return '';
   }
   return (
-    '?' + qp.map(p => p.key + (isNull(p.value) ? '' : '=' + p.value)).join('&')
+    '?' +
+    qp
+      .map(p => {
+        console.log(p.key, p.value);
+        return p.key + (isNull(p.value) ? '' : '=' + p.value);
+      })
+      .join('&')
   );
 };
