@@ -1,3 +1,7 @@
+/**
+ * @file Type component
+ * @author Mattamorphic
+ */
 import './css/Type.css';
 
 import { GraphQLType } from '../GraphQL';
@@ -6,8 +10,8 @@ import Select from '../../../shared/Select';
 
 interface TypeProps {
   className?: string;
-  selected: GraphQLType;
   onUpdate: (type: GraphQLType) => void;
+  selected: GraphQLType;
 }
 
 const Type: React.FunctionComponent<TypeProps> = props => {

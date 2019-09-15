@@ -1,3 +1,7 @@
+/**
+ * @file Data component
+ * @author Mattamorphic
+ */
 import './css/Data.css';
 
 import { DataType } from '../../enums';
@@ -10,12 +14,12 @@ export type payloadType = { [key: string]: any };
 export type gqlPayloadType = { query: string };
 
 export interface DataData {
-  type: DataType;
   data: {
-    [DataType.JSON]: payloadType;
-    [DataType.GQL]: gqlPayloadType;
     [DataType.FORM]: null;
+    [DataType.GQL]: gqlPayloadType;
+    [DataType.JSON]: payloadType;
   };
+  type: DataType;
 }
 
 interface DataProps {

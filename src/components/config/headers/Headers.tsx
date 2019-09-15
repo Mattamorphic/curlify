@@ -1,15 +1,18 @@
+/**
+ * @file Headers component
+ * @author Mattamorphic
+ */
 import './css/Headers.css';
 
 import React from 'react';
 import Toggler from '../../shared/Toggler';
 
+import { ColumnCount, HTTPHeaders } from '../../../enums';
 import KeyValueInput, { KeyValueEntry } from '../../shared/KeyValueInput';
 
-import { ColumnCount, HTTPHeaders } from '../../../enums';
-
 interface HeadersProps {
-  onUpdate: (entry: KeyValueEntry, index: number) => void;
   onRemove: (index: number) => void;
+  onUpdate: (entry: KeyValueEntry, index: number) => void;
   selected: KeyValueEntry[];
   width: ColumnCount;
 }
@@ -36,7 +39,6 @@ export default class Headers extends React.PureComponent<
   };
 
   addHeader = (): void => {
-    // create a pending header, add this to the end of the index
     this.props.onUpdate(
       {
         key: '',

@@ -1,23 +1,36 @@
+/**
+ * @file Utils
+ * @author Mattamorphic
+ */
 import { ConfigData } from '../components/config/Config';
 import { DataData } from '../components/data/Data';
-import { KeyValueEntry } from '../components/shared/KeyValueInput';
 import { HistoryEntry } from '../components/history/History';
 import { HTTPMethods } from '../enums';
+import { KeyValueEntry } from '../components/shared/KeyValueInput';
 import { parse } from 'graphql';
 import { ProxyData } from '../components/test/request/proxy/Proxy';
 
 export interface ParsedURL {
-  domain: string | null;
-  endpoint: string | null;
-  queryParams: KeyValueEntry[] | null;
+  domain: string;
+  endpoint: string;
+  queryParams: KeyValueEntry[];
   rawUrl: string;
 }
 
-export const methodHasPayload = (method: HTTPMethods) =>
+/**
+ * Does the given method suppport a payload?
+ *
+ * @params {HTTPMethods} method
+ *
+ * @returns boolean
+ */
+export const methodHasPayload = (method: HTTPMethods): boolean =>
   ![HTTPMethods.GET, HTTPMethods.HEAD].includes(method);
 
+// Proxy address
 export const PROXY = 'https://curlify-proxy.herokuapp.com/';
 
+// Common RegEx patterns used
 export const regEx = {
   // Todo: convert to /gms https://github.com/babel/babel/pull/10347
   curlData: /(?:-d\s{0,}'|")({.*})(?=['|"])/gim,
@@ -28,26 +41,20 @@ export const regEx = {
   multipleSpaces: / +/gm,
   newLine: /[\r|\n]/gm,
   newLineAndTab: /[\n|\r|\t]/gm,
+  queryParams: /(\?.*)/g,
   quotes: /["']/gim,
   singleEscapedNewLine: /(?<!\\)\\n/gm,
-  url: /^((?:http(?:s)?:\/\/)+[\w.-]+(?:.[\w.-]+))+([\w-._~:/?#[\]@!$&'()*+,;=.]+)$/gim,
-  queryParams: /(\?.*)/g
+  url: /^((?:http(?:s)?:\/\/)+[\w.-]+(?:.[\w.-]+))+([\w-._~:/?#[\]@!$&'()*+,;=.]+)$/gim
 };
 
-// export const hasDataChanged = (
-//   prevData: DataData,
-//   newData: DataData
-// ): boolean => {
-//   return false;
-// }
-//
-// export const hasConfigChanged = (
-//   prevData: DataData,
-//   newData: DataData
-// ): boolean => {
-//   return false;
-// }
-
+/**
+ * Determine if the proxy has changed
+ *
+ * @params {ProxyData} prevProxy
+ * @params {ProxyData} newProxy
+ *
+ * @returns {boolean}
+ */
 export const hasProxyChanged = (
   prevProxy: ProxyData,
   newProxy: ProxyData
@@ -57,9 +64,24 @@ export const hasProxyChanged = (
   );
 };
 
+/**
+ * Is the given string a HTTP method?
+ *
+ * @params {string} string
+ *
+ * @returns {boolean}
+ */
 export const isValidMethod = (string: string): boolean =>
   Object.values(HTTPMethods).includes(string);
 
+/**
+ * Does the domain / endpoint make a valid URL?
+ *
+ * @params {string} domain
+ * @params {string} endpoin
+ *
+ * @returns {boolean}
+ */
 export const isValidURL = (domain: string, endpoint: string): boolean => {
   const url =
     domain +
@@ -72,6 +94,13 @@ export const isValidURL = (domain: string, endpoint: string): boolean => {
   return !possUrl || possUrl[0] !== url ? false : true;
 };
 
+/**
+ * Are the headers provided valid?
+ *
+ * @params {KeyValueEntry[]} headers
+ *
+ * @returns {boolean}
+ */
 export const isValidHeaders = (headers: KeyValueEntry[]): boolean => {
   return headers.reduce((_: boolean, curr: KeyValueEntry) => {
     return (
@@ -83,7 +112,14 @@ export const isValidHeaders = (headers: KeyValueEntry[]): boolean => {
   }, true);
 };
 
-export const isValidJsonString = (json: string) => {
+/**
+ * Is given string valid json?
+ *
+ * @params {string} json
+ *
+ * @returns {boolean}
+ */
+export const isValidJsonString = (json: string): boolean => {
   try {
     JSON.parse(json);
     return true;
@@ -92,7 +128,14 @@ export const isValidJsonString = (json: string) => {
   }
 };
 
-export const isValidGraphQLString = (gql: string) => {
+/**
+ * Is given string valid graphql?
+ *
+ * @params {string} gql
+ *
+ * @returns {boolean}
+ */
+export const isValidGraphQLString = (gql: string): boolean => {
   try {
     parse(gql);
     return true;
@@ -101,23 +144,56 @@ export const isValidGraphQLString = (gql: string) => {
   }
 };
 
+/**
+ * Is given string a valid number?
+ *
+ * @params {string} value
+ *
+ * @returns {boolean}
+ */
 export const isStringANumber = (value: string): boolean => {
   return !isNaN(parseInt(value));
 };
 
+/**
+ * Is given string a valid date?
+ *
+ * @params {string} value
+ *
+ * @returns {boolean}
+ */
 export const isStringADate = (value: string): boolean => {
   return !isNaN(Date.parse(value.replace(regEx.dateTimeZoneChars, ' ')));
 };
 
+/**
+ * Is given string a nully value?
+ *
+ * @params {string} value
+ *
+ * @returns {boolean}
+ */
 export const isStringBooleanOrNull = (value: string): boolean => {
   const permitted = ['true', 'false', 'null', 'nil', 'undefined'];
   return permitted.includes(value.toLowerCase());
 };
 
+/**
+ * Is given string a valid url?
+ *
+ * @params {string} value
+ *
+ * @returns {boolean}
+ */
 export const isStringAURL = (value: string): boolean => {
   return !!value.replace(regEx.quotes, '').match(regEx.url);
 };
 
+/**
+ * Is local storage available?
+ *
+ * @returns {boolean}
+ */
 export const isStorageAvailable = (): boolean => {
   let storage;
   try {
@@ -131,6 +207,15 @@ export const isStorageAvailable = (): boolean => {
   }
 };
 
+/**
+ * Add history item to local storage
+ *
+ * @params {ConfigData} config  Request Config
+ * @params {DataData}   data    Request Data
+ * @params {number}     status  Status code
+ *
+ * @returns {string}
+ */
 export const addToHistory = (
   config: ConfigData,
   data: DataData,
@@ -162,7 +247,12 @@ export const addToHistory = (
   return id;
 };
 
-export const getHistory = () => {
+/**
+ * Fetch the history from local storage
+ *
+ * @returns {HistoryEntry[]}
+ */
+export const getHistory = (): HistoryEntry[] => {
   if (!isStorageAvailable()) {
     return [];
   }
@@ -190,8 +280,21 @@ export const getHistory = () => {
   });
 };
 
-export const parseURLString = (str: string) => {
-  console.log(str);
+/**
+ * Clear the local storage
+ */
+export const clearHistory = () => {
+  window.localStorage.clear();
+};
+
+/**
+ * Parse a URL into it's component parts
+ *
+ * @params {string} str Possible url
+ *
+ * @returns {ParsedURL}
+ */
+export const parseURLString = (str: string): ParsedURL => {
   const uri = new URL(str);
   const params = Object.fromEntries(new URLSearchParams(uri.search));
   let endpoint = uri.pathname;
@@ -206,14 +309,30 @@ export const parseURLString = (str: string) => {
   };
 };
 
-export const isNull = (value: any) => {
+/**
+ * Is a nully value?
+ *
+ * @params {any} value
+ *
+ * @returns {boolean}
+ */
+export const isNull = (value: any): boolean => {
   if (value === null || value === undefined || value === '') {
     return true;
   }
   return false;
 };
 
-export const convertObjToQueryParams = (qp: KeyValueEntry[]): string => {
+/**
+ * Convert an array to a query string
+ *
+ * @params {KeyValueEntry[]} qp
+ *
+ * @returns {string}
+ */
+export const convertKeyValueArrayToQueryParams = (
+  qp: KeyValueEntry[]
+): string => {
   if (qp.length === 0) {
     return '';
   }

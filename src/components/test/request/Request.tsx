@@ -1,3 +1,7 @@
+/**
+ * @file Request component
+ * @author Mattamorphic
+ */
 import './css/Request.css';
 
 import Button from '../../shared/Button';

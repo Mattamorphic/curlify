@@ -1,3 +1,7 @@
+/**
+ * @file Heading component
+ * @author Mattamorphic
+ */
 import './css/Heading.css';
 
 import React from 'react';

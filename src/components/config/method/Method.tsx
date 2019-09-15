@@ -1,3 +1,7 @@
+/**
+ * @file Method component
+ * @author Mattamorphic
+ */
 import './css/Method.css';
 
 import React from 'react';

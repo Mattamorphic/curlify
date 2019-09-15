@@ -1,5 +1,5 @@
 /**
- * @file Curl component
+ * @file Json component
  * @author Mattamorphic
  */
 import './css/Json.css';

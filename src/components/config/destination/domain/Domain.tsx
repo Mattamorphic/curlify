@@ -1,3 +1,7 @@
+/**
+ * @file Domain component
+ * @author Mattamorphic
+ */
 import './css/Domain.css';
 
 import Input from '../../../shared/Input';
@@ -7,8 +11,8 @@ import Tooltip from '../../../shared/Tooltip';
 
 interface DomainProps {
   isFullWidth: boolean;
-  value: string;
   onUpdate: (value: string) => void;
+  value: string;
 }
 
 const Domain: React.FunctionComponent<DomainProps> = props => (

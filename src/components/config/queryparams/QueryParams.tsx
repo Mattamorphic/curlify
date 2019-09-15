@@ -10,8 +10,8 @@ import Toggler from '../../shared/Toggler';
 import KeyValueInput, { KeyValueEntry } from '../../shared/KeyValueInput';
 
 interface QueryParamsProps {
-  onUpdate: (entry: KeyValueEntry, index: number) => void;
   onRemove: (index: number) => void;
+  onUpdate: (entry: KeyValueEntry, index: number) => void;
   selected: KeyValueEntry[];
 }
 
@@ -31,7 +31,6 @@ export default class QueryParams extends React.PureComponent<
   }
 
   addQueryParam = (): void => {
-    // create a pending header, add this to the end of the index
     this.props.onUpdate(
       {
         key: '',

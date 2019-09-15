@@ -1,3 +1,7 @@
+/**
+ * @file Test component
+ * @author Mattamorphic
+ */
 import './css/Test.css';
 
 import * as utils from '../../utils';
@@ -64,7 +68,7 @@ class Test extends React.PureComponent<TestProps, TestState> {
     const destination =
       this.props.config.domain +
       this.props.config.endpoint +
-      utils.convertObjToQueryParams(this.props.config.queryParams);
+      utils.convertKeyValueArrayToQueryParams(this.props.config.queryParams);
     return this.props.proxy.isEnabled
       ? this.props.proxy.url + destination
       : destination;

@@ -1,3 +1,7 @@
+/**
+ * @file App component
+ * @author Mattamorphic
+ */
 // 'None' imports
 import './css/App.css';
 
@@ -71,6 +75,13 @@ export default class App extends React.Component<AppProps, AppState> {
     this.isStorageAvailable = utils.isStorageAvailable();
   }
 
+  /**
+   * Updates the history in the state, and calls the util function to update history
+   *
+   * @params {ConfigData} config The configuration of the request
+   * @params {DataData}   data   The data payload in the request
+   * @params {number}     status The status code for the request
+   */
   addToHistory = (config: ConfigData, data: DataData, status: number): void => {
     this.setState(_ => {
       utils.addToHistory(config, data, status);
@@ -80,44 +91,71 @@ export default class App extends React.Component<AppProps, AppState> {
     });
   };
 
+  /**
+   * Clears the history from the local storage
+   */
   clearHistory = (): void => {
-    window.localStorage.clear();
+    utils.clearHistory();
     this.setState({
       history: []
     });
   };
 
+  /**
+   * Handle state change for the request config
+   *
+   * @params {ConfigData} config The config for the requestt
+   */
   onConfigChange = (config: ConfigData): void => {
     this.setState(
       {
         config: {
           domain: config.domain,
           endpoint: config.endpoint,
+          // Forces array to update the state
           headers: config.headers.map(header => header),
           method: config.method,
+          // Forces array to update the state
           queryParams: config.queryParams.map(qp => qp),
           urlString: config.urlString
         }
       },
+      // Once we've updated the state, validate the request
       () => this.setState({ validation: this.validatePayload() })
     );
   };
 
+  /**
+   * Handle state change for the request payload
+   *
+   * @params {DataData} data The Data for the requestt
+   */
   onDataChange = (data: DataData): void => {
     this.setState(
       {
         data
       },
+      // Once we've updated the state, validate the request
       () => this.setState({ validation: this.validatePayload() })
     );
   };
 
+  /**
+   * Handle state change for the request proxy
+   *
+   * @params {ProxyData} proxy The proxy for the requestt
+   */
   onProxyChange = (proxy: ProxyData): void => {
     this.setState({
       proxy
     });
   };
 
+  /**
+   * Validate the request config in the state
+   *
+   * @returns {ValidatePayloadResult}
+   */
   validatePayload = (): ValidatePayloadResult => {
     const result = {
       message: [] as string[],

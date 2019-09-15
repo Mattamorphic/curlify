@@ -1,3 +1,7 @@
+/**
+ * @file GraphQL component
+ * @author Mattamorphic
+ */
 import './css/GraphQL.css';
 
 import Button from '../../shared/Button';

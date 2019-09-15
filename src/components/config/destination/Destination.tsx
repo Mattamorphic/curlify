@@ -1,3 +1,7 @@
+/**
+ * @file Destination component
+ * @author Mattamorphic
+ */
 import './css/Destination.css';
 
 import * as utils from '../../../utils';
@@ -9,14 +13,14 @@ import { KeyValueEntry } from '../../shared/KeyValueInput';
 import React from 'react';
 
 interface DestinationProps {
+  domain: string;
+  endpoint: string;
   onUpdate: (
     domain: string,
     endpoint: string,
     queryParams: KeyValueEntry[],
     rawUrl: string
   ) => void;
-  domain: string;
-  endpoint: string;
   queryParams: KeyValueEntry[];
   width: ColumnCount;
 }
@@ -24,20 +28,22 @@ interface DestinationProps {
 const Destination: React.FunctionComponent<DestinationProps> = props => {
   const onUpdate = (value: string): void => {
     const url = utils.parseURLString(value);
-
-    // TODO: handle query params / draft state
     props.onUpdate(url.domain, url.endpoint, url.queryParams, url.rawUrl);
-  };
-
-  const onUpdateEndpoint = (endpoint: string): void => {
-    onUpdate(
-      props.domain + endpoint + utils.convertObjToQueryParams(props.queryParams)
-    );
   };
 
   const onUpdateDomain = (domain: string): void => {
     onUpdate(
-      domain + props.endpoint + utils.convertObjToQueryParams(props.queryParams)
+      domain +
+        props.endpoint +
+        utils.convertKeyValueArrayToQueryParams(props.queryParams)
+    );
+  };
+
+  const onUpdateEndpoint = (endpoint: string): void => {
+    onUpdate(
+      props.domain +
+        endpoint +
+        utils.convertKeyValueArrayToQueryParams(props.queryParams)
     );
   };
 

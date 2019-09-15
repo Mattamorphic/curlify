@@ -1,3 +1,7 @@
+/**
+ * @file Output component
+ * @author Mattamorphic
+ */
 import './css/Output.css';
 
 import { ConfigData } from '../config/Config';

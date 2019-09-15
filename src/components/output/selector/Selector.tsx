@@ -1,3 +1,7 @@
+/**
+ * @file Selector component
+ * @author Mattamorphic
+ */
 import './css/Selector.css';
 
 import { OutputType } from '../../../enums';

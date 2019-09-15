@@ -1,3 +1,7 @@
+/**
+ * @file FetchResponse component
+ * @author Mattamorphic
+ */
 import './css/FetchResponse.css';
 
 import React from 'react';
@@ -6,8 +10,8 @@ import ResponseJson from './responsejson/ResponseJson';
 import ResponseRaw from './responseraw/ResponseRaw';
 
 interface FetchResponseProps {
-  headers: Headers;
   data: string;
+  headers: Headers;
 }
 
 const FetchResponse: React.FunctionComponent<FetchResponseProps> = props => {

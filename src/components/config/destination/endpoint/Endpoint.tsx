@@ -1,3 +1,7 @@
+/**
+ * @file Endpoint component
+ * @author Mattamorphic
+ */
 import './css/Endpoint.css';
 
 import Input from '../../../shared/Input';
@@ -6,8 +10,8 @@ import Tooltip from '../../../shared/Tooltip';
 
 interface EndpointProps {
   isFullWidth: boolean;
-  value: string;
   onUpdate: (value: string) => void;
+  value: string;
 }
 
 const Endpoint: React.FunctionComponent<EndpointProps> = props => (

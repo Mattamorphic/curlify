@@ -1,22 +1,26 @@
+/**
+ * @file Config component
+ * @author Mattamorphic
+ */
 import './css/Config.css';
 
 import * as utils from '../../utils';
 
 import Destination from './destination/Destination';
+import Headers from './headers/Headers';
+import { KeyValueEntry } from '../shared/KeyValueInput';
 import Method from './method/Method';
+import QueryParams from './queryparams/QueryParams';
 import React from 'react';
 import Toggler from '../shared/Toggler';
 
 import { ColumnCount, HTTPMethods } from '../../enums';
-import Headers from './headers/Headers';
-import { KeyValueEntry } from '../shared/KeyValueInput';
-import QueryParams from './queryparams/QueryParams';
 
 export interface ConfigData {
-  method: HTTPMethods;
-  headers: KeyValueEntry[];
   domain: string;
   endpoint: string;
+  headers: KeyValueEntry[];
+  method: HTTPMethods;
   queryParams: KeyValueEntry[];
   urlString: string;
 }
@@ -94,7 +98,7 @@ export default class Config extends React.PureComponent<
     data.urlString =
       data.domain +
       data.endpoint +
-      utils.convertObjToQueryParams(data.queryParams);
+      utils.convertKeyValueArrayToQueryParams(data.queryParams);
     this.props.updateConfig(data);
   };
 
@@ -105,7 +109,7 @@ export default class Config extends React.PureComponent<
     data.urlString =
       data.domain +
       data.endpoint +
-      utils.convertObjToQueryParams(data.queryParams);
+      utils.convertKeyValueArrayToQueryParams(data.queryParams);
     this.props.updateConfig(data);
   };
 
