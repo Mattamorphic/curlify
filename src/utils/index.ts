@@ -191,7 +191,6 @@ export const getHistory = () => {
 };
 
 export const parseURLString = (str: string) => {
-  // const qpRegEx = str.split(regEx.queryParams);
   console.log(str);
   const uri = new URL(str);
   const params = Object.fromEntries(new URLSearchParams(uri.search));
@@ -222,7 +221,6 @@ export const convertObjToQueryParams = (qp: KeyValueEntry[]): string => {
     '?' +
     qp
       .map(p => {
-        console.log(p.key, p.value);
         return p.key + (isNull(p.value) ? '' : '=' + p.value);
       })
       .join('&')

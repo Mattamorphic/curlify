@@ -30,11 +30,15 @@ const Destination: React.FunctionComponent<DestinationProps> = props => {
   };
 
   const onUpdateEndpoint = (endpoint: string): void => {
-    onUpdate(props.domain + endpoint);
+    onUpdate(
+      props.domain + endpoint + utils.convertObjToQueryParams(props.queryParams)
+    );
   };
 
   const onUpdateDomain = (domain: string): void => {
-    onUpdate(domain + props.endpoint);
+    onUpdate(
+      domain + props.endpoint + utils.convertObjToQueryParams(props.queryParams)
+    );
   };
 
   return (

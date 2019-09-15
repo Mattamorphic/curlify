@@ -102,6 +102,10 @@ export default class Config extends React.PureComponent<
     const data = this.props.data;
     delete data.queryParams[index];
     data.queryParams = data.queryParams.filter(queryparam => queryparam);
+    data.urlString =
+      data.domain +
+      data.endpoint +
+      utils.convertObjToQueryParams(data.queryParams);
     this.props.updateConfig(data);
   };
 

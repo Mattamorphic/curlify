@@ -155,7 +155,6 @@ export default class Curl extends React.Component<CurlProps, CurlState> {
 
     // decide which domain and endpoint to use
     const url = this.parseUrl(value);
-    console.log(url);
 
     if (
       method &&
