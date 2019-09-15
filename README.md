@@ -1,3 +1,5 @@
+![](https://lh3.googleusercontent.com/XrOgNtsI9MbyBCC1qYsbUDfQq1abnrk22NRwaLOkUCJTMFnq6JilDx5ltvra69AxYBBJzOut62EXqKyqOVVW1i7uS4GlVwRikuuMBCQqxLD5AwGriNOZTwCTPFvVaYDWSwFNe53lhQ=w2400)
+
 # Curlify
 
 A one stop shop for testing REST and GraphQL APIs: https://mattamorphic.github.io/curlify
@@ -46,6 +48,8 @@ https://api.github.com/users/octocat
 You can see a stray character here, a non-escaped new line here - can lead to you staring blankly at a terminal for anywhere upto twenty minutes.
 
 Presenting, Curlify!
+
+![Interface Screenshot](https://lh3.googleusercontent.com/pU5R8C082jTyQNeWsxbDoK96kvqKk9Z3T7gpEbjvmaDsc27VNRDn3o3X2zx3Jt7D-lRsAmqkOYCawXf9YkjN7TRQvVMeH5i0pD7g1k4D_0gYt7l4GMUZXLU0-Nuj76iXuKRtY_cy0A=w2400)
 
 ## Features
 
