@@ -43,7 +43,7 @@ export const regEx = {
   newLineAndTab: /[\n|\r|\t]/gm,
   queryParams: /(\?.*)/g,
   quotes: /["']/gim,
-  singleEscapedNewLine: /(?<!\\)\\n/gm,
+  singleEscapedNewLine: /(\\n)/gm,
   url: /^((?:http(?:s)?:\/\/)+[\w.-]+(?:.[\w.-]+))+([\w-._~:/?#[\]@!$&'()*+,;=.]+)$/gim
 };
 
